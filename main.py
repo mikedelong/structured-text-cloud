@@ -15,3 +15,9 @@ if __name__ == '__main__':
         settings = json.load(settings_fp)
         print(settings)
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+    quit(0)
+
+    input_file = settings['input_file'] if 'input_file' in settings.keys() else None
+    if input_file is None:
+        print('input file not in settings. Quitting.')
+        quit(1)
