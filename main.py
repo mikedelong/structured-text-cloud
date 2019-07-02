@@ -35,3 +35,5 @@ if __name__ == '__main__':
                               workers=word2vec_workers_)
     training_data = [[word.lower() for word in casual_tokenize(item)] for item in text]
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
+
+    print('total time: {:5.2f}s'.format(time() - time_start))
