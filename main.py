@@ -1,6 +1,4 @@
 import json
-from time import time
-
 # import pandas as pd
 # from gensim.models import Word2Vec
 # from nltk.tokenize import casual_tokenize
@@ -8,6 +6,7 @@ from time import time
 # from sklearn.manifold.t_sne import TSNE
 # from nltk.corpus import stopwords
 import logging
+from time import time
 
 if __name__ == '__main__':
     time_start = time()
@@ -20,3 +19,7 @@ if __name__ == '__main__':
     if input_file is None:
         print('input file not in settings. Quitting.')
         quit(1)
+
+    with open(input_file, 'r', encoding='utf-8') as input_fp:
+        text = input_fp.readlines()
+        print('our input data has {} lines.'.format(len(text)))
