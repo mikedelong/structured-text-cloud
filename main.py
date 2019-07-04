@@ -43,7 +43,7 @@ if __name__ == '__main__':
     word2vec_model.train(training_data, epochs=epochs_, total_examples=total_examples)
     X = word2vec_model.wv[word2vec_model.wv.vocab]
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
-    do_plot = False
+    do_plot = True
     if do_plot:
         time_projection = time()
 
