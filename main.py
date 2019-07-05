@@ -39,20 +39,19 @@ if __name__ == '__main__':
     word2vec_model.build_vocab(training_data)
     total_examples = word2vec_model.corpus_count
     print('word2vec total examples: {}'.format(total_examples))
-    epochs_ = 1000
+    epochs_ = 2000
     word2vec_model.train(training_data, epochs=epochs_, total_examples=total_examples)
     X = word2vec_model.wv[word2vec_model.wv.vocab]
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
     do_plot = True
     if do_plot:
         time_projection = time()
-
         n_components_ = 2
         do_pca = False
         projection_model = PCA(n_components=n_components_) if do_pca else \
             TSNE(
                 n_components=n_components_,
-                n_iter=1000,
+                n_iter=10000,
                 n_iter_without_progress=300
             )
         result = projection_model.fit_transform(X)
