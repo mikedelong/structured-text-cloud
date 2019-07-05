@@ -39,7 +39,7 @@ if __name__ == '__main__':
     word2vec_model.build_vocab(training_data)
     total_examples = word2vec_model.corpus_count
     print('word2vec total examples: {}'.format(total_examples))
-    epochs_ = 4000
+    epochs_ = 8000
     word2vec_model.train(training_data, epochs=epochs_, total_examples=total_examples)
     X = word2vec_model.wv[word2vec_model.wv.vocab]
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
