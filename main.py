@@ -71,7 +71,7 @@ if __name__ == '__main__':
         xs = [x[1] for x in filtered]
         ys = [y[2] for y in filtered]
 
-        words_to_plot = 1000
+        words_to_plot = 2100
         fig = plt.figure()
         if n_components_ == 3:
             ax = fig.add_subplot(111, projection='3d')
