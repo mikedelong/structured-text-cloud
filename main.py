@@ -29,8 +29,8 @@ if __name__ == '__main__':
     time_word2vec = time()
 
     random_state_ = 1
-    word2vec_size_ = 100  # how big are the word-to-vec vectors?
-    word2vec_min_count_ = 9  # how many times does a word have to appear to be interesting?
+    word2vec_size_ = 50  # how big are the word-to-vec vectors?
+    word2vec_min_count_ = 20  # how many times does a word have to appear to be interesting?
     word2vec_workers_ = 4  # how many threads will we use?
     word2vec_compute_loss_ = True
     word2vec_model = Word2Vec(compute_loss=word2vec_compute_loss_, min_count=word2vec_min_count_,
@@ -89,7 +89,7 @@ if __name__ == '__main__':
         elif n_components_ == 2:
             for i, word in enumerate(words[:words_to_plot]):
                 # ax.text(result[i, 0], result[i, 1], s=word, size=5, zorder=1, color='k')
-                ax.text(xs[i], ys[i], s=word, size=5, zorder=1, color='k')
+                ax.text(xs[i], ys[i], s=word, size=10, zorder=1, color='k')
         else:
             raise ValueError('we should be labeling in 2 or 3 dimensions but n_components is {}'.format(n_components_))
         plt.axis('off')
