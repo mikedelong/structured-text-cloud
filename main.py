@@ -28,9 +28,9 @@ if __name__ == '__main__':
         text = input_fp.readlines()
         print('our input data has {} lines.'.format(len(text)))
 
-    text = text[341:21965]  # exclude everything that isn't in the actual text
-    # 341
-    # 21965
+    start_line = settings['text_start_line'] if 'text_start_line' in settings.keys() else 0
+    stop_line = settings['text_stop_line'] if 'text_stop_line' in settings.keys() else -1
+    text = text[start_line: stop_line]  # exclude everything outside our window of interest
     time_word2vec = time()
 
     random_state_ = 1
@@ -54,7 +54,7 @@ if __name__ == '__main__':
         n_components_ = 2
         do_tsne = True
         n_iter_ = 10000
-        projection_model = TSNE(n_components=n_components_, n_iter=n_iter_,
+        projection_model = TSNE(n_components=n_components_, n_iter=n_iter_, verbose=1,
                                 n_iter_without_progress=300) if do_tsne else Isomap(n_neighbors=10,
                                                                                     n_components=n_components_,
                                                                                     max_iter=n_iter_, n_jobs=4)
