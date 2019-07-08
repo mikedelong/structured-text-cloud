@@ -5,9 +5,11 @@ from time import time
 import matplotlib.pyplot as plt
 # import pandas as pd
 from gensim.models import Word2Vec
+# import plotly.graph_objs as go
 from nltk.corpus import stopwords
 from nltk.tokenize import casual_tokenize
-from sklearn.decomposition import PCA
+# from plotly.offline import plot
+from sklearn.manifold.isomap import Isomap
 from sklearn.manifold.t_sne import TSNE
 
 if __name__ == '__main__':
@@ -47,13 +49,13 @@ if __name__ == '__main__':
     if do_plot:
         time_projection = time()
         n_components_ = 2
-        do_pca = False
-        projection_model = PCA(n_components=n_components_) if do_pca else \
-            TSNE(
-                n_components=n_components_,
-                n_iter=10000,
-                n_iter_without_progress=300
-            )
+        do_tsne = True
+        n_iter_ = 10000
+        projection_model = TSNE(n_components=n_components_, n_iter=n_iter_,
+                                n_iter_without_progress=300) if do_tsne else Isomap(n_neighbors=10,
+                                                                                    n_components=n_components_,
+                                                                                    max_iter=n_iter_, n_jobs=4)
+
         result = projection_model.fit_transform(X)
         print('projection took {:5.2f}s'.format(time() - time_projection))
 
