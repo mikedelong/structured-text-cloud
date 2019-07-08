@@ -54,6 +54,7 @@ if __name__ == '__main__':
         n_components_ = 2
         do_tsne = True
         n_iter_ = 10000
+        # todo see if we can have the model not start with a random guess
         projection_model = TSNE(n_components=n_components_, n_iter=n_iter_, verbose=1,
                                 n_iter_without_progress=300) if do_tsne else Isomap(n_neighbors=10,
                                                                                     n_components=n_components_,
