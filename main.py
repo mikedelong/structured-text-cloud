@@ -28,6 +28,9 @@ if __name__ == '__main__':
         text = input_fp.readlines()
         print('our input data has {} lines.'.format(len(text)))
 
+    text = text[341:21965]  # exclude everything that isn't in the actual text
+    # 341
+    # 21965
     time_word2vec = time()
 
     random_state_ = 1
