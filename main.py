@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
     random_state_ = 1
     word2vec_size_ = 50  # how big are the word-to-vec vectors?
-    word2vec_min_count_ = 20  # how many times does a word have to appear to be interesting?
+    word2vec_min_count_ = 200  # how many times does a word have to appear to be interesting?
     word2vec_workers_ = 4  # how many threads will we use?
     word2vec_compute_loss_ = True
     word2vec_model = Word2Vec(compute_loss=word2vec_compute_loss_, min_count=word2vec_min_count_,
