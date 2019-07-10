@@ -76,7 +76,7 @@ if __name__ == '__main__':
         words = [word[0] for word in filtered]
         xs = [x[1] for x in filtered]
         ys = [y[2] for y in filtered]
-        counts = [word2vec_model.vocabulary[word].count for word in filtered]
+        counts = [word2vec_model.wv.vocab[word[0]].count for word in filtered]
 
         words_to_plot = 2100
         # todo add plotly plotting
