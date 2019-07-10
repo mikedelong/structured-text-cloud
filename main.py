@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
     random_state_ = 1
     word2vec_size_ = 50  # how big are the word-to-vec vectors?
-    word2vec_min_count_ = 200  # how many times does a word have to appear to be interesting?
+    word2vec_min_count_ = 50  # how many times does a word have to appear to be interesting?
     word2vec_workers_ = 4  # how many threads will we use?
     word2vec_compute_loss_ = True
     word2vec_model = Word2Vec(compute_loss=word2vec_compute_loss_, min_count=word2vec_min_count_,
@@ -55,7 +55,7 @@ if __name__ == '__main__':
         do_tsne = True
         n_iter_ = 10000
         # todo see if we can have the model not start with a random guess
-        projection_model = TSNE(n_components=n_components_, n_iter=n_iter_, verbose=1,
+        projection_model = TSNE(n_components=n_components_, n_iter=n_iter_, verbose=2,
                                 n_iter_without_progress=300) if do_tsne else Isomap(n_neighbors=10,
                                                                                     n_components=n_components_,
                                                                                     max_iter=n_iter_, n_jobs=4)
