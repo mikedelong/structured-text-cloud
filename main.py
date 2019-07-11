@@ -3,12 +3,12 @@ import logging
 from time import time
 
 import matplotlib.pyplot as plt
+import plotly.graph_objs as go
 # import pandas as pd
 from gensim.models import Word2Vec
-# import plotly.graph_objs as go
 from nltk.corpus import stopwords
 from nltk.tokenize import casual_tokenize
-# from plotly.offline import plot
+from plotly.offline import plot
 from sklearn.manifold.isomap import Isomap
 from sklearn.manifold.t_sne import TSNE
 
@@ -92,15 +92,25 @@ if __name__ == '__main__':
             raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
 
         # todo only plot the most important words or the most popular words
-        if n_components_ == 3:
-            for i, word in enumerate(words[:words_to_plot]):
-                ax.text(result[i, 0], result[i, 1], result[i, 2], '%s' % word, size=8, zorder=1, color='k')
-        elif n_components_ == 2:
+        do_matplotlib = False
+        if do_matplotlib:
             for i, word in enumerate(words[:words_to_plot]):
                 # ax.text(result[i, 0], result[i, 1], s=word, size=5, zorder=1, color='k')
                 ax.text(xs[i], ys[i], s=word, size=10, zorder=1, color='k')
         else:
-            raise ValueError('we should be labeling in 2 or 3 dimensions but n_components is {}'.format(n_components_))
+            mode_ = 'text'  # 'markers+text'
+
+            trace1 = go.Scatter(hoverinfo='none',
+                                marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1), opacity=0.8,
+                                            size=6),
+                                mode=mode_, text=words, x=xs, y=ys)
+            data = [trace1]
+            layout = go.Layout(margin=dict(l=0, t=0, r=0, b=0))
+            fig = go.Figure(data=data, layout=layout)
+            # todo move the output file name to settings
+            output_file_name = input_file.replace('.txt', '.html')
+            plot(fig, filename=output_file_name, auto_open=False)
+
         plt.axis('off')
         plt.show()
 
