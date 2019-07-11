@@ -4,7 +4,6 @@ from time import time
 
 import matplotlib.pyplot as plt
 import plotly.graph_objs as go
-# import pandas as pd
 from gensim.models import Word2Vec
 from nltk.corpus import stopwords
 from nltk.tokenize import casual_tokenize
