@@ -1,5 +1,5 @@
-plotly
-scikit-learn
-nltk
 gensim
 matplotlib
+nltk
+plotly
+scikit-learn
