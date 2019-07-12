@@ -33,7 +33,7 @@ if __name__ == '__main__':
     time_word2vec = time()
 
     random_state_ = 1
-    word2vec_size_ = 50  # how big are the word-to-vec vectors?
+    word2vec_size_ = 100 if 'word2vec_size' not in settings.keys() else int(settings['word2vec_size'])
     word2vec_min_count_ = 35  # how many times does a word have to appear to be interesting?
     word2vec_workers_ = 4  # how many threads will we use?
     word2vec_compute_loss_ = True
