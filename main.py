@@ -34,7 +34,8 @@ if __name__ == '__main__':
 
     random_state_ = 1
     word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
-    word2vec_min_count_ = 35  # how many times does a word have to appear to be interesting?
+    # how many times does a word have to appear to be interesting?
+    word2vec_min_count_ = settings['word2vec_min_count'] if 'word2vec_min_count' in settings.keys() else 10
     word2vec_workers_ = 4  # how many threads will we use?
     word2vec_compute_loss_ = True
     word2vec_model = Word2Vec(compute_loss=word2vec_compute_loss_, min_count=word2vec_min_count_,
