@@ -26,6 +26,8 @@ if __name__ == '__main__':
     word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
     # how many times does a word have to appear to be interesting?
     word2vec_min_count_ = settings['word2vec_min_count'] if 'word2vec_min_count' in settings.keys() else 10
+    # todo make this a settings
+    word2vec_workers_ = 4  # how many threads will we use?
     if input_file is None:
         print('input file not in settings. Quitting.')
         quit(1)
@@ -37,7 +39,6 @@ if __name__ == '__main__':
     text = text[start_line: stop_line]  # exclude everything outside our window of interest
     time_word2vec = time()
 
-    word2vec_workers_ = 4  # how many threads will we use?
     word2vec_compute_loss_ = True
     word2vec_model = Word2Vec(compute_loss=word2vec_compute_loss_, min_count=word2vec_min_count_,
                               seed=random_state_, size=word2vec_size_, workers=word2vec_workers_)
