@@ -18,7 +18,14 @@ if __name__ == '__main__':
         print(settings)
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
+    epochs_ = settings['word2vec_epochs'] if 'word2vec_epochs' in settings.keys() else 100
     input_file = settings['input_file'] if 'input_file' in settings.keys() else None
+    random_state_ = settings['random_state'] if 'random_state' in settings.keys() else 0
+    start_line = settings['text_start_line'] if 'text_start_line' in settings.keys() else 0
+    stop_line = settings['text_stop_line'] if 'text_stop_line' in settings.keys() else -1
+    word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
+    # how many times does a word have to appear to be interesting?
+    word2vec_min_count_ = settings['word2vec_min_count'] if 'word2vec_min_count' in settings.keys() else 10
     if input_file is None:
         print('input file not in settings. Quitting.')
         quit(1)
@@ -27,18 +34,11 @@ if __name__ == '__main__':
         text = input_fp.readlines()
         print('our input data has {} lines.'.format(len(text)))
 
-    start_line = settings['text_start_line'] if 'text_start_line' in settings.keys() else 0
-    stop_line = settings['text_stop_line'] if 'text_stop_line' in settings.keys() else -1
     text = text[start_line: stop_line]  # exclude everything outside our window of interest
     time_word2vec = time()
 
-    random_state_ = 1
-    word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
-    # how many times does a word have to appear to be interesting?
-    word2vec_min_count_ = settings['word2vec_min_count'] if 'word2vec_min_count' in settings.keys() else 10
     word2vec_workers_ = 4  # how many threads will we use?
     word2vec_compute_loss_ = True
-    epochs_ = settings['word2vec_epochs'] if 'word2vec_epochs' in settings.keys() else 100
     word2vec_model = Word2Vec(compute_loss=word2vec_compute_loss_, min_count=word2vec_min_count_,
                               seed=random_state_, size=word2vec_size_, workers=word2vec_workers_)
     training_data = [[word.lower() for word in casual_tokenize(item)] for item in text]
