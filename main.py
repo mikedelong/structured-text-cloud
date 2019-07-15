@@ -30,6 +30,8 @@ if __name__ == '__main__':
     word2vec_workers_ = 4  # how many threads will we use?
     # todo make this a setting
     word2vec_compute_loss_ = True
+    # todo make this a setting
+    do_plot = True
     if input_file is None:
         print('input file not in settings. Quitting.')
         quit(1)
@@ -50,7 +52,6 @@ if __name__ == '__main__':
     word2vec_model.train(training_data, epochs=epochs_, total_examples=total_examples)
     X = word2vec_model.wv[word2vec_model.wv.vocab]
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
-    do_plot = True
     if do_plot:
         time_projection = time()
         n_components_ = 2
