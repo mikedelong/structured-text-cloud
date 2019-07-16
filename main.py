@@ -32,6 +32,8 @@ if __name__ == '__main__':
     word2vec_compute_loss_ = True
     # todo make this a setting
     do_plot = True
+    # todo make this a setting
+    n_components_ = 2
     if input_file is None:
         print('input file not in settings. Quitting.')
         quit(1)
@@ -54,7 +56,6 @@ if __name__ == '__main__':
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
     if do_plot:
         time_projection = time()
-        n_components_ = 2
         do_tsne = True
         n_iter_ = 10000
         # todo see if we can have the model not start with a random guess
