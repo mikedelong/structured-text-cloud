@@ -55,12 +55,13 @@ if __name__ == '__main__':
     word2vec_model.train(training_data, epochs=word2vec_epochs_, total_examples=total_examples)
     X = word2vec_model.wv[word2vec_model.wv.vocab]
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
+    tsne_verbose_ = 2
     if do_plot:
         time_projection = time()
         do_tsne = True
         n_iter_ = 10000
         # todo see if we can have the model not start with a random guess
-        projection_model = TSNE(n_components=n_components_, n_iter=n_iter_, verbose=2,
+        projection_model = TSNE(n_components=n_components_, n_iter=n_iter_, verbose=tsne_verbose_,
                                 n_iter_without_progress=300) if do_tsne else Isomap(n_neighbors=10,
                                                                                     n_components=n_components_,
                                                                                     max_iter=n_iter_, n_jobs=4)
