@@ -53,7 +53,6 @@ if __name__ == '__main__':
     total_examples = word2vec_model.corpus_count
     print('word2vec total examples: {}'.format(total_examples))
     word2vec_model.train(training_data, epochs=word2vec_epochs_, total_examples=total_examples)
-    X = word2vec_model.wv[word2vec_model.wv.vocab]
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
     tsne_verbose_ = 2
     if do_plot:
@@ -66,6 +65,7 @@ if __name__ == '__main__':
                                                                                     n_components=n_components_,
                                                                                     max_iter=n_iter_, n_jobs=4)
 
+        X = word2vec_model.wv[word2vec_model.wv.vocab]
         result = projection_model.fit_transform(X)
         print('projection took {:5.2f}s'.format(time() - time_projection))
 
