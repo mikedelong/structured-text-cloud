@@ -30,8 +30,7 @@ if __name__ == '__main__':
     if 'word2vec_workers' not in settings.keys():
         logging.warning('setting word2vec workers to default')
     word2vec_workers_ = settings['word2vec_workers'] if 'word2vec_workers' in settings.keys() else 1
-    # todo make this a setting
-    word2vec_compute_loss_ = True
+    word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
     # todo make this a setting
     do_plot = True
     # todo make this a setting
