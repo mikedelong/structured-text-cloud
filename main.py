@@ -26,8 +26,10 @@ if __name__ == '__main__':
     word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
     # how many times does a word have to appear to be interesting?
     word2vec_min_count_ = settings['word2vec_min_count'] if 'word2vec_min_count' in settings.keys() else 10
-    # todo make this a setting
-    word2vec_workers_ = 4  # how many threads will we use?
+    # how many threads will we use?
+    if 'word2vec_workers' not in settings.keys():
+        logging.warning('setting word2vec workers to default')
+    word2vec_workers_ = settings['word2vec_workers'] if 'word2vec_workers' in settings.keys() else 1
     # todo make this a setting
     word2vec_compute_loss_ = True
     # todo make this a setting
