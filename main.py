@@ -18,11 +18,11 @@ if __name__ == '__main__':
         print(settings)
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-    epochs_ = settings['word2vec_epochs'] if 'word2vec_epochs' in settings.keys() else 100
     input_file = settings['input_file'] if 'input_file' in settings.keys() else None
     random_state_ = settings['random_state'] if 'random_state' in settings.keys() else 0
     start_line = settings['text_start_line'] if 'text_start_line' in settings.keys() else 0
     stop_line = settings['text_stop_line'] if 'text_stop_line' in settings.keys() else -1
+    word2vec_epochs_ = settings['word2vec_epochs'] if 'word2vec_epochs' in settings.keys() else 100
     word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
     # how many times does a word have to appear to be interesting?
     word2vec_min_count_ = settings['word2vec_min_count'] if 'word2vec_min_count' in settings.keys() else 10
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     word2vec_model.build_vocab(training_data)
     total_examples = word2vec_model.corpus_count
     print('word2vec total examples: {}'.format(total_examples))
-    word2vec_model.train(training_data, epochs=epochs_, total_examples=total_examples)
+    word2vec_model.train(training_data, epochs=word2vec_epochs_, total_examples=total_examples)
     X = word2vec_model.wv[word2vec_model.wv.vocab]
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
     if do_plot:
