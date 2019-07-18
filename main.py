@@ -32,8 +32,7 @@ if __name__ == '__main__':
     word2vec_workers_ = settings['word2vec_workers'] if 'word2vec_workers' in settings.keys() else 1
     word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
     do_plot = settings['do_plot'] if 'do_plot' in settings.keys() else False
-    # todo make this a setting
-    n_components_ = 2
+    n_components_ = settings['plot_dimensions'] if 'plot_dimensions' in settings.keys() else 2
     if input_file is None:
         print('input file not in settings. Quitting.')
         quit(1)
