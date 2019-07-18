@@ -72,7 +72,8 @@ if __name__ == '__main__':
         print('projection took {:5.2f}s'.format(time() - time_projection))
 
         words = list(word2vec_model.wv.vocab)
-        print('the model vocabulary has {} words and they are {}'.format(len(words), words))
+        report_vocabulary_limit = 20
+        print('the model vocabulary has {} words and they are {}'.format(len(words), words[:report_vocabulary_limit]))
         stop_words = stopwords.words('english')
         filtered = list()
         for index, word in enumerate(words):
