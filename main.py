@@ -33,6 +33,9 @@ if __name__ == '__main__':
     word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
     do_plot = settings['do_plot'] if 'do_plot' in settings.keys() else False
     n_components_ = settings['plot_dimensions'] if 'plot_dimensions' in settings.keys() else 2
+    tsne_verbose_ = 2
+    isomap_n_jobs_ = 4
+    isomap_n_neighbors_ = 10
     if input_file is None:
         print('input file not in settings. Quitting.')
         quit(1)
@@ -52,9 +55,6 @@ if __name__ == '__main__':
     print('word2vec total examples: {}'.format(total_examples))
     word2vec_model.train(training_data, epochs=word2vec_epochs_, total_examples=total_examples)
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
-    tsne_verbose_ = 2
-    isomap_n_jobs_ = 4
-    isomap_n_neighbors_ = 10
     if do_plot:
         time_projection = time()
         do_tsne = True
