@@ -40,7 +40,8 @@ if __name__ == '__main__':
         print('input file not in settings. Quitting.')
         quit(1)
 
-    with open(input_file, 'r', encoding='utf-8') as input_fp:
+    input_encoding = 'utf-8'
+    with open(input_file, 'r', encoding=input_encoding) as input_fp:
         text = input_fp.readlines()
         print('our input data has {} lines.'.format(len(text)))
 
