@@ -56,13 +56,14 @@ if __name__ == '__main__':
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
     tsne_verbose_ = 2
     isomap_n_jobs_ = 4
+    isomap_n_neighbors_ = 10
     if do_plot:
         time_projection = time()
         do_tsne = True
         n_iter_ = 10000
         # todo see if we can have the model not start with a random guess
         projection_model = TSNE(n_components=n_components_, n_iter=n_iter_, verbose=tsne_verbose_,
-                                n_iter_without_progress=300) if do_tsne else Isomap(n_neighbors=10,
+                                n_iter_without_progress=300) if do_tsne else Isomap(n_neighbors=isomap_n_neighbors_,
                                                                                     n_components=n_components_,
                                                                                     max_iter=n_iter_,
                                                                                     n_jobs=isomap_n_jobs_)
