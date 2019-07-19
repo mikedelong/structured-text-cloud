@@ -81,20 +81,14 @@ if __name__ == '__main__':
                 filtered.append((word, result[index, 0], result[index, 1]))
         print('after we filter stopwords our vocabulary has {} words'.format(len(filtered)))
 
+        if n_components_ != 2:
+            raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
+
         # now reconstruct the words and results from the filtered result
         words = [word[0] for word in filtered]
         xs = [x[1] for x in filtered]
         ys = [y[2] for y in filtered]
         counts = [word2vec_model.wv.vocab[word[0]].count for word in filtered]
-
-        # words_to_plot = 2100
-        if n_components_ == 3:
-            pass
-        elif n_components_ == 2:
-            pass
-        else:
-            raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
-        # todo add a slider for count
 
         # todo only plot the most important words or the most popular words
         mode_ = 'text'  # 'markers+text'
