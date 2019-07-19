@@ -2,7 +2,6 @@ import json
 import logging
 from time import time
 
-import matplotlib.pyplot as plt
 import plotly.graph_objs as go
 from gensim.models import Word2Vec
 from nltk.corpus import stopwords
@@ -33,6 +32,7 @@ if __name__ == '__main__':
     word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
     do_plot = settings['do_plot'] if 'do_plot' in settings.keys() else False
     n_components_ = settings['plot_dimensions'] if 'plot_dimensions' in settings.keys() else 2
+    # todo add a validity check for n_components_
     tsne_verbose_ = 2
     isomap_n_jobs_ = 4
     isomap_n_neighbors_ = 10
@@ -87,40 +87,27 @@ if __name__ == '__main__':
         ys = [y[2] for y in filtered]
         counts = [word2vec_model.wv.vocab[word[0]].count for word in filtered]
 
-        words_to_plot = 2100
-        # todo add plotly plotting
-        # todo add a slider for count
-        fig = plt.figure()
+        # words_to_plot = 2100
         if n_components_ == 3:
-            ax = fig.add_subplot(111, projection='3d')
-            ax.scatter(result[:words_to_plot, 0], result[:words_to_plot, 1], result[:words_to_plot, 2])
+            pass
         elif n_components_ == 2:
-            ax = fig.add_subplot(111)
-            ax.scatter(xs[:words_to_plot], ys[:words_to_plot], s=1)
+            pass
         else:
             raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
+        # todo add a slider for count
 
         # todo only plot the most important words or the most popular words
-        do_matplotlib = False
-        if do_matplotlib:
-            for i, word in enumerate(words[:words_to_plot]):
-                # ax.text(result[i, 0], result[i, 1], s=word, size=5, zorder=1, color='k')
-                ax.text(xs[i], ys[i], s=word, size=10, zorder=1, color='k')
-        else:
-            mode_ = 'text'  # 'markers+text'
+        mode_ = 'text'  # 'markers+text'
 
-            trace1 = go.Scatter(hoverinfo='none',
-                                marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1), opacity=0.8,
-                                            size=6),
-                                mode=mode_, text=words, x=xs, y=ys)
-            data = [trace1]
-            layout = go.Layout(margin=dict(l=0, t=0, r=0, b=0))
-            fig = go.Figure(data=data, layout=layout)
-            # todo move the output file name to settings
-            output_file_name = input_file.replace('.txt', '.html')
-            plot(fig, filename=output_file_name, auto_open=False)
-
-        plt.axis('off')
-        plt.show()
+        trace1 = go.Scatter(hoverinfo='none',
+                            marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1), opacity=0.8,
+                                        size=6),
+                            mode=mode_, text=words, x=xs, y=ys)
+        data = [trace1]
+        layout = go.Layout(margin=dict(l=0, t=0, r=0, b=0))
+        fig = go.Figure(data=data, layout=layout)
+        # todo move the output file name to settings
+        output_file_name = input_file.replace('.txt', '.html')
+        plot(fig, filename=output_file_name, auto_open=False)
 
     print('total time: {:5.2f}s'.format(time() - time_start))
