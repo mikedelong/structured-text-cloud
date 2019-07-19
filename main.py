@@ -35,6 +35,9 @@ if __name__ == '__main__':
     if n_components_ != 2:
         raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
     tsne_verbose_ = 2
+    tsne_verbose_ = settings['tsne_verbose'] if 'tsne_verbose' in settings.keys() else 0
+    if 'tsne_verbose' not in settings.keys():
+        logging.warning('setting t-SNE verbosity to default')
     isomap_n_jobs_ = 4
     isomap_n_neighbors_ = 10
     if input_file is None:
