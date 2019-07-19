@@ -32,7 +32,8 @@ if __name__ == '__main__':
     word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
     do_plot = settings['do_plot'] if 'do_plot' in settings.keys() else False
     n_components_ = settings['plot_dimensions'] if 'plot_dimensions' in settings.keys() else 2
-    # todo add a validity check for n_components_
+    if n_components_ != 2:
+        raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
     tsne_verbose_ = 2
     isomap_n_jobs_ = 4
     isomap_n_neighbors_ = 10
@@ -81,8 +82,6 @@ if __name__ == '__main__':
                 filtered.append((word, result[index, 0], result[index, 1]))
         print('after we filter stopwords our vocabulary has {} words'.format(len(filtered)))
 
-        if n_components_ != 2:
-            raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
 
         # now reconstruct the words and results from the filtered result
         words = [word[0] for word in filtered]
