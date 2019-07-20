@@ -41,6 +41,8 @@ if __name__ == '__main__':
     isomap_n_jobs_ = 4
     # todo make this a setting
     isomap_n_neighbors_ = 10
+    n_iter_ = 10000
+    do_tsne = True
     if input_file is None:
         print('input file not in settings. Quitting.')
         quit(1)
@@ -63,8 +65,6 @@ if __name__ == '__main__':
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
     if do_plot:
         time_projection = time()
-        do_tsne = True
-        n_iter_ = 10000
         # todo see if we can have the model not start with a random guess
         projection_model = TSNE(n_components=n_components_, n_iter=n_iter_, verbose=tsne_verbose_,
                                 n_iter_without_progress=300) if do_tsne else Isomap(n_neighbors=isomap_n_neighbors_,
