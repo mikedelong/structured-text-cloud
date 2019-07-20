@@ -85,7 +85,6 @@ if __name__ == '__main__':
                 filtered.append((word, result[index, 0], result[index, 1]))
         print('after we filter stopwords our vocabulary has {} words'.format(len(filtered)))
 
-
         # now reconstruct the words and results from the filtered result
         words = [word[0] for word in filtered]
         xs = [x[1] for x in filtered]
