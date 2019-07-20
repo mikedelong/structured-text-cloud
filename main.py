@@ -39,6 +39,7 @@ if __name__ == '__main__':
         logging.warning('setting t-SNE verbosity to default')
     # todo make this a setting
     isomap_n_jobs_ = 4
+    # todo make this a setting
     isomap_n_neighbors_ = 10
     if input_file is None:
         print('input file not in settings. Quitting.')
