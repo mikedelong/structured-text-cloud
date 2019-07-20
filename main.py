@@ -38,6 +38,7 @@ if __name__ == '__main__':
     tsne_verbose_ = settings['tsne_verbose'] if 'tsne_verbose' in settings.keys() else 0
     if 'tsne_verbose' not in settings.keys():
         logging.warning('setting t-SNE verbosity to default')
+    # todo make this a setting
     isomap_n_jobs_ = 4
     isomap_n_neighbors_ = 10
     if input_file is None:
