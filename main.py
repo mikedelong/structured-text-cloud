@@ -46,6 +46,7 @@ if __name__ == '__main__':
         logging.warning('setting Isomap neighbor count to default.')
     # todo make this a setting
     n_iter_ = 10000
+    # todo make this a setting
     do_tsne = True
     if input_file is None:
         print('input file not in settings. Quitting.')
