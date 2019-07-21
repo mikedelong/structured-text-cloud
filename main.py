@@ -39,6 +39,11 @@ if __name__ == '__main__':
         logging.warning('setting t-SNE verbosity to default')
     # todo make this a setting
     isomap_n_jobs_ = 4
+    isomap_n_jobs_ = settings['isomap_job_count'] if 'isomap_job_count' in settings.keys() else 1
+    if 'isomap_job_count' not in settings.keys():
+        logging.warning('setting IsoMap parallelism (job count) to default/serial')
+
+
     # todo make this a setting
     isomap_n_neighbors_ = 10
     n_iter_ = 10000
