@@ -41,8 +41,6 @@ if __name__ == '__main__':
     if 'isomap_job_count' not in settings.keys():
         logging.warning('setting IsoMap parallelism (job count) to default/serial')
 
-    # todo make this a setting
-    isomap_n_neighbors_ = 10
     isomap_n_neighbors_ = settings['isomap_neighbor_count'] if 'isomap_neighbor_count' in settings.keys() else 5
     if 'isomap_n_neighbors_' not in settings.keys():
         logging.warning('setting Isomap neighbor count to default.')
