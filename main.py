@@ -43,6 +43,9 @@ if __name__ == '__main__':
 
     # todo make this a setting
     isomap_n_neighbors_ = 10
+    isomap_n_neighbors_ = settings['isomap_neighbor_count'] if 'isomap_neighbor_count' in settings.keys() else 5
+    if 'isomap_n_neighbors_' not in settings.keys():
+        logging.warning('setting Isomap neighbor count to default.')
     n_iter_ = 10000
     do_tsne = True
     if input_file is None:
