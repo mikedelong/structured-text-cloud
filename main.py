@@ -48,6 +48,7 @@ if __name__ == '__main__':
     if 'projection_iteration_count' not in settings.keys():
         logging.warning('setting projection (t-SNE/Isomap) iteration count to default'.format(n_iter_))
     do_tsne = settings['do_tsne'] if 'do_tsne' in settings.keys() else False
+    do_isomap = settings['do_isomap'] if 'do_isomap' in settings.keys() else False
     if input_file is None:
         print('input file not in settings. Quitting.')
         quit(1)
