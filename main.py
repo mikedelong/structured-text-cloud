@@ -46,6 +46,9 @@ if __name__ == '__main__':
         logging.warning('setting Isomap neighbor count to default.')
     # todo make this a setting
     n_iter_ = 10000
+    n_iter_ = settings['projection_iteration_count'] if 'projection_iteration_count' in settings.keys() else 100
+    if 'projection_iteration_count' not in settings.keys():
+        logging.warning('setting projection (t-SNE/Isomap) iteration count to default'.format(n_iter_))
     # todo make this a setting
     do_tsne = True
     if input_file is None:
