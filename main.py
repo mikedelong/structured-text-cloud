@@ -77,7 +77,7 @@ if __name__ == '__main__':
         # todo see if we can have the model not start with a random guess
         n_iter_without_progress_ = 300
         projection_model = TSNE(n_components=n_components_, n_iter=n_iter_, verbose=tsne_verbose_,
-                                n_iter_without_progress=n_iter_without_progress_) if do_tsne else Isomap(
+                                n_iter_without_progress=n_iter_without_progress_, init='pca') if do_tsne else Isomap(
             n_neighbors=isomap_n_neighbors_,
             n_components=n_components_,
             max_iter=n_iter_,
