@@ -101,41 +101,43 @@ if __name__ == '__main__':
         counts = [word2vec_model.wv.vocab[word[0]].count for word in filtered]
 
         mode_ = 'text'  # 'markers+text'
-        fig = go.Figure(data=[], layout=[])
-        for step in range(1, word2vec_min_count_ + 1):
-            # todo only plot the most important words or the most popular words
+        # fig = go.Figure(data=[], layout=[])
 
-            fig.add_trace(go.Scatter(hoverinfo='none',
-                                     marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1), opacity=0.8,
-                                                 size=6),
-                                     mode=mode_, text=words,
-                                     x=[xs[index] for index in range(len(filtered)) if counts[index] < step],
-                                     y=[ys[index] for index in range(len(filtered)) if counts[index] < step]))
+        # for step in range(1, word2vec_min_count_ + 1):
+        # todo only plot the most important words or the most popular words
+        trace = go.Scatter(hoverinfo='none',
+                           marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1), opacity=0.8,
+                                       size=6),
+                           mode=mode_, text=words,
+                           # x=[xs[index] for index in range(len(filtered)) if counts[index] < step],
+                           x=xs, y=ys)
+
+        # y=[ys[index] for index in range(len(filtered)) if counts[index] < step])
 
         # data = []
-        fig.data[10].visible = True
+        # fig.data[10].visible = True
         # Create and add slider
-        steps = []
-        for i in range(len(fig.data)):
-            step = dict(
-                method="restyle",
-                args=["visible", [False] * len(fig.data)],
-            )
-            step["args"][1][i] = True  # Toggle i'th trace to "visible"
-            steps.append(step)
+        # steps = []
+        # for i in range(len(fig.data)):
+        #     step = dict(
+        #         method="restyle",
+        #         args=["visible", [False] * len(fig.data)],
+        #     )
+        #     step["args"][1][i] = True  # Toggle i'th trace to "visible"
+        #     steps.append(step)
 
-        fig.update_layout(
-            sliders=[dict(
-                active=10,
-                currentvalue={"prefix": "Frequency: "},
-                pad={"t": 50},
-                steps=steps
-            )]
-        )
+        # fig.update_layout(
+        #     sliders=[dict(
+        #         active=10,
+        #         currentvalue={"prefix": "Frequency: "},
+        #         pad={"t": 50},
+        #         steps=steps
+        #     )]
+        # )
 
-        # data = [trace1]
-        # layout = go.Layout(margin=dict(l=0, t=0, r=0, b=0))
-        # fig = go.Figure(data=data, layout=layout)
+        data = [trace]
+        layout = go.Layout(margin=dict(l=0, t=0, r=0, b=0))
+        fig = go.Figure(data=data, layout=layout)
         # todo move the output file name to settings
         output_file_name = input_file.replace('.txt', '.html')
         plot(fig, filename=output_file_name, auto_open=False)
