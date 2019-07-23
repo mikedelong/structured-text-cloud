@@ -76,12 +76,12 @@ if __name__ == '__main__':
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
     if do_plot:
         time_projection = time()
+        tsne_init_ = 'pca'
         projection_model = TSNE(n_components=n_components_, n_iter=n_iter_, verbose=tsne_verbose_,
-                                n_iter_without_progress=n_iter_without_progress_, init='pca') if do_tsne else Isomap(
-            n_neighbors=isomap_n_neighbors_,
-            n_components=n_components_,
-            max_iter=n_iter_,
-            n_jobs=isomap_n_jobs_)
+                                n_iter_without_progress=n_iter_without_progress_,
+                                init=tsne_init_) if do_tsne else Isomap(n_neighbors=isomap_n_neighbors_,
+                                                                        n_components=n_components_, max_iter=n_iter_,
+                                                                        n_jobs=isomap_n_jobs_)
 
         X = word2vec_model.wv[word2vec_model.wv.vocab]
         result = projection_model.fit_transform(X)
