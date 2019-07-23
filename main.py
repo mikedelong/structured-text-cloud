@@ -47,6 +47,8 @@ if __name__ == '__main__':
     n_iter_ = settings['projection_iteration_count'] if 'projection_iteration_count' in settings.keys() else 100
     if 'projection_iteration_count' not in settings.keys():
         logging.warning('setting projection (t-SNE/Isomap) iteration count to default'.format(n_iter_))
+    # todo make this a setting
+    n_iter_without_progress_ = 300
     do_tsne = settings['do_tsne'] if 'do_tsne' in settings.keys() else False
     do_isomap = settings['do_isomap'] if 'do_isomap' in settings.keys() else False
     # todo add code to cover the True-True case
@@ -74,7 +76,6 @@ if __name__ == '__main__':
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
     if do_plot:
         time_projection = time()
-        n_iter_without_progress_ = 300
         projection_model = TSNE(n_components=n_components_, n_iter=n_iter_, verbose=tsne_verbose_,
                                 n_iter_without_progress=n_iter_without_progress_, init='pca') if do_tsne else Isomap(
             n_neighbors=isomap_n_neighbors_,
