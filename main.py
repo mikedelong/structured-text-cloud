@@ -56,7 +56,8 @@ if __name__ == '__main__':
     do_isomap = settings['do_isomap'] if 'do_isomap' in settings.keys() else False
     # todo add code to cover the True-True case
     if do_tsne and do_isomap:
-        logging.error('Check settings: do_tsne and do_isomap cannot both be true.')
+        logging.error('Check settings: do_tsne and do_isomap cannot both be true. Quitting.')
+        quit(1)
     # todo add code to cover the False-False case
     if input_file is None:
         print('input file not in settings. Quitting.')
