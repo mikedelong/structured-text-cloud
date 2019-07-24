@@ -47,8 +47,6 @@ if __name__ == '__main__':
     n_iter_ = settings['projection_iteration_count'] if 'projection_iteration_count' in settings.keys() else 100
     if 'projection_iteration_count' not in settings.keys():
         logging.warning('setting projection (t-SNE/Isomap) iteration count to default'.format(n_iter_))
-    # todo make this a setting
-    n_iter_without_progress_ = 300
     n_iter_without_progress_ = settings[
         'tsne_iterations_without_progress'] if 'tsne_iterations_without_progress' in settings.keys() else 50
 
