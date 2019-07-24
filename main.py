@@ -51,8 +51,6 @@ if __name__ == '__main__':
         'tsne_iterations_without_progress'] if 'tsne_iterations_without_progress' in settings.keys() else 50
     if 'tsne_iterations_without_progress' not in settings.keys():
         logging.warning('setting t-SNE iterations without progress to default'.format(n_iter_without_progress_))
-    # todo make this a setting
-    tsne_init_ = 'pca'
     tsne_init_ = settings['tsne_initialization'] if 'tsne_initialization' in settings.keys() else 'random'
     do_tsne = settings['do_tsne'] if 'do_tsne' in settings.keys() else False
     do_isomap = settings['do_isomap'] if 'do_isomap' in settings.keys() else False
