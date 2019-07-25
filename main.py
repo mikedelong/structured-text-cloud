@@ -117,28 +117,7 @@ if __name__ == '__main__':
                            # x=[xs[index] for index in range(len(filtered)) if counts[index] < step],
                            x=xs, y=ys)
 
-        # y=[ys[index] for index in range(len(filtered)) if counts[index] < step])
 
-        # data = []
-        # fig.data[10].visible = True
-        # Create and add slider
-        # steps = []
-        # for i in range(len(fig.data)):
-        #     step = dict(
-        #         method="restyle",
-        #         args=["visible", [False] * len(fig.data)],
-        #     )
-        #     step["args"][1][i] = True  # Toggle i'th trace to "visible"
-        #     steps.append(step)
-
-        # fig.update_layout(
-        #     sliders=[dict(
-        #         active=10,
-        #         currentvalue={"prefix": "Frequency: "},
-        #         pad={"t": 50},
-        #         steps=steps
-        #     )]
-        # )
 
         data = [trace]
         layout = go.Layout(margin=dict(l=0, t=0, r=0, b=0))
