@@ -61,8 +61,6 @@ if __name__ == '__main__':
         print('input file not in settings. Quitting.')
         quit(1)
 
-    # todo make this a setting
-    input_encoding = 'utf-8'
     input_encoding = settings['input_encoding'] if 'input_encoding' in settings.keys() else 'utf-8'
     with open(input_file, 'r', encoding=input_encoding) as input_fp:
         text = input_fp.readlines()
