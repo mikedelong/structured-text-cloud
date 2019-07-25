@@ -54,7 +54,6 @@ if __name__ == '__main__':
     tsne_init_ = settings['tsne_initialization'] if 'tsne_initialization' in settings.keys() else 'random'
     do_tsne = settings['do_tsne'] if 'do_tsne' in settings.keys() else False
     do_isomap = settings['do_isomap'] if 'do_isomap' in settings.keys() else False
-    # todo add code to cover the True-True case
     if do_tsne and do_isomap:
         logging.error('Check settings: do_tsne and do_isomap cannot both be true. Quitting.')
         quit(1)
