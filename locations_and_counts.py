@@ -12,7 +12,7 @@ from sklearn.manifold.t_sne import TSNE
 
 if __name__ == '__main__':
     time_start = time()
-    with open('./settings.json') as settings_fp:
+    with open('./locations_and_counts.json') as settings_fp:
         settings = json.load(settings_fp)
         print(settings)
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
