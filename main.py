@@ -106,9 +106,6 @@ if __name__ == '__main__':
         counts = [word2vec_model.wv.vocab[word[0]].count for word in filtered]
 
         mode_ = 'text'  # 'markers+text'
-        # fig = go.Figure(data=[], layout=[])
-
-        # for step in range(1, word2vec_min_count_ + 1):
         # todo only plot the most important words or the most popular words
         trace = go.Scatter(hoverinfo='none',
                            marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1), opacity=0.8,
