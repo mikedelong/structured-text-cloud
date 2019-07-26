@@ -117,8 +117,6 @@ if __name__ == '__main__':
                            # x=[xs[index] for index in range(len(filtered)) if counts[index] < step],
                            x=xs, y=ys)
 
-
-
         data = [trace]
         layout = go.Layout(margin=dict(l=0, t=0, r=0, b=0))
         fig = go.Figure(data=data, layout=layout)
