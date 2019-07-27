@@ -2,6 +2,7 @@ import json
 import logging
 from time import time
 
+import pandas as pd
 from gensim.models import Word2Vec
 from nltk.corpus import stopwords
 from nltk.tokenize import casual_tokenize
@@ -102,5 +103,7 @@ if __name__ == '__main__':
         xs = [x[1] for x in filtered]
         ys = [y[2] for y in filtered]
         counts = [word2vec_model.wv.vocab[word[0]].count for word in filtered]
+
+        result_df = pd.DataFrame.from_dict({'word': words, 'x': xs, 'y': ys, 'count': counts})
 
     print('total time: {:5.2f}s'.format(time() - time_start))
