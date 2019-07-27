@@ -2,11 +2,9 @@ import json
 import logging
 from time import time
 
-import plotly.graph_objs as go
 from gensim.models import Word2Vec
 from nltk.corpus import stopwords
 from nltk.tokenize import casual_tokenize
-from plotly.offline import plot
 from sklearn.manifold.isomap import Isomap
 from sklearn.manifold.t_sne import TSNE
 
@@ -104,20 +102,5 @@ if __name__ == '__main__':
         xs = [x[1] for x in filtered]
         ys = [y[2] for y in filtered]
         counts = [word2vec_model.wv.vocab[word[0]].count for word in filtered]
-
-        mode_ = 'text'  # 'markers+text'
-        # todo only plot the most important words or the most popular words
-        trace = go.Scatter(hoverinfo='none',
-                           marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1), opacity=0.8,
-                                       size=6),
-                           mode=mode_, text=words,
-                           x=xs, y=ys)
-
-        data = [trace]
-        layout = go.Layout(margin=dict(l=0, t=0, r=0, b=0))
-        fig = go.Figure(data=data, layout=layout)
-        # todo move the output file name to settings
-        output_file_name = input_file.replace('.txt', '.html')
-        plot(fig, filename=output_file_name, auto_open=False)
 
     print('total time: {:5.2f}s'.format(time() - time_start))
