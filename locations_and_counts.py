@@ -105,5 +105,6 @@ if __name__ == '__main__':
         counts = [word2vec_model.wv.vocab[word[0]].count for word in filtered]
 
         result_df = pd.DataFrame.from_dict({'word': words, 'x': xs, 'y': ys, 'count': counts})
+        output_file = input_file.replace('.txt', '.csv')
 
     print('total time: {:5.2f}s'.format(time() - time_start))
