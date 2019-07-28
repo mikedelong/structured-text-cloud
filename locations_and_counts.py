@@ -100,11 +100,10 @@ if __name__ == '__main__':
 
         # now reconstruct the words and results from the filtered result
         words = [word[0] for word in filtered]
-        xs = [x[1] for x in filtered]
         ys = [y[2] for y in filtered]
         counts = [word2vec_model.wv.vocab[word[0]].count for word in filtered]
 
-        result_df = pd.DataFrame.from_dict({'word': words, 'x': xs, 'y': ys, 'count': counts})
+        result_df = pd.DataFrame.from_dict({'word': words, 'x': [x[1] for x in filtered], 'y': ys, 'count': counts})
         output_file = input_file.replace('.txt', '.csv')
         result_df.to_csv(output_file, index=True, header=True)
 
