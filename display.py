@@ -20,19 +20,13 @@ if __name__ == '__main__':
 
     data_df = pd.read_csv(input_file)
 
-    # now reconstruct the words and results from the filtered result
-    words = list()
-    xs = list()
-    ys = list()
-    counts = list()
-
     mode_ = 'text'  # 'markers+text'
     # todo only plot the most important words or the most popular words
     trace = go.Scatter(hoverinfo='none',
                        marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1), opacity=0.8,
                                    size=6),
-                       mode=mode_, text=words,
-                       x=xs, y=ys)
+                       mode=mode_, text=data_df['word'],
+                       x=data_df['x'], y=data_df['y'])
 
     data = [trace]
     layout = go.Layout(margin=dict(l=0, t=0, r=0, b=0))
