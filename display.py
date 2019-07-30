@@ -2,6 +2,7 @@ import json
 import logging
 from time import time
 
+import pandas as pd
 import plotly.graph_objs as go
 from plotly.offline import plot
 
@@ -16,6 +17,8 @@ if __name__ == '__main__':
     if input_file is None:
         logging.error('No input file specified. Quitting.')
         quit(1)
+
+    data_df = pd.read_csv(input_file)
 
     # now reconstruct the words and results from the filtered result
     words = list()
