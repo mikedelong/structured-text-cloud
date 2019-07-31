@@ -1,3 +1,4 @@
 {
-  "input_file": "./data/2701-0.csv"
+  "input_file": "./data/2701-0.csv",
+  "output_file": "./data/2701-0.html"
 }
