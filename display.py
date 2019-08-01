@@ -32,8 +32,7 @@ if __name__ == '__main__':
                            mode=mode_, text=data_df['word'],
                            x=data_df['x'], y=data_df['y'])]
 
-        layout = go.Layout(margin=dict(l=0, t=0, r=0, b=0))
-        fig = go.Figure(data=data, layout=layout)
+        fig = go.Figure(data=data, layout=go.Layout(margin=dict(l=0, t=0, r=0, b=0)))
         plot(fig, filename=output_file_name, auto_open=False)
 
     print('total time: {:5.2f}s'.format(time() - time_start))
