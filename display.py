@@ -23,9 +23,9 @@ if __name__ == '__main__':
     # todo move the output file name to settings
     output_file_name = input_file.replace('.csv', '.html')
     mode_ = 'text'  # 'markers+text'
+    # todo only plot the most important words or the most popular words
     do_basic = True
     if do_basic:
-        # todo only plot the most important words or the most popular words
         fig = go.Figure(data=[go.Scatter(hoverinfo='none',
                                          marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
                                                      opacity=0.8,
