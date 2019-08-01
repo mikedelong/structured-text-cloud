@@ -26,13 +26,13 @@ if __name__ == '__main__':
     do_basic = True
     if do_basic:
         # todo only plot the most important words or the most popular words
-        data = [go.Scatter(hoverinfo='none',
-                           marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1), opacity=0.8,
-                                       size=6),
-                           mode=mode_, text=data_df['word'],
-                           x=data_df['x'], y=data_df['y'])]
-
-        fig = go.Figure(data=data, layout=go.Layout(margin=dict(l=0, t=0, r=0, b=0)))
+        fig = go.Figure(data=[go.Scatter(hoverinfo='none',
+                                         marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
+                                                     opacity=0.8,
+                                                     size=6),
+                                         mode=mode_, text=data_df['word'],
+                                         x=data_df['x'], y=data_df['y'])],
+                        layout=go.Layout(margin=dict(l=0, t=0, r=0, b=0)))
         plot(fig, filename=output_file_name, auto_open=False)
 
     print('total time: {:5.2f}s'.format(time() - time_start))
