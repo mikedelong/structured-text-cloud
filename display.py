@@ -21,7 +21,10 @@ if __name__ == '__main__':
     data_df = pd.read_csv(input_file)
 
     # todo move the output file name to settings
-    output_file_name = input_file.replace('.csv', '.html')
+    output_file_name = settings['output_file'] if 'output_file' in settings.keys() else None
+    if output_file_name is None:
+        logging.error('No output file specified. Quitting.')
+        quit(1)
     mode_ = 'text'  # 'markers+text'
     # todo only plot the most important words or the most popular words
     do_basic = True
