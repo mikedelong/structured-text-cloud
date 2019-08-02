@@ -20,7 +20,6 @@ if __name__ == '__main__':
 
     data_df = pd.read_csv(input_file)
 
-    # todo move the output file name to settings
     output_file_name = settings['output_file'] if 'output_file' in settings.keys() else None
     if output_file_name is None:
         logging.error('No output file specified. Quitting.')
