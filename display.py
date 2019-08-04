@@ -37,7 +37,6 @@ if __name__ == '__main__':
     else:
         length = len(list(np.arange(0, 5, 0.1)))
         fig = go.Figure(data=[
-            # fig.add_trace(
             go.Scatter(
                 visible=False if index != 10 else True,
                 line=dict(color="#00CED1", width=6),
