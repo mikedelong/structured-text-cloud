@@ -32,18 +32,17 @@ if __name__ == '__main__':
         fig = go.Figure(data=[go.Scatter(hoverinfo='none',
                                          marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
                                                      opacity=0.8, size=6), mode=mode_, text=data_df['word'],
-                                         x=data_df['x'], y=data_df['y'])],
+                                         x=data_df['x'], y=data_df['y']
+                                         )],
                         layout=go.Layout(margin=dict(l=0, t=0, r=0, b=0)))
     else:
         length = len(list(np.arange(0, 5, 0.1)))
         fig = go.Figure(data=[
             go.Scatter(
                 visible=False if index != 10 else True,
-                line=dict(color="#00CED1", width=6),
-                name="nu = " + str(step),
-                x=np.arange(0, 10, 0.01),
-                y=np.sin(step * np.arange(0, 10, 0.01)))
-
+                marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
+                            opacity=0.8, size=6), mode=mode_, text=data_df['word'],
+                x=data_df['x'], y=data_df['y'])
             for index, step in enumerate(np.arange(0, 5, 0.1))
 
         ], layout=[dict(sliders=dict(
