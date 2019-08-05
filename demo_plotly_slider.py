@@ -1,3 +1,4 @@
+# https://plot.ly/python/sliders/
 import numpy as np
 from plotly.graph_objects import Figure
 from plotly.graph_objects import Scatter
