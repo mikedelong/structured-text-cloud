@@ -31,16 +31,15 @@ if __name__ == '__main__':
         step["args"][1][i] = True  # Toggle i'th trace to "visible"
         steps.append(step)
 
-    sliders = [dict(
-        active=10,
-        currentvalue={"prefix": "Frequency: "},
-        pad={"t": 50},
-        steps=[dict(method='restyle', args=['visible', [False if i != j else True for j in range(length)]]) for i
-               in range(length)]
-    )]
-
     fig.update_layout(
-        sliders=sliders
+        sliders=[dict(
+            active=10,
+            currentvalue={"prefix": "Frequency: "},
+            pad={"t": 50},
+            steps=[dict(method='restyle', args=['visible', [False if i != j else True for j in range(length)]]) for i
+                   in range(length)]
+        )]
+
     )
 
     # fig = go.Figure(data=[
