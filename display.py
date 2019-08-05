@@ -27,7 +27,7 @@ if __name__ == '__main__':
         quit(1)
     mode_ = 'text'  # 'markers+text'
     # todo only plot the most important words or the most popular words
-    do_basic = True
+    do_basic = False
     if do_basic:
         fig = go.Figure(data=[go.Scatter(hoverinfo='none',
                                          marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
