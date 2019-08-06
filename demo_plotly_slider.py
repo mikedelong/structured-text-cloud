@@ -13,8 +13,8 @@ if __name__ == '__main__':
     for index, step in enumerate(np.arange(0, 5, 0.1)):
         fig.add_trace(Scatter(
             visible=False if index != 10 else True,
-            line=dict(color="#00CED1", width=6),
-            name="nu = " + str(step),
+            line=dict(color='#00CED1', width=6),
+            name='nu = ' + str(step),
             x=np.arange(0, 10, 0.01),
             y=np.sin(step * np.arange(0, 10, 0.01))))
 
@@ -25,17 +25,17 @@ if __name__ == '__main__':
     steps = []
     for i in range(length):
         step = dict(
-            method="restyle",
-            args=["visible", [False] * len(fig.data)],
+            method='restyle',
+            args=['visible', [False] * len(fig.data)],
         )
-        step["args"][1][i] = True  # Toggle i'th trace to "visible"
+        step['args'][1][i] = True  # Toggle i'th trace to 'visible'
         steps.append(step)
 
     fig.update_layout(
         sliders=[dict(
             active=10,
-            currentvalue={"prefix": "Frequency: "},
-            pad={"t": 50},
+            currentvalue={'prefix': 'Frequency: '},
+            pad={'t': 50},
             steps=[dict(method='restyle', args=['visible', [False if i != j else True for j in range(length)]]) for i
                    in range(length)]
         )]
@@ -46,8 +46,8 @@ if __name__ == '__main__':
     #     # fig.add_trace(
     #     go.Scatter(
     #         visible=False if index != 10 else True,
-    #         line=dict(color="#00CED1", width=6),
-    #         name="nu = " + str(step),
+    #         line=dict(color='#00CED1', width=6),
+    #         name='nu = ' + str(step),
     #         x=np.arange(0, 10, 0.01),
     #         y=np.sin(step * np.arange(0, 10, 0.01)))
     #
@@ -55,8 +55,8 @@ if __name__ == '__main__':
     #
     # ], layout=[dict(sliders=dict(
     #     active=10,
-    #     currentvalue={"prefix": "Frequency: "},
-    #     pad={"t": 50},
+    #     currentvalue={'prefix': 'Frequency: '},
+    #     pad={'t': 50},
     #     steps=[dict(method='restyle', args=['visible', [False if i != j else True for j in range(length)]]) for i
     #            in range(length)]
     # )
