@@ -18,9 +18,6 @@ if __name__ == '__main__':
             x=np.arange(0, 10, 0.01),
             y=np.sin(step * np.arange(0, 10, 0.01))))
 
-    # Make 10th trace visible
-    fig.data[10].visible = True
-
     # Create and add slider
     steps = []
     for i in range(length):
