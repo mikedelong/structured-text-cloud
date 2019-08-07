@@ -42,15 +42,14 @@ if __name__ == '__main__':
             for index, step in enumerate(np.arange(0, 5, 0.1))
         ]
 
-        fig = Figure(data=traces)
-        fig.update_layout(
+        fig = Figure(data=traces, layout=dict(
             sliders=[dict(
                 active=10,
                 currentvalue={'prefix': 'Frequency: '},
                 pad={'t': 50},
                 steps=[dict(method='restyle', args=['visible', [j == i for j in range(length)]]) for i in range(length)]
             )]
-        )
+        ))
 
     # fig = go.Figure(data=[
     #     # fig.add_trace(
