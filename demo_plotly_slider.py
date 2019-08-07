@@ -12,7 +12,7 @@ if __name__ == '__main__':
     length = len(list(np.arange(0, 5, 0.1)))
     for index, step in enumerate(np.arange(0, 5, 0.1)):
         fig.add_trace(Scatter(
-            visible=False if index != 10 else True,
+            visible=(index == 10),
             line=dict(color='#00CED1', width=6),
             name='nu = ' + str(step),
             x=np.arange(0, 10, 0.01),
