@@ -19,17 +19,14 @@ if __name__ == '__main__':
             y=np.sin(step * np.arange(0, 10, 0.01))))
 
     # Create and add slider
-    steps = [dict(method='restyle', args=['visible', [j == i for j in range(length)]]) for i in range(length)]
 
     fig.update_layout(
         sliders=[dict(
             active=10,
             currentvalue={'prefix': 'Frequency: '},
             pad={'t': 50},
-            steps=[dict(method='restyle', args=['visible', [False if i != j else True for j in range(length)]]) for i
-                   in range(length)]
+            steps=[dict(method='restyle', args=['visible', [j == i for j in range(length)]]) for i in range(length)]
         )]
-
     )
 
     # fig = go.Figure(data=[
