@@ -19,18 +19,7 @@ if __name__ == '__main__':
             y=np.sin(step * np.arange(0, 10, 0.01))))
 
     # Create and add slider
-    do_long_version = False
-    if do_long_version:
-        steps = []
-        for i in range(length):
-            step = dict(
-                method='restyle',
-                args=['visible', [False] * length],
-            )
-            step['args'][1][i] = True  # Toggle i'th trace to 'visible'
-            steps.append(step)
-    else:
-        steps = [dict(method='restyle', args=['visible', [j == i for j in range(length)]]) for i in range(length)]
+    steps = [dict(method='restyle', args=['visible', [j == i for j in range(length)]]) for i in range(length)]
 
     fig.update_layout(
         sliders=[dict(
