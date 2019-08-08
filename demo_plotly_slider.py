@@ -32,16 +32,6 @@ if __name__ == '__main__':
             )]
         )
     else:
-        # traces = [
-        #     Scatter(
-        #         visible=(index == 10),
-        #         line=dict(color='#00CED1', width=6),
-        #         name='nu = ' + str(step),
-        #         x=np.arange(0, 10, 0.01),
-        #         y=np.sin(step * np.arange(0, 10, 0.01)))
-        #     for index, step in enumerate(np.arange(0, 5, 0.1))
-        # ]
-
         fig = Figure(data=[
             Scatter(
                 visible=(index == 10),
@@ -50,8 +40,7 @@ if __name__ == '__main__':
                 x=np.arange(0, 10, 0.01),
                 y=np.sin(step * np.arange(0, 10, 0.01)))
             for index, step in enumerate(np.arange(0, 5, 0.1))
-        ]
-            , layout=dict(
+        ], layout=dict(
             sliders=[dict(
                 active=10,
                 currentvalue={'prefix': 'Frequency: '},
