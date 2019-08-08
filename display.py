@@ -2,7 +2,6 @@ import json
 import logging
 from time import time
 
-import numpy as np
 import pandas as pd
 import plotly.graph_objs as go
 from plotly.offline import plot
@@ -36,19 +35,24 @@ if __name__ == '__main__':
                                          )],
                         layout=go.Layout(margin=dict(l=0, t=0, r=0, b=0)))
     else:
-        length = len(list(np.arange(0, 5, 0.1)))
+        length = data_df['count'].max()
+        # length = len(list(np.arange(0, 5, 0.1)))
         fig = go.Figure(data=[go.Scatter(hoverinfo='none',
                                          marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
-                                                     opacity=0.8, size=6), mode=mode_, text=data_df['word'],
-                                         x=data_df['x'], y=data_df['y']
-                                         )], layout=dict(
-            sliders=[dict(
-                active=10,
-                currentvalue={'prefix': 'Frequency: '},
-                pad={'t': 50},
-                steps=[dict(method='restyle', args=['visible', [j == i for j in range(length)]]) for i in range(length)]
-            )]
-        ))
+                                                     opacity=0.8, size=6), mode=mode_,
+                                         text=data_df[data_df['count'] > index]['word'],
+                                         x=data_df[data_df['count'] > index]['x'],
+                                         y=data_df[data_df['count'] > index]['y']
+                                         ) for index in range(1, length)],
+                        layout=dict(
+                            sliders=[dict(
+                                active=10,
+                                currentvalue={'prefix': 'Frequency: '},
+                                pad={'t': 50},
+                                steps=[dict(method='restyle', args=['visible', [j == i for j in range(length)]]) for i
+                                       in range(length)]
+                            )]
+                        ))
     plot(fig, filename=output_file_name, auto_open=False)
 
     print('total time: {:5.2f}s'.format(time() - time_start))
