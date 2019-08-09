@@ -47,7 +47,7 @@ if __name__ == '__main__':
                                          ) for index in range(1, length)],
                         layout=dict(
                             sliders=[dict(
-                                active=10,
+                                active=min(10, length),
                                 pad={'t': 1},
                                 steps=[dict(method='restyle', args=['visible', [j == i for j in range(length)]]) for i
                                        in range(length)]
