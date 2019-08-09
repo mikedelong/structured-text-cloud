@@ -47,7 +47,6 @@ if __name__ == '__main__':
                         layout=dict(
                             sliders=[dict(
                                 active=10,
-                                currentvalue={'prefix': 'Frequency: '},
                                 pad={'t': 1},
                                 steps=[dict(method='restyle', args=['visible', [j == i for j in range(length)]]) for i
                                        in range(length)]
