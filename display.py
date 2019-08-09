@@ -35,13 +35,14 @@ if __name__ == '__main__':
                                          )],
                         layout=go.Layout(margin=dict(l=0, t=0, r=0, b=0)))
     else:
-        length = data_df['count'].max()
+        ratio = 5
+        length = data_df['count'].max() // ratio
         fig = go.Figure(data=[go.Scatter(hoverinfo='none',
                                          marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
                                                      opacity=0.8, size=6), mode=mode_,
-                                         text=data_df[data_df['count'] > index]['word'],
-                                         x=data_df[data_df['count'] > index]['x'],
-                                         y=data_df[data_df['count'] > index]['y'],
+                                         text=data_df[data_df['count'] > ratio * index]['word'],
+                                         x=data_df[data_df['count'] > ratio * index]['x'],
+                                         y=data_df[data_df['count'] > ratio * index]['y'],
                                          name='level: {}'.format(index)
                                          ) for index in range(1, length)],
                         layout=dict(
