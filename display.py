@@ -41,13 +41,14 @@ if __name__ == '__main__':
                                                      opacity=0.8, size=6), mode=mode_,
                                          text=data_df[data_df['count'] > index]['word'],
                                          x=data_df[data_df['count'] > index]['x'],
-                                         y=data_df[data_df['count'] > index]['y']
+                                         y=data_df[data_df['count'] > index]['y'],
+                                         name='level: {}'.format(index)
                                          ) for index in range(1, length)],
                         layout=dict(
                             sliders=[dict(
                                 active=10,
                                 currentvalue={'prefix': 'Frequency: '},
-                                pad={'t': 50},
+                                pad={'t': 1},
                                 steps=[dict(method='restyle', args=['visible', [j == i for j in range(length)]]) for i
                                        in range(length)]
                             )]
