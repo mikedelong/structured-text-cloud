@@ -25,7 +25,6 @@ if __name__ == '__main__':
         logging.error('No output file specified. Quitting.')
         quit(1)
     mode_ = 'text'  # 'markers+text'
-    # todo only plot the most important words or the most popular words
     do_basic = False
     if do_basic:
         fig = go.Figure(data=[go.Scatter(hoverinfo='none',
