@@ -9,7 +9,7 @@
   "plot_dimensions": 2,
   "projection_iteration_count": 1000,
   "text_start_line": 1,
-  "text_stop_line": 65690,
+  "text_stop_line": 2730,
   "tsne_iterations_without_progress": 300,
   "tsne_initialization": "pca",
   "tsne_verbose": 1,
