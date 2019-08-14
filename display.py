@@ -34,6 +34,7 @@ if __name__ == '__main__':
                                          )],
                         layout=go.Layout(margin=dict(l=0, t=0, r=0, b=0)))
     else:
+        # todo telescope the levels so we don't have a bunch that are essentially the same
         ratio = 5
         length = data_df['count'].max() // ratio
         fig = go.Figure(data=[go.Scatter(hoverinfo='none',
