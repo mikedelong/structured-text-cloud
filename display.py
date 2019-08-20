@@ -54,27 +54,22 @@ if __name__ == '__main__':
             # hoverinfo='none',
             marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
                         opacity=0.8, size=6), mode=mode_,
-            # text=data_df[data_df['count'] > index]['word'],
             text=
-            data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile, interpolation=interpolation_)][
-                'word'],
-            # x=data_df[data_df['count'] > index]['x'],
-            x=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile, interpolation=interpolation_)][
-                'x'],
-            # y=data_df[data_df['count'] > index]['y'],
-            y=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile, interpolation=interpolation_)][
-                'y'],
-            # hovertext=data_df[data_df['count'] > index]['count'],
+            data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
+                                                                           interpolation=interpolation_)]['word'],
+            x=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
+                                                                             interpolation=interpolation_)]['x'],
+            y=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
+                                                                             interpolation=interpolation_)]['y'],
             hovertext=
-            data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile, interpolation=interpolation_)][
-                'count'],
+            data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
+                                                                           interpolation=interpolation_)]['count'],
             name='level: {}'.format(index)
         ) for index, quantile in enumerate(quantiles)],
             layout=dict(
                 sliders=[dict(
                     active=min(5, len(quantiles)),
                     pad={'t': 1},
-                    # steps=[dict(method='restyle', args=['visible', [j == i for j in range(len(slices))]]) for i  in range(len(slices))]
                     steps=[dict(method='restyle', args=['visible', [j == i for j in range(len(quantiles))]]) for i in
                            range(len(quantiles))]
                 )]
