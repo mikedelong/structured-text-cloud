@@ -50,6 +50,7 @@ if __name__ == '__main__':
         else:
             quantiles = [float(index) / float(len(slices)) for index in range(1, len(slices))]
         interpolation_ = 'lower'
+
         fig = go.Figure(data=[go.Scatter(
             # hoverinfo='none',
             marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
@@ -64,7 +65,8 @@ if __name__ == '__main__':
             hovertext=
             data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
                                                                            interpolation=interpolation_)]['count'],
-            name='level: {}'.format(index)
+            name='level: {}'.format(index),
+
         ) for index, quantile in enumerate(quantiles)],
             layout=dict(
                 sliders=[dict(
@@ -72,7 +74,8 @@ if __name__ == '__main__':
                     pad={'t': 1},
                     steps=[dict(method='restyle', args=['visible', [j == i for j in range(len(quantiles))]]) for i in
                            range(len(quantiles))]
-                )]
+                )],
+                xaxis=dict(visible=False),
             ))
     plot(fig, filename=output_file_name, auto_open=False)
 
