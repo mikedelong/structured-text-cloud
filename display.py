@@ -76,6 +76,7 @@ if __name__ == '__main__':
                            range(len(quantiles))]
                 )],
                 xaxis=dict(visible=False),
+                yaxis=dict(visible=False),
             ))
     plot(fig, filename=output_file_name, auto_open=False)
 
