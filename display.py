@@ -68,7 +68,7 @@ if __name__ == '__main__':
         ) for index, quantile in enumerate(quantiles)],
             layout=dict(
                 sliders=[dict(
-                    active=min(5, len(quantiles) // 2),
+                    active=len(quantiles) // 2,
                     pad={'t': 1},
                     steps=[dict(method='restyle', args=['visible', [j == i for j in range(len(quantiles))]]) for i in
                            range(len(quantiles))]
