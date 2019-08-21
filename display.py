@@ -54,16 +54,15 @@ if __name__ == '__main__':
         fig = go.Figure(data=[go.Scatter(
             marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
                         opacity=0.8, size=6), mode=mode_,
-            text=
-            data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
-                                                                           interpolation=interpolation_)]['word'],
+            text=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
+                                                                                interpolation=interpolation_)]['word'],
             x=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
                                                                              interpolation=interpolation_)]['x'],
             y=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
                                                                              interpolation=interpolation_)]['y'],
-            hovertext=
-            data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
-                                                                           interpolation=interpolation_)]['count'],
+            hovertext=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
+                                                                                     interpolation=interpolation_)][
+                'count'],
             name='level: {}'.format(index),
 
         ) for index, quantile in enumerate(quantiles)],
