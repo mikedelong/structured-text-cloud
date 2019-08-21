@@ -52,7 +52,6 @@ if __name__ == '__main__':
         interpolation_ = 'lower'
 
         fig = go.Figure(data=[go.Scatter(
-            # hoverinfo='none',
             marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
                         opacity=0.8, size=6), mode=mode_,
             text=
