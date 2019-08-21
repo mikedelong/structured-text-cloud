@@ -9,10 +9,10 @@ from plotly.offline import plot
 
 if __name__ == '__main__':
     time_start = time()
+    logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
     with open('./display.json') as settings_fp:
         settings = json.load(settings_fp)
-        print(settings)
-    logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+        logging.info(settings)
 
     input_file = settings['input_file'] if 'input_file' in settings.keys() else None
     if input_file is None:
