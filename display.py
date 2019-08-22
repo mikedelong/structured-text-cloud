@@ -78,4 +78,4 @@ if __name__ == '__main__':
             ))
     plot(fig, filename=output_file_name, auto_open=False)
 
-    print('total time: {:5.2f}s'.format(time() - time_start))
+    logging.info('total time: {:5.2f}s'.format(time() - time_start))
