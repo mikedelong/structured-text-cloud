@@ -73,8 +73,8 @@ if __name__ == '__main__':
                     steps=[dict(method='restyle', args=['visible', [j == i for j in range(len(quantiles))]]) for i in
                            range(len(quantiles))]
                 )],
-                xaxis=dict(visible=False),
-                yaxis=dict(visible=False),
+                xaxis=dict(visible=False, range=[-100, 100]),
+                yaxis=dict(visible=False, range=[-100, 100]),
             ))
     plot(fig, filename=output_file_name, auto_open=False)
 
