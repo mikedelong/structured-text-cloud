@@ -64,8 +64,8 @@ if __name__ == '__main__':
                 steps=[dict(method='restyle', args=['visible', [j == i for j in range(len(quantiles))]]) for i in
                        range(len(quantiles))]
             )],
-            xaxis=dict(visible=False, range=[-100, 100]),
-            yaxis=dict(visible=False, range=[-100, 100]),
+            xaxis=dict(visible=False, range=[data_df['x'].min(), data_df['x'].max()]),
+            yaxis=dict(visible=False, range=[data_df['y'].min(), data_df['y'].max()]),
         ))
     plot(fig, filename=output_file_name, auto_open=False)
 
