@@ -42,6 +42,7 @@ if __name__ == '__main__':
         quantiles = [float(index) / float(len(slices)) for index in range(1, len(slices))]
     interpolation_ = 'lower'
 
+    stretch_factor = 1.05
     fig = go.Figure(data=[go.Scatter(
         marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
                     opacity=0.8, size=6), mode=mode_,
@@ -64,8 +65,8 @@ if __name__ == '__main__':
                 steps=[dict(method='restyle', args=['visible', [j == i for j in range(len(quantiles))]]) for i in
                        range(len(quantiles))]
             )],
-            xaxis=dict(visible=False, range=[data_df['x'].min(), data_df['x'].max()]),
-            yaxis=dict(visible=False, range=[data_df['y'].min(), data_df['y'].max()]),
+            xaxis=dict(visible=False, range=[stretch_factor * data_df['x'].min(), stretch_factor * data_df['x'].max()]),
+            yaxis=dict(visible=False, range=[stretch_factor * data_df['y'].min(), stretch_factor * data_df['y'].max()]),
         ))
     plot(fig, filename=output_file_name, auto_open=False)
 
