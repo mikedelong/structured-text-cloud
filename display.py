@@ -37,7 +37,6 @@ if __name__ == '__main__':
         data_df['cumulative'] = data_df['count'].cumsum()
         quantiles = [1.0 / float(slice_limit) * index - 1.0 / (2.0 * float(slice_limit)) for index in
                      range(1, slice_limit + 1)]
-        pass
     else:
         quantiles = [float(index) / float(len(slices)) for index in range(1, len(slices))]
     interpolation_ = 'lower'
