@@ -1,4 +1,3 @@
-wiktionaryparser
 gensim
 matplotlib
 nltk
@@ -6,3 +5,4 @@ numpy
 pandas
 plotly
 scikit-learn
+wiktionaryparser
