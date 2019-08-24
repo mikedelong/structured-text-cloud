@@ -29,12 +29,12 @@ if __name__ == '__main__':
     slice_limit = 10
     slices = sorted(data_df['count'].unique().tolist())
 
+    total = sum(slices)
+    counts = Counter(data_df['count'].values.tolist())
+    data_df = data_df.sort_values(by=['count'], axis=0, ascending=True)
+    data_df['cumulative'] = data_df['count'].cumsum()
     # if we have more than ten slices refit to ten
     if len(slices) > slice_limit:
-        total = sum(slices)
-        counts = Counter(data_df['count'].values.tolist())
-        data_df = data_df.sort_values(by=['count'], axis=0, ascending=True)
-        data_df['cumulative'] = data_df['count'].cumsum()
         quantiles = [1.0 / float(slice_limit) * index - 1.0 / (2.0 * float(slice_limit)) for index in
                      range(1, slice_limit + 1)]
     else:
