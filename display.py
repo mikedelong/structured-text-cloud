@@ -16,6 +16,16 @@ def get_part_of_speech(arg, arg_parser):
     return result[0]['definitions'][0]['partOfSpeech'] if len(result[0]['definitions']) > 0 else ''
 
 
+part_of_speech_color_map = {
+    '': 'black',
+    'noun': 'red',
+    'verb': 'blue',
+    'adjective': 'orange',
+    'adverb': 'green',
+    'preposition': 'purple',
+    'numeral': 'yellow'
+}
+
 if __name__ == '__main__':
     time_start = time()
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -53,15 +63,6 @@ if __name__ == '__main__':
     interpolation_ = 'lower'
 
     data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser,))
-    part_of_speech_color_map = {
-        '': 'black',
-        'noun': 'red',
-        'verb': 'blue',
-        'adjective': 'orange',
-        'adverb': 'green',
-        'preposition': 'purple',
-        'numeral': 'yellow'
-    }
     data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
     stretch_factor = 1.05
     fig = go.Figure(data=[go.Scatter(
