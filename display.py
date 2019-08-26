@@ -9,6 +9,7 @@ from plotly.offline import plot
 from wiktionaryparser import WiktionaryParser
 
 
+# todo add file storage for performance
 def get_part_of_speech(arg, arg_parser):
     result = arg_parser.fetch(arg)
     if not len(result):
