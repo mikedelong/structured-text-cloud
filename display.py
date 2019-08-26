@@ -6,6 +6,13 @@ from time import time
 import pandas as pd
 import plotly.graph_objs as go
 from plotly.offline import plot
+from wiktionaryparser import WiktionaryParser
+
+
+def get_part_of_speech(arg, arg_parser):
+    result = arg_parser.fetch(arg)
+    return result[0]['definitions'][0]['partOfSpeech'] if len(result) > 0 else ''
+
 
 if __name__ == '__main__':
     time_start = time()
@@ -18,6 +25,8 @@ if __name__ == '__main__':
     if input_file is None:
         logging.error('No input file specified. Quitting.')
         quit(1)
+
+    parser = WiktionaryParser()
 
     data_df = pd.read_csv(input_file)
 
