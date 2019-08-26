@@ -53,6 +53,16 @@ if __name__ == '__main__':
     interpolation_ = 'lower'
 
     data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser,))
+    part_of_speech_color_map = {
+        '': 'black',
+        'noun': 'red',
+        'verb': 'blue',
+        'adjective': 'orange',
+        'adverb': 'green',
+        'preposition': 'purple',
+        'numeral': 'yellow'
+    }
+    data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
     stretch_factor = 1.05
     fig = go.Figure(data=[go.Scatter(
         marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
@@ -67,6 +77,7 @@ if __name__ == '__main__':
                                                                                  interpolation=interpolation_)][
             'count'],
         name='level: {}'.format(index),
+        textfont=dict(color='')
 
     ) for index, quantile in enumerate(quantiles)],
         layout=dict(
