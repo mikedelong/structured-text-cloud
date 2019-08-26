@@ -11,7 +11,10 @@ from wiktionaryparser import WiktionaryParser
 
 def get_part_of_speech(arg, arg_parser):
     result = arg_parser.fetch(arg)
-    return result[0]['definitions'][0]['partOfSpeech'] if len(result) > 0 else ''
+    print('{} {}'.format(arg, result))
+    if not len(result):
+        return ''
+    return result[0]['definitions'][0]['partOfSpeech'] if len(result[0]['definitions']) > 0 else ''
 
 
 if __name__ == '__main__':
@@ -50,6 +53,7 @@ if __name__ == '__main__':
         quantiles = [float(index) / float(len(slices)) for index in range(1, len(slices))]
     interpolation_ = 'lower'
 
+    data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser,))
     stretch_factor = 1.05
     fig = go.Figure(data=[go.Scatter(
         marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
