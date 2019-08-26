@@ -11,7 +11,6 @@ from wiktionaryparser import WiktionaryParser
 
 def get_part_of_speech(arg, arg_parser):
     result = arg_parser.fetch(arg)
-    print('{} {}'.format(arg, result))
     if not len(result):
         return ''
     return result[0]['definitions'][0]['partOfSpeech'] if len(result[0]['definitions']) > 0 else ''
