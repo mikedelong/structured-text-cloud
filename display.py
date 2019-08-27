@@ -66,6 +66,7 @@ if __name__ == '__main__':
     # data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser,))
     # data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
     stretch_factor = 1.05
+    # todo break this up into a per-part-of-speech loop
     fig = go.Figure(data=[go.Scatter(
         marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
                     opacity=0.8, size=6), mode=mode_,
