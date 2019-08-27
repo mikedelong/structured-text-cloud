@@ -63,7 +63,7 @@ if __name__ == '__main__':
         quantiles = [float(index) / float(len(slices)) for index in range(1, len(slices))]
     interpolation_ = 'lower'
 
-    data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser,))
+    # data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser,))
     # data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
     stretch_factor = 1.05
     fig = go.Figure(data=[go.Scatter(
