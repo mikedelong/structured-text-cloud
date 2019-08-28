@@ -42,6 +42,11 @@ if __name__ == '__main__':
         logging.error('No input file specified. Quitting.')
         quit(1)
 
+    part_of_speech_file = settings['part_of_speech_file'] if 'part_of_speech_file' in settings.keys() else None
+    if part_of_speech_file is None:
+        logging.error('No part of speech file specified. Quitting.')
+        quit(2)
+
     parser = WiktionaryParser()
 
     data_df = pd.read_csv(input_file)
