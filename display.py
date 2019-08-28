@@ -10,11 +10,14 @@ from wiktionaryparser import WiktionaryParser
 
 
 # todo add file storage for performance
-def get_part_of_speech(arg, arg_parser):
-    result = arg_parser.fetch(arg)
-    if not len(result):
-        return ''
-    return result[0]['definitions'][0]['partOfSpeech'] if len(result[0]['definitions']) > 0 else ''
+def get_part_of_speech(arg, arg_parser, arg_known):
+    if arg in arg_known.keys():
+        return arg_known[arg]
+    else:
+        result = arg_parser.fetch(arg)
+        if not len(result):
+            return ''
+        return result[0]['definitions'][0]['partOfSpeech'] if len(result[0]['definitions']) > 0 else ''
 
 
 part_of_speech_color_map = {
@@ -63,7 +66,8 @@ if __name__ == '__main__':
         quantiles = [float(index) / float(len(slices)) for index in range(1, len(slices))]
     interpolation_ = 'lower'
 
-    # data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser,))
+    known_part_of_speech = {'boy': 'noun', 'one': 'numeral'}
+    data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser, known_part_of_speech))
     # data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
     stretch_factor = 1.05
     # todo break this up into a per-part-of-speech loop
