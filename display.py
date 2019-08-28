@@ -68,6 +68,8 @@ if __name__ == '__main__':
 
     known_part_of_speech = {'boy': 'noun', 'one': 'numeral'}
     data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser, known_part_of_speech))
+    # write the known parts of speech to a file before we proceed
+    data_df[['word', 'part_of_speech']].to_csv('./data/part_of_speech.csv', index=True, header=True)
     # data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
     stretch_factor = 1.05
     # todo break this up into a per-part-of-speech loop
