@@ -27,7 +27,10 @@ part_of_speech_color_map = {
     'adjective': 'orange',
     'adverb': 'green',
     'preposition': 'purple',
-    'numeral': 'yellow'
+    'numeral': 'yellow',
+    'nan': 'purple',
+    'proper noun': 'purple',
+    'determiner': 'purple'
 }
 
 if __name__ == '__main__':
@@ -71,13 +74,13 @@ if __name__ == '__main__':
         quantiles = [float(index) / float(len(slices)) for index in range(1, len(slices))]
     interpolation_ = 'lower'
 
-    known_part_of_speech = {'boy': 'noun', 'one': 'numeral'}
     known_part_of_speech_df = pd.read_csv(part_of_speech_file, usecols=['word', 'part_of_speech'])
     known_part_of_speech = {row['word']: row['part_of_speech'] for _, row in known_part_of_speech_df.iterrows()}
     data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser, known_part_of_speech))
     # write the known parts of speech to a file before we proceed
     data_df[['word', 'part_of_speech']].to_csv('./data/part_of_speech.csv', index=True, header=True)
-    # data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
+    data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
+
     stretch_factor = 1.05
     # todo break this up into a per-part-of-speech loop
     fig = go.Figure(data=[go.Scatter(
@@ -93,9 +96,9 @@ if __name__ == '__main__':
                                                                                  interpolation=interpolation_)][
             'count'],
         name='level: {}'.format(index),
-        # textfont=dict(color=data_df[
-        #     data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile, interpolation=interpolation_)]['color'])
-        textfont=dict(color='black')
+        textfont=dict(color=data_df[
+            data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile, interpolation=interpolation_)]['color']),
+        # textfont=dict(color='black')
 
     ) for index, quantile in enumerate(quantiles)],
         layout=dict(
