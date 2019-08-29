@@ -16,21 +16,24 @@ def get_part_of_speech(arg, arg_parser, arg_known):
     else:
         result = arg_parser.fetch(arg)
         if not len(result):
-            return ''
+            return 'unknown'
         return result[0]['definitions'][0]['partOfSpeech'] if len(result[0]['definitions']) > 0 else ''
 
 
 part_of_speech_color_map = {
-    '': 'black',
+    # '': 'black',
     'noun': 'red',
     'verb': 'blue',
     'adjective': 'orange',
     'adverb': 'green',
     'preposition': 'purple',
     'numeral': 'yellow',
-    'nan': 'purple',
-    'proper noun': 'purple',
-    'determiner': 'purple'
+    # 'nan': 'purple',
+    'proper noun': 'tomato',
+    'pronoun': 'fuchsia',
+    'determiner': 'purple',
+    'conjunction': 'purple',
+    'unknown': 'black'
 }
 
 if __name__ == '__main__':
@@ -77,8 +80,10 @@ if __name__ == '__main__':
     known_part_of_speech_df = pd.read_csv(part_of_speech_file, usecols=['word', 'part_of_speech'])
     known_part_of_speech = {row['word']: row['part_of_speech'] for _, row in known_part_of_speech_df.iterrows()}
     data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser, known_part_of_speech))
+    data_df['part_of_speech'] = data_df['part_of_speech'].fillna('unknown')
     # write the known parts of speech to a file before we proceed
     data_df[['word', 'part_of_speech']].to_csv('./data/part_of_speech.csv', index=True, header=True)
+    logging.info(data_df['part_of_speech'].unique().tolist())
     data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
     data_df = data_df.dropna()
 
