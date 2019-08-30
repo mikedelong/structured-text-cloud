@@ -31,6 +31,7 @@ part_of_speech_color_map = {
     'pronoun': 'fuchsia',
     'determiner': 'purple',
     'conjunction': 'orchid',
+    'interjection': 'honeydew',
     'unknown': 'black'
 }
 
