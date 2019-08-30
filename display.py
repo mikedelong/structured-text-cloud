@@ -21,18 +21,16 @@ def get_part_of_speech(arg, arg_parser, arg_known):
 
 
 part_of_speech_color_map = {
-    # '': 'black',
     'noun': 'red',
     'verb': 'blue',
     'adjective': 'orange',
     'adverb': 'green',
     'preposition': 'purple',
     'numeral': 'yellow',
-    # 'nan': 'purple',
     'proper noun': 'tomato',
     'pronoun': 'fuchsia',
     'determiner': 'purple',
-    'conjunction': 'purple',
+    'conjunction': 'orchid',
     'unknown': 'black'
 }
 
@@ -88,8 +86,7 @@ if __name__ == '__main__':
 
     stretch_factor = 1.05
     fig = go.Figure(data=[go.Scatter(
-        marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1),
-                    opacity=0.8, size=6), mode=mode_,
+        marker=dict(line=dict(color='rgba(217, 217, 217, 0.14)', width=0.1), opacity=0.8, size=6), mode=mode_,
         text=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
                                                                             interpolation=interpolation_)]['word'],
         x=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
