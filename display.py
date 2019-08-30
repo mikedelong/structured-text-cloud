@@ -102,7 +102,6 @@ if __name__ == '__main__':
         name='level: {}'.format(index),
         textfont=dict(color=data_df[
             data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile, interpolation=interpolation_)]['color']),
-        # textfont=dict(color='black')
 
     ) for index, quantile in enumerate(quantiles)],
         layout=dict(
