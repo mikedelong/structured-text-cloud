@@ -82,7 +82,6 @@ if __name__ == '__main__':
     data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser, known_part_of_speech))
     data_df['part_of_speech'] = data_df['part_of_speech'].fillna('unknown')
     # write the known parts of speech to a file before we proceed
-    # todo we want to accumulate known parts of speech from case to case rather than overwriting
     for index, row in data_df.iterrows():
         known_part_of_speech[row['word']] = row['part_of_speech']
     pd.DataFrame.from_dict({'word': list(known_part_of_speech.keys()),
