@@ -89,7 +89,6 @@ if __name__ == '__main__':
                             'part_of_speech': list(known_part_of_speech.values())},
                            orient='columns').sort_values(axis=0, by='word').to_csv('./data/part_of_speech.csv',
                                                                                    index=True, header=True)
-    # data_df[['word', 'part_of_speech']].to_csv('./data/part_of_speech.csv', index=True, header=True)
     logging.info(data_df['part_of_speech'].value_counts().to_dict())
     data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
 
