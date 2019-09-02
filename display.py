@@ -90,11 +90,12 @@ if __name__ == '__main__':
     logging.info(data_df['part_of_speech'].value_counts().to_dict())
     data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
 
+    color_ = 'rgba(217, 217, 217, 0.14)'
     interpolation_ = 'lower'
     stretch_factor = 1.05
-    color_ = 'rgba(217, 217, 217, 0.14)'
+    width_ = 0.1
     fig = go.Figure(data=[go.Scatter(
-        marker=dict(line=dict(color=color_, width=0.1), opacity=0.8, size=6), mode=mode_,
+        marker=dict(line=dict(color=color_, width=width_), opacity=0.8, size=6), mode=mode_,
         text=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
                                                                             interpolation=interpolation_)]['word'],
         x=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
