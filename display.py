@@ -92,10 +92,11 @@ if __name__ == '__main__':
 
     color_ = 'rgba(217, 217, 217, 0.14)'
     interpolation_ = 'lower'
+    opacity_ = 0.8
     stretch_factor = 1.05
     width_ = 0.1
     fig = go.Figure(data=[go.Scatter(
-        marker=dict(line=dict(color=color_, width=width_), opacity=0.8, size=6), mode=mode_,
+        marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=6), mode=mode_,
         text=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
                                                                             interpolation=interpolation_)]['word'],
         x=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
