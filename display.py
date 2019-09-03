@@ -104,8 +104,7 @@ if __name__ == '__main__':
         marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=size_), mode=mode_,
         text=get_quantile(data_df, 'cumulative', quantile, interpolation_)['word'],
         x=get_quantile(data_df, 'cumulative', quantile, interpolation_)['x'],
-        y=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
-                                                                         interpolation=interpolation_)]['y'],
+        y=get_quantile(data_df, 'cumulative', quantile, interpolation_)['y'],
         hovertext=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
                                                                                  interpolation=interpolation_)][
             'count'],
