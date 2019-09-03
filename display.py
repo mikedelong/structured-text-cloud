@@ -105,9 +105,7 @@ if __name__ == '__main__':
         text=get_quantile(data_df, 'cumulative', quantile, interpolation_)['word'],
         x=get_quantile(data_df, 'cumulative', quantile, interpolation_)['x'],
         y=get_quantile(data_df, 'cumulative', quantile, interpolation_)['y'],
-        hovertext=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
-                                                                                 interpolation=interpolation_)][
-            'count'],
+        hovertext=get_quantile(data_df, 'cumulative', quantile, interpolation_)['count'],
         name='level: {}'.format(index),
         textfont=dict(color=data_df[
             data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile, interpolation=interpolation_)]['color']),
