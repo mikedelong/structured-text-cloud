@@ -20,6 +20,10 @@ def get_part_of_speech(arg, arg_parser, arg_known):
         return result[0]['definitions'][0]['partOfSpeech'] if len(result[0]['definitions']) > 0 else ''
 
 
+def get_quantile(arg_df, arg_column, arg_quantile, arg_interpolation):
+    return arg_df[arg_df[arg_column] > data_df[arg_column].quantile(q=arg_quantile, interpolation=arg_interpolation)]
+
+
 part_of_speech_color_map = {
     'noun': 'red',
     'verb': 'blue',
@@ -98,8 +102,7 @@ if __name__ == '__main__':
     width_ = 0.1
     fig = go.Figure(data=[go.Scatter(
         marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=size_), mode=mode_,
-        text=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
-                                                                            interpolation=interpolation_)]['word'],
+        text=get_quantile(data_df, 'cumulative', quantile, interpolation_)['word'],
         x=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
                                                                          interpolation=interpolation_)]['x'],
         y=data_df[data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile,
