@@ -101,13 +101,13 @@ if __name__ == '__main__':
     stretch_factor = 1.05
     width_ = 0.1
     fig = go.Figure(data=[go.Scatter(
+        hovertext=get_quantile(data_df, 'cumulative', quantile, interpolation_)['count'],
         marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=size_), mode=mode_,
+        name='level: {}'.format(index),
         text=get_quantile(data_df, 'cumulative', quantile, interpolation_)['word'],
+        textfont=dict(color=get_quantile(data_df, 'cumulative', quantile, interpolation_)['color']),
         x=get_quantile(data_df, 'cumulative', quantile, interpolation_)['x'],
         y=get_quantile(data_df, 'cumulative', quantile, interpolation_)['y'],
-        hovertext=get_quantile(data_df, 'cumulative', quantile, interpolation_)['count'],
-        textfont=dict(color=get_quantile(data_df, 'cumulative', quantile, interpolation_)['color']),
-        name='level: {}'.format(index),
     ) for index, quantile in enumerate(quantiles)],
         layout=dict(
             sliders=[dict(
