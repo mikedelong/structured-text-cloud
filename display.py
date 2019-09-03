@@ -106,10 +106,8 @@ if __name__ == '__main__':
         x=get_quantile(data_df, 'cumulative', quantile, interpolation_)['x'],
         y=get_quantile(data_df, 'cumulative', quantile, interpolation_)['y'],
         hovertext=get_quantile(data_df, 'cumulative', quantile, interpolation_)['count'],
+        textfont=dict(color=get_quantile(data_df, 'cumulative', quantile, interpolation_)['color']),
         name='level: {}'.format(index),
-        textfont=dict(color=data_df[
-            data_df['cumulative'] > data_df['cumulative'].quantile(q=quantile, interpolation=interpolation_)]['color']),
-
     ) for index, quantile in enumerate(quantiles)],
         layout=dict(
             sliders=[dict(
