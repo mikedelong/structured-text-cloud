@@ -103,7 +103,6 @@ if __name__ == '__main__':
     fig = go.Figure(data=[go.Scatter(
         hovertext=get_quantile(data_df, 'cumulative', quantile, interpolation_)['count'],
         marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=size_), mode=mode_,
-        # name='level: {}'.format(index),
         text=get_quantile(data_df, 'cumulative', quantile, interpolation_)['word'],
         textfont=dict(color=get_quantile(data_df, 'cumulative', quantile, interpolation_)['color']),
         x=get_quantile(data_df, 'cumulative', quantile, interpolation_)['x'],
