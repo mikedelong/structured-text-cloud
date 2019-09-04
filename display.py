@@ -96,7 +96,6 @@ if __name__ == '__main__':
     part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum().apply(lambda x:
                                                  '#{:02x}{:02x}{:02x}'.format(int(256 * x - 1), int(256 * x - 1),
                                                                               int(256 * x - 1))).to_dict()
-    # quit(1)
     data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
 
     color_ = 'rgba(217, 217, 217, 0.14)'
