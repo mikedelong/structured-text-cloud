@@ -93,12 +93,7 @@ if __name__ == '__main__':
                                                                                    index=True, header=True)
     logging.info(data_df['part_of_speech'].value_counts().to_dict())
     # get the cumsum
-    t0 = data_df['part_of_speech'].value_counts(normalize=True)
-    logging.info(type(t0))
-    logging.info(t0)
-    logging.info(
-        t0.cumsum().apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(256 * x - 1), int(256 * x - 1), int(256 * x - 1))))
-    part_of_speech_color_map = t0.cumsum().apply(lambda x:
+    part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum().apply(lambda x:
                                                  '#{:02x}{:02x}{:02x}'.format(int(256 * x - 1), int(256 * x - 1),
                                                                               int(256 * x - 1))).to_dict()
     # quit(1)
