@@ -92,6 +92,16 @@ if __name__ == '__main__':
                            orient='columns').sort_values(axis=0, by='word').to_csv('./data/part_of_speech.csv',
                                                                                    index=True, header=True)
     logging.info(data_df['part_of_speech'].value_counts().to_dict())
+    # get the cumsum
+    t0 = data_df['part_of_speech'].value_counts(normalize=True)
+    logging.info(type(t0))
+    logging.info(t0)
+    logging.info(
+        t0.cumsum().apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(256 * x - 1), int(256 * x - 1), int(256 * x - 1))))
+    part_of_speech_color_map = t0.cumsum().apply(lambda x:
+                                                 '#{:02x}{:02x}{:02x}'.format(int(256 * x - 1), int(256 * x - 1),
+                                                                              int(256 * x - 1))).to_dict()
+    # quit(1)
     data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
 
     color_ = 'rgba(217, 217, 217, 0.14)'
@@ -105,6 +115,7 @@ if __name__ == '__main__':
         marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=size_), mode=mode_,
         text=get_quantile(data_df, 'cumulative', quantile, interpolation_)['word'],
         textfont=dict(color=get_quantile(data_df, 'cumulative', quantile, interpolation_)['color']),
+        # , colorscale='Viridis'),
         x=get_quantile(data_df, 'cumulative', quantile, interpolation_)['x'],
         y=get_quantile(data_df, 'cumulative', quantile, interpolation_)['y'],
     ) for index, quantile in enumerate(quantiles)],
