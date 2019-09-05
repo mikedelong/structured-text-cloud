@@ -81,14 +81,14 @@ if __name__ == '__main__':
     color_count = data_df['part_of_speech'].nunique()
 
     part_of_speech_color_map = {}
-    which_color_map = 'cumsum'
-    which_color_map = 'uniform'
+    which_color_map = 'uniform'  # 'cumsum'
 
     if which_color_map == 'cumsum':
         # use the cumsum of the value counts to assign a gray by hex string
         part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
         ).apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(256 * x - 1), int(256 * x - 1), int(256 * x - 1))).to_dict()
     elif which_color_map == 'uniform':
+        # use evenly-spaced but still gray colors
         part_of_speech_color_map = {
             item[0]: '#{:02x}{:02x}{:02x}'.format(int(256 * float(index) / float(color_count)),
                                                   int(256 * float(index) / float(color_count)),
