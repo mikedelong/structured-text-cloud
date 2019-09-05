@@ -1,10 +1,13 @@
 import json
 import logging
 from collections import Counter
+from math import floor
 from time import time
 
+import numpy as np
 import pandas as pd
 import plotly.graph_objs as go
+from matplotlib.pyplot import cm
 from plotly.offline import plot
 from wiktionaryparser import WiktionaryParser
 
@@ -77,8 +80,6 @@ if __name__ == '__main__':
                            orient='columns').sort_values(axis=0, by='word').to_csv('./data/part_of_speech.csv',
                                                                                    index=True, header=True)
     logging.info(data_df['part_of_speech'].value_counts().to_dict())
-    # instead of cumsum we want our colors to be evenly spaced
-    color_count = data_df['part_of_speech'].nunique()
 
     part_of_speech_color_map = {}
     which_color_map = 'uniform'  # 'cumsum'
@@ -88,11 +89,13 @@ if __name__ == '__main__':
         part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
         ).apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(256 * x - 1), int(256 * x - 1), int(256 * x - 1))).to_dict()
     elif which_color_map == 'uniform':
+        # instead of cumsum we want our colors to be evenly spaced
         # use evenly-spaced but still gray colors
+        colors = cm.jet(np.linspace(0, 1, data_df['part_of_speech'].nunique()))
         part_of_speech_color_map = {
-            item[0]: '#{:02x}{:02x}{:02x}'.format(int(256 * float(index) / float(color_count)),
-                                                  int(256 * float(index) / float(color_count)),
-                                                  int(256 * float(index) / float(color_count)))
+            item[0]: '#{:02x}{:02x}{:02x}'.format(floor(255 * colors[index][0]),
+                                                  floor(255 * colors[index][1]),
+                                                  floor(255 * colors[index][2]))
             for index, item in enumerate(data_df['part_of_speech'].value_counts().items())}
     else:
         raise NotImplementedError('color map: {}'.format(which_color_map))
