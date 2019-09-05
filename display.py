@@ -80,15 +80,23 @@ if __name__ == '__main__':
     # instead of cumsum we want our colors to be evenly spaced
     color_count = data_df['part_of_speech'].nunique()
 
-    # use the cumsum of the value counts to assign a gray by hex string
-    # part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
-    # ).apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(256 * x - 1), int(256 * x - 1), int(256 * x - 1))).to_dict()
-    part_of_speech_color_map = {
-        item[0]: '#{:02x}{:02x}{:02x}'.format(int(256 * float(index) / float(color_count)),
-                                              int(256 * float(index) / float(color_count)),
-                                              int(256 * float(index) / float(color_count)))
-        for index, item in enumerate(data_df['part_of_speech'].value_counts().items())}
-    logging.info(part_of_speech_color_map)
+    part_of_speech_color_map = {}
+    which_color_map = 'cumsum'
+    which_color_map = 'uniform'
+
+    if which_color_map == 'cumsum':
+        # use the cumsum of the value counts to assign a gray by hex string
+        part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
+        ).apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(256 * x - 1), int(256 * x - 1), int(256 * x - 1))).to_dict()
+    elif which_color_map == 'uniform':
+        part_of_speech_color_map = {
+            item[0]: '#{:02x}{:02x}{:02x}'.format(int(256 * float(index) / float(color_count)),
+                                                  int(256 * float(index) / float(color_count)),
+                                                  int(256 * float(index) / float(color_count)))
+            for index, item in enumerate(data_df['part_of_speech'].value_counts().items())}
+    else:
+        raise NotImplementedError('color map: {}'.format(which_color_map))
+    logging.info('color map {} looks like {}'.format(which_color_map, part_of_speech_color_map))
     data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
 
     color_ = 'rgba(217, 217, 217, 0.14)'
