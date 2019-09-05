@@ -24,21 +24,6 @@ def get_quantile(arg_df, arg_column, arg_quantile, arg_interpolation):
     return arg_df[arg_df[arg_column] > data_df[arg_column].quantile(q=arg_quantile, interpolation=arg_interpolation)]
 
 
-part_of_speech_color_map = {
-    'noun': 'red',
-    'verb': 'blue',
-    'adjective': 'orange',
-    'adverb': 'green',
-    'preposition': 'purple',
-    'numeral': 'yellow',
-    'proper noun': 'tomato',
-    'pronoun': 'fuchsia',
-    'determiner': 'purple',
-    'conjunction': 'orchid',
-    'interjection': 'honeydew',
-    'unknown': 'black'
-}
-
 if __name__ == '__main__':
     time_start = time()
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
