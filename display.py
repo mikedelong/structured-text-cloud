@@ -89,8 +89,7 @@ if __name__ == '__main__':
         part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
         ).apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(256 * x - 1), int(256 * x - 1), int(256 * x - 1))).to_dict()
     elif which_color_map == 'uniform':
-        # instead of cumsum we want our colors to be evenly spaced
-        # use evenly-spaced but still gray colors
+        # use evenly-spaced colors from the jet colormap
         colors = cm.jet(np.linspace(0, 1, data_df['part_of_speech'].nunique()))
         part_of_speech_color_map = {
             item[0]: '#{:02x}{:02x}{:02x}'.format(floor(255 * colors[index][0]),
