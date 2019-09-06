@@ -90,6 +90,7 @@ if __name__ == '__main__':
         ).apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(256 * x - 1), int(256 * x - 1), int(256 * x - 1))).to_dict()
     elif which_color_map == 'uniform':
         # use evenly-spaced colors from the jet colormap
+        # todo think about changing the linear space so it produces numbers in the 0..255 range
         colors = cm.jet(np.linspace(0, 1, data_df['part_of_speech'].nunique()))
         part_of_speech_color_map = {
             item[0]: '#{:02x}{:02x}{:02x}'.format(floor(255 * colors[index][0]),
