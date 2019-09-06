@@ -1,7 +1,6 @@
 import json
 import logging
 from collections import Counter
-from math import floor
 from time import time
 
 import numpy as np
@@ -91,11 +90,11 @@ if __name__ == '__main__':
     elif which_color_map == 'uniform':
         # use evenly-spaced colors from the jet colormap
         # todo think about changing the linear space so it produces numbers in the 0..255 range
-        colors = cm.jet(np.linspace(0, 1, data_df['part_of_speech'].nunique()))
+        colors = 255.0 * cm.jet(np.linspace(0, 1, data_df['part_of_speech'].nunique()))
         part_of_speech_color_map = {
-            item[0]: '#{:02x}{:02x}{:02x}'.format(floor(255 * colors[index][0]),
-                                                  floor(255 * colors[index][1]),
-                                                  floor(255 * colors[index][2]))
+            item[0]: '#{:02x}{:02x}{:02x}'.format(int(1 * colors[index][0]),
+                                                  int(1 * colors[index][1]),
+                                                  int(1 * colors[index][2]))
             for index, item in enumerate(data_df['part_of_speech'].value_counts().items())}
     else:
         raise NotImplementedError('color map: {}'.format(which_color_map))
