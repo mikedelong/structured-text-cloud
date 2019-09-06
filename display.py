@@ -92,9 +92,7 @@ if __name__ == '__main__':
         # todo think about changing the linear space so it produces numbers in the 0..255 range
         colors = (255.0 * cm.jet(np.linspace(0, 1, data_df['part_of_speech'].nunique()))).astype(int)
         part_of_speech_color_map = {
-            item[0]: '#{:02x}{:02x}{:02x}'.format(colors[index][0],
-                                                  colors[index][1],
-                                                  colors[index][2])
+            item[0]: '#{:02x}{:02x}{:02x}'.format(colors[index][0], colors[index][1], colors[index][2])
             for index, item in enumerate(data_df['part_of_speech'].value_counts().items())}
     else:
         raise NotImplementedError('color map: {}'.format(which_color_map))
