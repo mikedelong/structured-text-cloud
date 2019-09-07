@@ -81,13 +81,13 @@ if __name__ == '__main__':
     logging.info(data_df['part_of_speech'].value_counts().to_dict())
 
     which_color_map = 'cumsum'  # was 'uniform'
+    colormap = cm.get_cmap('jet')
     if which_color_map == 'cumsum':
         # use the cumsum of the value counts to assign a gray by hex string
         part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
         ).apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(256 * x - 1), int(256 * x - 1), int(256 * x - 1))).to_dict()
     elif which_color_map == 'uniform':
         # use evenly-spaced colors from a colormap
-        colormap = cm.get_cmap('jet')
         colors = (255.0 * colormap(np.linspace(0, 1, data_df['part_of_speech'].nunique()))).astype(int)
         part_of_speech_color_map = {
             item[0]: '#{:02x}{:02x}{:02x}'.format(colors[index][0], colors[index][1], colors[index][2])
