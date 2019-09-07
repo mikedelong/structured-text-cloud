@@ -80,9 +80,7 @@ if __name__ == '__main__':
                                                                                    index=True, header=True)
     logging.info(data_df['part_of_speech'].value_counts().to_dict())
 
-    part_of_speech_color_map = {}
     which_color_map = 'uniform'  # 'cumsum'
-
     if which_color_map == 'cumsum':
         # use the cumsum of the value counts to assign a gray by hex string
         part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
