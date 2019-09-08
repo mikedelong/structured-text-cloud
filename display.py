@@ -85,8 +85,8 @@ if __name__ == '__main__':
     if which_color_map == 'cumsum':
         # use the cumsum of the value counts to assign a color from the colormap by hex string
         part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
-        ).apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(255.0 * colormap(x)[0]), int(255.0 * colormap(x)[1]),
-                                                       int(255.0 * colormap(x)[2]))).to_dict()
+        ).apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(255 * colormap(x)[0]), int(255 * colormap(x)[1]),
+                                                       int(255 * colormap(x)[2]))).to_dict()
     elif which_color_map == 'uniform':
         # use evenly-spaced colors from a colormap
         colors = (255.0 * colormap(np.linspace(0, 1, data_df['part_of_speech'].nunique()))).astype(int)
