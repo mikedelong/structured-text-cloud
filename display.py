@@ -83,7 +83,7 @@ if __name__ == '__main__':
     which_color_map = 'cumsum'  # was 'uniform'
     colormap = cm.get_cmap('jet')
     if which_color_map == 'cumsum':
-        # use the cumsum of the value counts to assign a gray by hex string
+        # use the cumsum of the value counts to assign a color from the colormap by hex string
         # todo get this working with the colormap
         part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
         ).apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(255.0 * colormap(x)[0]), int(255.0 * colormap(x)[1]),
