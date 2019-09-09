@@ -3,13 +3,16 @@ import logging
 from collections import Counter
 from time import time
 
-import numpy as np
 import pandas as pd
 import plotly.graph_objs as go
 from matplotlib.pyplot import cm
 from plotly.offline import plot
 from wiktionaryparser import WiktionaryParser
 
+
+def float_color_to_hex(arg_float, arg_colormap):
+    color_value = arg_colormap(arg_float)
+    return '#{:02x}{:02x}{:02x}'.format(int(255 * color_value[0]), int(255 * color_value[1]), int(255 * color_value[2]))
 
 # todo add file storage for performance
 def get_part_of_speech(arg, arg_parser, arg_known):
@@ -85,15 +88,19 @@ if __name__ == '__main__':
     # todo factor out common code here as a function
     if which_color_map == 'cumsum':
         # use the cumsum of the value counts to assign a color from the colormap by hex string
+        # part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
+        # ).apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(255 * colormap(x)[0]), int(255 * colormap(x)[1]),
+        #                                                int(255 * colormap(x)[2]))).to_dict()
         part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
-        ).apply(lambda x: '#{:02x}{:02x}{:02x}'.format(int(255 * colormap(x)[0]), int(255 * colormap(x)[1]),
-                                                       int(255 * colormap(x)[2]))).to_dict()
+        ).apply(lambda x: float_color_to_hex(x, colormap)).to_dict()
     elif which_color_map == 'uniform':
         # use evenly-spaced colors from a colormap
-        colors = (255.0 * colormap(np.linspace(0, 1, data_df['part_of_speech'].nunique()))).astype(int)
-        part_of_speech_color_map = {
-            item[0]: '#{:02x}{:02x}{:02x}'.format(colors[index][0], colors[index][1], colors[index][2])
-            for index, item in enumerate(data_df['part_of_speech'].value_counts().items())}
+        # colors = (255.0 * colormap(np.linspace(0, 1, data_df['part_of_speech'].nunique()))).astype(int)
+        # part_of_speech_color_map = {
+        #     item[0]: '#{:02x}{:02x}{:02x}'.format(colors[index][0], colors[index][1], colors[index][2])
+        #     for index, item in enumerate(data_df['part_of_speech'].value_counts().items())}
+        part_of_speech_color_map = {item[0]: float_color_to_hex(item[1], colormap) for index, item in
+                                    enumerate(data_df['part_of_speech'].value_counts().items())}
     else:
         raise NotImplementedError('color map: {}'.format(which_color_map))
     logging.info('color map {} looks like {}'.format(which_color_map, part_of_speech_color_map))
