@@ -15,6 +15,7 @@ def float_color_to_hex(arg_float, arg_colormap):
     color_value = arg_colormap(arg_float)
     return '#{:02x}{:02x}{:02x}'.format(int(255 * color_value[0]), int(255 * color_value[1]), int(255 * color_value[2]))
 
+
 # todo add file storage for performance
 def get_part_of_speech(arg, arg_parser, arg_known):
     if arg in arg_known.keys():
@@ -93,9 +94,9 @@ if __name__ == '__main__':
         ).apply(lambda x: float_color_to_hex(x, colormap)).to_dict()
     elif which_color_map == 'uniform':
         # use evenly-spaced colors from a colormap
-        colors = np.linspace(0, 1, data_df['part_of_speech'].nunique())
-        part_of_speech_color_map = {item[0]: float_color_to_hex(colors[index], colormap) for index, item in
-                                    enumerate(data_df['part_of_speech'].value_counts().items())}
+        part_of_speech_color_map = {data_df['part_of_speech'].unique()[index]: float_color_to_hex(
+            np.linspace(0, 1, data_df['part_of_speech'].nunique())[index], colormap) for index in
+            range(data_df['part_of_speech'].nunique())}
 
     else:
         raise NotImplementedError('color map: {}'.format(which_color_map))
