@@ -3,6 +3,7 @@ import logging
 from collections import Counter
 from time import time
 
+import numpy as np
 import pandas as pd
 import plotly.graph_objs as go
 from matplotlib.pyplot import cm
@@ -92,12 +93,10 @@ if __name__ == '__main__':
         ).apply(lambda x: float_color_to_hex(x, colormap)).to_dict()
     elif which_color_map == 'uniform':
         # use evenly-spaced colors from a colormap
-        # colors = (255.0 * colormap(np.linspace(0, 1, data_df['part_of_speech'].nunique()))).astype(int)
-        # part_of_speech_color_map = {
-        #     item[0]: '#{:02x}{:02x}{:02x}'.format(colors[index][0], colors[index][1], colors[index][2])
-        #     for index, item in enumerate(data_df['part_of_speech'].value_counts().items())}
-        part_of_speech_color_map = {item[0]: float_color_to_hex(item[1], colormap) for index, item in
+        colors = np.linspace(0, 1, data_df['part_of_speech'].nunique())
+        part_of_speech_color_map = {item[0]: float_color_to_hex(colors[index], colormap) for index, item in
                                     enumerate(data_df['part_of_speech'].value_counts().items())}
+
     else:
         raise NotImplementedError('color map: {}'.format(which_color_map))
     logging.info('color map {} looks like {}'.format(which_color_map, part_of_speech_color_map))
