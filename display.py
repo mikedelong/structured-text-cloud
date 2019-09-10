@@ -87,7 +87,6 @@ if __name__ == '__main__':
 
     which_color_map = 'uniform'  # was 'uniform' / 'cumsum'
     colormap = cm.get_cmap('jet')
-    # todo factor out common code here as a function
     if which_color_map == 'cumsum':
         # use the cumsum of the value counts to assign a color from the colormap by hex string
         part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
@@ -97,7 +96,6 @@ if __name__ == '__main__':
         part_of_speech_color_map = {data_df['part_of_speech'].unique()[index]: float_color_to_hex(
             np.linspace(0, 1, data_df['part_of_speech'].nunique())[index], colormap) for index in
             range(data_df['part_of_speech'].nunique())}
-
     else:
         raise NotImplementedError('color map: {}'.format(which_color_map))
     logging.info('color map {} looks like {}'.format(which_color_map, part_of_speech_color_map))
