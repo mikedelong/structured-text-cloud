@@ -1,5 +1,5 @@
 {
-  "input_file": "./data/11-0.csv",
-  "output_file": "./data/11-0.html",
+  "input_file": "./data/3600-0.csv",
+  "output_file": "./data/3600-0.html",
   "part_of_speech_file": "./data/part_of_speech.csv"
 }
