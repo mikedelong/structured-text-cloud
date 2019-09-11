@@ -16,7 +16,6 @@ def float_color_to_hex(arg_float, arg_colormap):
     return '#{:02x}{:02x}{:02x}'.format(int(255 * color_value[0]), int(255 * color_value[1]), int(255 * color_value[2]))
 
 
-# todo add file storage for performance
 def get_part_of_speech(arg, arg_parser, arg_known):
     if arg in arg_known.keys():
         return arg_known[arg]
