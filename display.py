@@ -80,7 +80,7 @@ if __name__ == '__main__':
         known_part_of_speech[row['word']] = row['part_of_speech']
     pd.DataFrame.from_dict({'word': list(known_part_of_speech.keys()),
                             'part_of_speech': list(known_part_of_speech.values())},
-                           orient='columns').sort_values(axis=0, by='word').to_csv('./data/part_of_speech.csv',
+                           orient='columns').sort_values(axis=0, by='word').to_csv(part_of_speech_file,
                                                                                    index=True, header=True)
     logging.info(data_df['part_of_speech'].value_counts().to_dict())
 
