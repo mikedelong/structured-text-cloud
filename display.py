@@ -101,6 +101,7 @@ if __name__ == '__main__':
         else:
             raise NotImplementedError('color map: {}'.format(which_color_map))
     else:
+        # https://stackoverflow.com/questions/60208/replacements-for-switch-statement-in-python?rq=1
         supported_color_maps = {'cumsum', 'uniform'}
         if which_color_map in supported_color_maps:
             part_of_speech_color_map = {
