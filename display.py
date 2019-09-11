@@ -87,17 +87,32 @@ if __name__ == '__main__':
 
     which_color_map = 'uniform'  # was 'uniform' / 'cumsum'
     colormap = cm.get_cmap('jet')
-    if which_color_map == 'cumsum':
-        # use the cumsum of the value counts to assign a color from the colormap by hex string
-        part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
-        ).apply(lambda x: float_color_to_hex(x, colormap)).to_dict()
-    elif which_color_map == 'uniform':
-        # use evenly-spaced colors from a colormap
-        part_of_speech_color_map = {data_df['part_of_speech'].unique()[index]: float_color_to_hex(
-            np.linspace(0, 1, data_df['part_of_speech'].nunique())[index], colormap) for index in
-            range(data_df['part_of_speech'].nunique())}
+    do_original = False
+    if do_original:
+        if which_color_map == 'cumsum':
+            # use the cumsum of the value counts to assign a color from the colormap by hex string
+            part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
+            ).apply(lambda x: float_color_to_hex(x, colormap)).to_dict()
+        elif which_color_map == 'uniform':
+            # use evenly-spaced colors from a colormap
+            part_of_speech_color_map = {data_df['part_of_speech'].unique()[index]: float_color_to_hex(
+                np.linspace(0, 1, data_df['part_of_speech'].nunique())[index], colormap) for index in
+                range(data_df['part_of_speech'].nunique())}
+        else:
+            raise NotImplementedError('color map: {}'.format(which_color_map))
     else:
-        raise NotImplementedError('color map: {}'.format(which_color_map))
+        supported_color_maps = {'cumsum', 'uniform'}
+        if which_color_map in supported_color_maps:
+            part_of_speech_color_map = {
+                'cumsum': data_df['part_of_speech'].value_counts(normalize=True).cumsum(
+                ).apply(lambda x: float_color_to_hex(x, colormap)).to_dict(),
+                'uniform': {data_df['part_of_speech'].unique()[index]: float_color_to_hex(
+                    np.linspace(0, 1, data_df['part_of_speech'].nunique())[index], colormap) for index in
+                    range(data_df['part_of_speech'].nunique())}
+            }[which_color_map]
+        else:
+            raise NotImplementedError('color map: {}'.format(which_color_map))
+
     logging.info('color map {} looks like {}'.format(which_color_map, part_of_speech_color_map))
     data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
 
