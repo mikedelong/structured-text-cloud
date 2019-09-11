@@ -12,8 +12,8 @@ from wiktionaryparser import WiktionaryParser
 
 
 def float_color_to_hex(arg_float, arg_colormap):
-    color_value = arg_colormap(arg_float)
-    return '#{:02x}{:02x}{:02x}'.format(int(255 * color_value[0]), int(255 * color_value[1]), int(255 * color_value[2]))
+    color_value = tuple([int(255 * arg_colormap(arg_float)[index]) for index in range(3)])
+    return '#{:02x}{:02x}{:02x}'.format(color_value[0], color_value[1], color_value[2])
 
 
 def get_part_of_speech(arg, arg_parser, arg_known):
