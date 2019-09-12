@@ -25,17 +25,37 @@ if __name__ == '__main__':
         text = input_fp.readlines()
         logging.info('our input data has {} lines.'.format(len(text)))
 
-    text = ' '.join(text[start_line: stop_line])  # exclude everything outside our window of interest
+    # exclude everything outside our window of interest
+    # concatenate all the text into one long string, because that's what spacy needs to see
+    # remove newlines and squeeze out extra space
+    logging.info('started squeezing text')
+    text = ' '.join(text[start_line: stop_line]).replace('\n', ' ')
+    while '  ' in text:
+        text = text.replace('  ', ' ')
+    logging.info('finished squeezing text')
+
+    # for key, value in {
+    #     ',': ' ,',
+    #     '.': ' .',
+    #     ':': ' :',
+    #     '--': ' --',
+    # }.items():
+    #     text.replace(key, value)
 
     parser = load('en_core_web_sm')
     parser.max_length = len(text) + 1
     logging.info('current available pipes are {}'.format({item for item in parser.pipe_names}))
+    # todo combine noun tokens to convert compound nouns
+    # https://hackernoon.com/word2vec-part-1-fe2ec6514d70
+    # todo think about whether we need to handle capitalization before we use word2vec
     with parser.disable_pipes('ner'):
         logging.info('starting parsing')
         result = parser(text=text)
         logging.info('parsing complete')
         logging.info('we have {} sentences'.format(len(list(result.sents))))
+        sentences = list(result.sents)
+        for index in range(10):
+            sentence = sentences[index]
+            logging.info(' '.join([str((item, item.tag_)) for item in sentence]))
 
-        for item in result[:30]:
-            logging.debug('{} {} '.format(item, item.tag_))
     logging.info('total time: {:5.2f}s'.format(time() - time_start))
