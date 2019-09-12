@@ -27,13 +27,15 @@ if __name__ == '__main__':
 
     text = ' '.join(text[start_line: stop_line])  # exclude everything outside our window of interest
 
-    logging.info('starting parsing')
     parser = load('en_core_web_sm')
     parser.max_length = len(text) + 1
-    result = parser(text=text)
-    logging.info('parsing complete')
     logging.info('current available pipes are {}'.format({item for item in parser.pipe_names}))
+    with parser.disable_pipes('ner'):
+        logging.info('starting parsing')
+        result = parser(text=text)
+        logging.info('parsing complete')
+        logging.info('we have {} sentences'.format(len(list(result.sents))))
 
-    for item in result[:30]:
-        logging.info('{} {} '.format(item, item.tag_))
+        for item in result[:30]:
+            logging.debug('{} {} '.format(item, item.tag_))
     logging.info('total time: {:5.2f}s'.format(time() - time_start))
