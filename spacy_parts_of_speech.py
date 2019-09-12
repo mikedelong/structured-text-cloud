@@ -2,14 +2,15 @@ import json
 import logging
 from time import time
 
-from spacy.lang.en import English
+from spacy import load
 
 if __name__ == '__main__':
     time_start = time()
     with open('./locations_and_counts.json') as settings_fp:
         settings = json.load(settings_fp)
-        print(settings)
+        # print(settings)
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+    logging.info('settings are {}'.format(settings))
 
     input_file = settings['input_file'] if 'input_file' in settings.keys() else None
     random_state_ = settings['random_state'] if 'random_state' in settings.keys() else 0
@@ -27,9 +28,12 @@ if __name__ == '__main__':
     text = ' '.join(text[start_line: stop_line])  # exclude everything outside our window of interest
 
     logging.info('starting parsing')
-    parser = English()
+    parser = load('en_core_web_sm')
     parser.max_length = len(text) + 1
     result = parser(text=text)
     logging.info('parsing complete')
+    logging.info('current available pipes are {}'.format({item for item in parser.pipe_names}))
 
+    for item in result[:30]:
+        logging.info('{} {} '.format(item, item.tag_))
     logging.info('total time: {:5.2f}s'.format(time() - time_start))
