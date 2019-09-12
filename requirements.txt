@@ -1,4 +1,3 @@
-spacy
 gensim
 matplotlib
 nltk
@@ -6,4 +5,5 @@ numpy
 pandas
 plotly
 scikit-learn
+spacy
 wiktionaryparser
