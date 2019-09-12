@@ -24,8 +24,12 @@ if __name__ == '__main__':
         text = input_fp.readlines()
         print('our input data has {} lines.'.format(len(text)))
 
-    text = text[start_line: stop_line]  # exclude everything outside our window of interest
+    text = ' '.join(text[start_line: stop_line])  # exclude everything outside our window of interest
 
+    logging.info('starting parsing')
     parser = English()
+    parser.max_length = len(text) + 1
+    result = parser(text=text)
+    logging.info('parsing complete')
 
     print('total time: {:5.2f}s'.format(time() - time_start))
