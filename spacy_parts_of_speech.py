@@ -2,6 +2,8 @@ import json
 import logging
 from time import time
 
+from spacy.lang.en import English
+
 if __name__ == '__main__':
     time_start = time()
     with open('./locations_and_counts.json') as settings_fp:
@@ -23,5 +25,7 @@ if __name__ == '__main__':
         print('our input data has {} lines.'.format(len(text)))
 
     text = text[start_line: stop_line]  # exclude everything outside our window of interest
+
+    parser = English()
 
     print('total time: {:5.2f}s'.format(time() - time_start))
