@@ -4,6 +4,12 @@ from time import time
 
 from spacy import load
 
+
+def token_lower(arg):
+    pieces = arg.split('/')
+    return '/'.join([pieces[0].lower(), pieces[1]])
+
+
 if __name__ == '__main__':
     time_start = time()
     with open('./locations_and_counts.json') as settings_fp:
@@ -48,6 +54,6 @@ if __name__ == '__main__':
         sentences = list(result.sents)
         for index in range(10):
             sentence = sentences[index]
-            logging.info(' '.join([str('{}/{}'.format(item, item.tag_)) for item in sentence]))
+            logging.info(' '.join([token_lower(str('{}/{}'.format(item, item.tag_))) for item in sentence]))
 
     logging.info('total time: {:5.2f}s'.format(time() - time_start))
