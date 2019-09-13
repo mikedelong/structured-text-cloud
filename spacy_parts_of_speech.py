@@ -34,14 +34,6 @@ if __name__ == '__main__':
         text = text.replace('  ', ' ')
     logging.info('finished squeezing text')
 
-    # for key, value in {
-    #     ',': ' ,',
-    #     '.': ' .',
-    #     ':': ' :',
-    #     '--': ' --',
-    # }.items():
-    #     text.replace(key, value)
-
     parser = load('en_core_web_sm')
     parser.max_length = len(text) + 1
     logging.info('current available pipes are {}'.format({item for item in parser.pipe_names}))
