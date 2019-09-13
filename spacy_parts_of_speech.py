@@ -68,8 +68,18 @@ if __name__ == '__main__':
             sentence = sentences[index]
             logging.info(' '.join([token_lower(str('{}/{}'.format(item, item.tag_))) for item in sentence]))
 
+    time_word2vec = time()
     word2vec_model = Word2Vec(compute_loss=word2vec_compute_loss_, min_count=word2vec_min_count_,
                               seed=random_state_, size=word2vec_size_, workers=word2vec_workers_)
     logging.info('created the Word2Vec model')
+    training_data = [
+        [token_lower(token) for token in ' '.join([str('{}/{}'.format(item, item.tag_)) for item in sentence]).split()]
+        for sentence in sentences]
+    logging.info('created the part-marked, properly-cased training data for Word2Vec')
+    word2vec_model.build_vocab(training_data)
+    total_examples = word2vec_model.corpus_count
+    print('word2vec total examples: {}'.format(total_examples))
+    word2vec_model.train(training_data, epochs=word2vec_epochs_, total_examples=total_examples)
+    print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
 
     logging.info('total time: {:5.2f}s'.format(time() - time_start))
