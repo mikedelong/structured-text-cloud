@@ -70,18 +70,20 @@ if __name__ == '__main__':
     else:
         quantiles = [float(index) / float(len(slices)) for index in range(1, len(slices))]
 
-    known_part_of_speech_df = pd.read_csv(part_of_speech_file, usecols=['word', 'part_of_speech'])
-    known_part_of_speech = {row['word']: row['part_of_speech'] for _, row in known_part_of_speech_df.iterrows()}
-    # known_part_of_speech = {}
-    data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser, known_part_of_speech))
-    data_df['part_of_speech'] = data_df['part_of_speech'].fillna('unknown')
-    # write the known parts of speech to a file before we proceed
-    for index, row in data_df.iterrows():
-        known_part_of_speech[row['word']] = row['part_of_speech']
-    pd.DataFrame.from_dict({'word': list(known_part_of_speech.keys()),
-                            'part_of_speech': list(known_part_of_speech.values())},
-                           orient='columns').sort_values(axis=0, by='word').to_csv(part_of_speech_file,
-                                                                                   index=True, header=True)
+    # we only need to create the part of speech data if it does not already exist
+    if 'part_of_speech' not in list(data_df):
+        known_part_of_speech_df = pd.read_csv(part_of_speech_file, usecols=['word', 'part_of_speech'])
+        known_part_of_speech = {row['word']: row['part_of_speech'] for _, row in known_part_of_speech_df.iterrows()}
+        # known_part_of_speech = {}
+        data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser, known_part_of_speech))
+        data_df['part_of_speech'] = data_df['part_of_speech'].fillna('unknown')
+        # write the known parts of speech to a file before we proceed
+        for index, row in data_df.iterrows():
+            known_part_of_speech[row['word']] = row['part_of_speech']
+        pd.DataFrame.from_dict({'word': list(known_part_of_speech.keys()),
+                                'part_of_speech': list(known_part_of_speech.values())},
+                               orient='columns').sort_values(axis=0, by='word').to_csv(part_of_speech_file,
+                                                                                       index=True, header=True)
     logging.info(data_df['part_of_speech'].value_counts().to_dict())
 
     which_color_map = 'uniform'  # was 'uniform' / 'cumsum'
