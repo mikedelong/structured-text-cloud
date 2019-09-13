@@ -56,6 +56,6 @@ if __name__ == '__main__':
         sentences = list(result.sents)
         for index in range(10):
             sentence = sentences[index]
-            logging.info(' '.join([str((item, item.tag_)) for item in sentence]))
+            logging.info(' '.join([str('{}/{}'.format(item, item.tag_)) for item in sentence]))
 
     logging.info('total time: {:5.2f}s'.format(time() - time_start))
