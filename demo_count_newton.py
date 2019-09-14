@@ -41,8 +41,7 @@ def get_count(arg):
 
 
 if __name__ == '__main__':
-    x0_ = 17.0
-    g = newton(f, x0=x0_)
+    g = newton(f, x0=17.0)
     print(g)
     print(f(g))
 
