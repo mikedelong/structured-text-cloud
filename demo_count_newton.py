@@ -6,7 +6,20 @@ def f(arg):
     return -2.0 + arg / 2.0
 
 
-def get_count(arg):
+def get_count(arg, arg_documents):
+    try:
+        vectorizer = CountVectorizer(encoding='utf-8', lowercase=True, ngram_range=(1, 1), min_df=arg)
+        X = vectorizer.fit_transform(raw_documents=arg_documents)
+        return len(vectorizer.vocabulary_) - 14.0
+    except ValueError:
+        return float('inf')
+
+
+if __name__ == '__main__':
+    g = newton(f, x0=17.0)
+    print(g)
+    print(f(g))
+
     documents = ['the rain in Spain falls mainly in the plane',
                  'The Tahiti rail, Tahitian red-billed rail, or Pacific red-billed rail (Gallirallus pacificus) is an'
                  ' extinct species of rail that lived on Tahiti. It was first recorded during James Cook\'s second'
@@ -32,18 +45,6 @@ def get_count(arg):
                  ' It appears to have become'
                  ' extinct some time after 1844 on Tahiti, and perhaps as late as the 1930s on Mehetia.'
                  ]
-    try:
-        vectorizer = CountVectorizer(encoding='utf-8', lowercase=True, ngram_range=(1, 1), min_df=arg)
-        X = vectorizer.fit_transform(raw_documents=documents)
-        return len(vectorizer.vocabulary_) - 14.0
-    except ValueError:
-        return float('inf')
 
-
-if __name__ == '__main__':
-    g = newton(f, x0=17.0)
-    print(g)
-    print(f(g))
-
-    g = newton(get_count, x0=4)
+    g = newton(get_count, x0=4, args=(documents,))
     print(g)
