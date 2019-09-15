@@ -9,7 +9,7 @@ def f(arg):
 def get_count(arg, arg_documents):
     try:
         vectorizer = CountVectorizer(encoding='utf-8', lowercase=True, ngram_range=(1, 1), min_df=arg)
-        X = vectorizer.fit_transform(raw_documents=arg_documents)
+        vectorizer.fit_transform(raw_documents=arg_documents)
         return len(vectorizer.vocabulary_) - 14.0
     except ValueError:
         return float('inf')
