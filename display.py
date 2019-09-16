@@ -121,8 +121,8 @@ if __name__ == '__main__':
     data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
 
     # get the cut level
-    # cut_level = data_df.nlargest(n=200, columns=['count'], keep='all')['count'].min()
-    # data_df = data_df[data_df['count'] >= cut_level]
+    cut_level = data_df.nlargest(n=200, columns=['count'], keep='all')['count'].min()
+    data_df = data_df[data_df['count'] >= cut_level]
 
     color_ = 'rgba(217, 217, 217, 0.14)'
     interpolation_ = 'lower'
