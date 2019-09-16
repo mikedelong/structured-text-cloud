@@ -47,6 +47,12 @@ if __name__ == '__main__':
         logging.error('No part of speech file specified. Quitting.')
         quit(2)
 
+    max_words_to_show = settings['max_words_to_show'] if 'max_words_to_show' in settings.keys() else None
+    if max_words_to_show is None:
+        max_words_to_show = 300
+        logging.error('Max words to show not set, defaulting to default value: {}'.format(max_words_to_show))
+
+
     parser = WiktionaryParser()
 
     data_df = pd.read_csv(input_file)
@@ -121,10 +127,9 @@ if __name__ == '__main__':
     data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
 
     # get the cut level
-    cut_level_n = 200
-    cut_level = data_df.nlargest(n=cut_level_n, columns=['count'], keep='all')['count'].min()
+    cut_level = data_df.nlargest(n=max_words_to_show, columns=['count'], keep='all')['count'].min()
     data_df = data_df[data_df['count'] >= cut_level]
-    logging.info('our cut level of {} leaves us with {} rows/words to display'.format(cut_level_n, len(data_df)))
+    logging.info('our cut level of {} leaves us with {} rows/words to display'.format(max_words_to_show, len(data_df)))
 
     color_ = 'rgba(217, 217, 217, 0.14)'
     interpolation_ = 'lower'
