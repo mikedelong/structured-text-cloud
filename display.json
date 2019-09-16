@@ -1,5 +1,6 @@
 {
   "input_file": "./data/3600-0_pos.csv",
+  "max_words_to_show": 400,
   "output_file": "./data/3600-0.html",
   "part_of_speech_file": "./data/part_of_speech.csv"
 }
