@@ -50,6 +50,8 @@ if __name__ == '__main__':
     parser = WiktionaryParser()
 
     data_df = pd.read_csv(input_file)
+    # we need to squeeze out spaces from the column names before we proceed
+    data_df.rename(columns={item: item.strip() for item in list(data_df)}, inplace=True)
 
     output_file_name = settings['output_file'] if 'output_file' in settings.keys() else None
     if output_file_name is None:
@@ -118,12 +120,17 @@ if __name__ == '__main__':
     logging.info('color map {} looks like {}'.format(which_color_map, part_of_speech_color_map))
     data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
 
+    # get the cut level
+    # cut_level = data_df.nlargest(n=200, columns=['count'], keep='all')['count'].min()
+    # data_df = data_df[data_df['count'] >= cut_level]
+
     color_ = 'rgba(217, 217, 217, 0.14)'
     interpolation_ = 'lower'
     opacity_ = 0.8
     size_ = 6
     stretch_factor = 1.05
     width_ = 0.1
+    logging.info(list(data_df))
     fig = go.Figure(data=[go.Scatter(
         hovertext=get_quantile(data_df, 'cumulative', quantile, interpolation_)['count'],
         marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=size_), mode=mode_,
