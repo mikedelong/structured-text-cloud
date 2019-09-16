@@ -10,7 +10,7 @@ def get_count(arg, arg_documents):
     try:
         vectorizer = CountVectorizer(encoding='utf-8', lowercase=True, ngram_range=(1, 1), min_df=arg)
         vectorizer.fit(raw_documents=arg_documents)
-        return len(vectorizer.vocabulary_) - 14.0
+        return len(vectorizer.vocabulary_)
     except ValueError:
         return float('inf')
 
@@ -46,5 +46,5 @@ if __name__ == '__main__':
                  ' extinct some time after 1844 on Tahiti, and perhaps as late as the 1930s on Mehetia.'
                  ]
 
-    g = newton(get_count, x0=4, args=(documents,))
-    print(g)
+    for min_df in range(1, 9):
+        print('{} {}'.format(min_df, get_count(min_df, arg_documents=documents)))
