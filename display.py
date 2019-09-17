@@ -64,6 +64,7 @@ if __name__ == '__main__':
         logging.error('No output file specified. Quitting.')
         quit(1)
     mode_ = 'text'  # 'markers+text'
+    # todo move the slice strategy to a setting
     slice_limit = 10
     slices = sorted(data_df['count'].unique().tolist())
 
