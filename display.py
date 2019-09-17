@@ -57,6 +57,7 @@ if __name__ == '__main__':
     data_df = pd.read_csv(input_file)
     # we need to squeeze out spaces from the column names before we proceed
     data_df.rename(columns={item: item.strip() for item in list(data_df)}, inplace=True)
+    logging.info('column names after load and rename: {}'.format(list(data_df)))
 
     output_file_name = settings['output_file'] if 'output_file' in settings.keys() else None
     if output_file_name is None:
@@ -136,7 +137,6 @@ if __name__ == '__main__':
     size_ = 6
     stretch_factor = 1.05
     width_ = 0.1
-    logging.info(list(data_df))
     fig = go.Figure(data=[go.Scatter(
         hovertext=get_quantile(data_df, 'cumulative', quantile, interpolation_)['count'],
         marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=size_), mode=mode_,
