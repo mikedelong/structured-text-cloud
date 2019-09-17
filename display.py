@@ -122,7 +122,7 @@ if __name__ == '__main__':
         else:
             raise NotImplementedError('color map: {}'.format(which_color_map))
 
-    logging.info('color map {} looks like {}'.format(which_color_map, part_of_speech_color_map))
+    logging.info('color map {}: {}'.format(which_color_map, part_of_speech_color_map))
     data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
 
     # get the cut level
