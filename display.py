@@ -95,6 +95,7 @@ if __name__ == '__main__':
     logging.info('part of speech counts: {}'.format(data_df['part_of_speech'].value_counts().to_dict()))
 
     which_color_map = 'uniform'  # was 'uniform' / 'cumsum'
+    # todo move the colormap name to a setting
     colormap = cm.get_cmap('jet')
     do_original = False
     if do_original:
