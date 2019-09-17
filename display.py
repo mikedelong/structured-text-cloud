@@ -52,7 +52,6 @@ if __name__ == '__main__':
         max_words_to_show = 300
         logging.error('Max words to show not set, defaulting to default value: {}'.format(max_words_to_show))
 
-
     parser = WiktionaryParser()
 
     data_df = pd.read_csv(input_file)
