@@ -35,7 +35,7 @@ if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
     with open('./display.json') as settings_fp:
         settings = json.load(settings_fp)
-        logging.info(settings)
+        logging.info('settings: {}'.format(settings))
 
     input_file = settings['input_file'] if 'input_file' in settings.keys() else None
     if input_file is None:
