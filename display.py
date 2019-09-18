@@ -100,7 +100,8 @@ if __name__ == '__main__':
 
     which_color_map = 'uniform'  # was 'uniform' / 'cumsum'
     # todo move the colormap name to a setting
-    colormap = cm.get_cmap('jet')
+    colormap_name = 'jet'
+    colormap = cm.get_cmap(colormap_name)
     do_original = False
     if do_original:
         if which_color_map == 'cumsum':
