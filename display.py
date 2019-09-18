@@ -52,11 +52,17 @@ if __name__ == '__main__':
         max_words_to_show = 300
         logging.warning('Max words to show not set, defaulting to default value: {}'.format(max_words_to_show))
 
+    output_file_name = settings['output_file'] if 'output_file' in settings.keys() else None
+    if output_file_name is None:
+        logging.error('No output file specified. Quitting.')
+        quit(1)
+
     part_of_speech_file = settings['part_of_speech_file'] if 'part_of_speech_file' in settings.keys() else None
     if part_of_speech_file is None:
         logging.error('No part of speech file specified. Quitting.')
         quit(2)
 
+    # todo only create this if it will be needed
     parser = WiktionaryParser()
 
     data_df = pd.read_csv(input_file)
@@ -64,10 +70,6 @@ if __name__ == '__main__':
     data_df.rename(columns={item: item.strip() for item in list(data_df)}, inplace=True)
     logging.info('column names after load and rename: {}'.format(list(data_df)))
 
-    output_file_name = settings['output_file'] if 'output_file' in settings.keys() else None
-    if output_file_name is None:
-        logging.error('No output file specified. Quitting.')
-        quit(1)
     mode_ = 'text'  # 'markers+text'
     slices = sorted(data_df['count'].unique().tolist())
 
