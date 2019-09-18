@@ -55,7 +55,7 @@ if __name__ == '__main__':
     max_pages = settings['max_pages_to_show'] if 'max_pages_to_show' in settings.keys() else None
     if max_pages is None:
         max_pages = 10
-        logging.error('Max pages to show not set, defaulting to default value: {}'.format(max_pages))
+        logging.warning('Max pages to show not set, defaulting to default value: {}'.format(max_pages))
 
     parser = WiktionaryParser()
 
