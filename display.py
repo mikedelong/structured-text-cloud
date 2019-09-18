@@ -47,15 +47,15 @@ if __name__ == '__main__':
         max_pages = 10
         logging.warning('Max pages to show not set, defaulting to default value: {}'.format(max_pages))
 
-    part_of_speech_file = settings['part_of_speech_file'] if 'part_of_speech_file' in settings.keys() else None
-    if part_of_speech_file is None:
-        logging.error('No part of speech file specified. Quitting.')
-        quit(2)
-
     max_words_to_show = settings['max_words_to_show'] if 'max_words_to_show' in settings.keys() else None
     if max_words_to_show is None:
         max_words_to_show = 300
         logging.warning('Max words to show not set, defaulting to default value: {}'.format(max_words_to_show))
+
+    part_of_speech_file = settings['part_of_speech_file'] if 'part_of_speech_file' in settings.keys() else None
+    if part_of_speech_file is None:
+        logging.error('No part of speech file specified. Quitting.')
+        quit(2)
 
     parser = WiktionaryParser()
 
