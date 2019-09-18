@@ -52,6 +52,12 @@ if __name__ == '__main__':
         max_words_to_show = 300
         logging.error('Max words to show not set, defaulting to default value: {}'.format(max_words_to_show))
 
+    # todo move the slice strategy to a setting
+    max_pages = settings['max_pages_to_show'] if 'max_pages_to_show' in settings.keys() else None
+    if max_pages is None:
+        max_pages = 10
+        logging.error('Max pages to show not set, defaulting to default value: {}'.format(max_pages))
+
     parser = WiktionaryParser()
 
     data_df = pd.read_csv(input_file)
@@ -64,8 +70,6 @@ if __name__ == '__main__':
         logging.error('No output file specified. Quitting.')
         quit(1)
     mode_ = 'text'  # 'markers+text'
-    # todo move the slice strategy to a setting
-    slice_limit = 10
     slices = sorted(data_df['count'].unique().tolist())
 
     total = sum(slices)
@@ -73,9 +77,9 @@ if __name__ == '__main__':
     data_df = data_df.sort_values(by=['count'], axis=0, ascending=True)
     data_df['cumulative'] = data_df['count'].cumsum()
     # if we have more than ten slices refit to ten
-    if len(slices) > slice_limit:
-        quantiles = [1.0 / float(slice_limit) * index - 1.0 / (2.0 * float(slice_limit)) for index in
-                     range(1, slice_limit + 1)]
+    if len(slices) > max_pages:
+        quantiles = [1.0 / float(max_pages) * index - 1.0 / (2.0 * float(max_pages)) for index in
+                     range(1, max_pages + 1)]
     else:
         quantiles = [float(index) / float(len(slices)) for index in range(1, len(slices))]
 
