@@ -30,6 +30,11 @@ def get_quantile(arg_df, arg_column, arg_quantile, arg_interpolation):
     return arg_df[arg_df[arg_column] > data_df[arg_column].quantile(q=arg_quantile, interpolation=arg_interpolation)]
 
 
+def get_setting(arg_name, arg_setting):
+    result = settings[arg_name] if arg_name in arg_setting.keys() else None
+    return result
+
+
 if __name__ == '__main__':
     time_start = time()
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
