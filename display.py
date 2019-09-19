@@ -42,7 +42,7 @@ if __name__ == '__main__':
         settings = json.load(settings_fp)
         logging.info('settings: {}'.format(settings))
 
-    colormap_name = settings['colormap'] if 'colormap' in settings.keys() else None
+    colormap_name = get_setting('colormap', settings)
     if colormap_name is None:
         colormap_name = 'jet'
         logging.warning('colormap not set, defaulting to default value: {}'.format(colormap_name))
