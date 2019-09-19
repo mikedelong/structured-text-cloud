@@ -80,6 +80,9 @@ if __name__ == '__main__':
     data_df.rename(columns={item: item.strip() for item in list(data_df)}, inplace=True)
     logging.info('column names after load and rename: {}'.format(list(data_df)))
 
+    # todo remove the punctuation tokens
+    # todo set the type for the punctuation markers to be PUNCT
+
     mode_ = 'text'  # 'markers+text'
     slices = sorted(data_df['count'].unique().tolist())
 
