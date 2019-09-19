@@ -37,8 +37,6 @@ if __name__ == '__main__':
         settings = json.load(settings_fp)
         logging.info('settings: {}'.format(settings))
 
-    # todo move the colormap name to a setting
-    colormap_name = 'jet'
     colormap_name = settings['colormap'] if 'colormap' in settings.keys() else None
     if colormap_name is None:
         colormap_name = 'jet'
