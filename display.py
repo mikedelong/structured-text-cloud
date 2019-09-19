@@ -37,6 +37,13 @@ if __name__ == '__main__':
         settings = json.load(settings_fp)
         logging.info('settings: {}'.format(settings))
 
+    # todo move the colormap name to a setting
+    colormap_name = 'jet'
+    colormap_name = settings['colormap'] if 'colormap' in settings.keys() else None
+    if colormap_name is None:
+        colormap_name = 'jet'
+        logging.warning('colormap not set, defaulting to default value: {}'.format(colormap_name))
+
     input_file = settings['input_file'] if 'input_file' in settings.keys() else None
     if input_file is None:
         logging.error('No input file specified. Quitting.')
@@ -101,8 +108,6 @@ if __name__ == '__main__':
     logging.info('part of speech counts: {}'.format(data_df['part_of_speech'].value_counts().to_dict()))
 
     which_color_map = 'uniform'  # was 'uniform' / 'cumsum'
-    # todo move the colormap name to a setting
-    colormap_name = 'jet'
     colormap = cm.get_cmap(colormap_name)
     do_original = False
     if do_original:
