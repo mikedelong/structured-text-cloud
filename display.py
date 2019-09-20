@@ -47,7 +47,7 @@ if __name__ == '__main__':
         colormap_name = 'jet'
         logging.warning('colormap not set, defaulting to default value: {}'.format(colormap_name))
 
-    input_file = settings['input_file'] if 'input_file' in settings.keys() else None
+    input_file = get_setting('input_file', settings)
     if input_file is None:
         logging.error('No input file specified. Quitting.')
         quit(1)
