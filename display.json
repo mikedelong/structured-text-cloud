@@ -1,5 +1,5 @@
 {
-  "colormap": "viridis",
+  "colormap": "hot",
   "input_file": "./data/3600-0_pos.csv",
   "max_pages_to_show": 12,
   "max_words_to_show": 400,
