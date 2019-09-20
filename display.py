@@ -10,6 +10,12 @@ from matplotlib.pyplot import cm
 from plotly.offline import plot
 from wiktionaryparser import WiktionaryParser
 
+# 'HYPH',
+supported_parts_of_speech = ['-LRB-', '-RRB-', 'ADD', 'CC', 'CD', 'DT', 'EX', 'FW', 'IN', 'JJ', 'JJR', 'JJS', 'LS',
+                             'MD', 'NFP', 'NN', 'NNP', 'NNPS', 'NNS', 'PDT', 'POS', 'PRP', 'PRP$', 'RB', 'RBR',
+                             'RBS', 'RP', 'TO', 'UH', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'WDT', 'WP', 'WP$',
+                             'WRB']
+
 
 def float_color_to_hex(arg_float, arg_colormap):
     color_value = tuple([int(255 * arg_colormap(arg_float)[index]) for index in range(3)])
@@ -83,11 +89,6 @@ if __name__ == '__main__':
     # todo remove the punctuation tokens
     # todo set the type for the punctuation markers to be PUNCT
 
-    # 'HYPH',
-    supported_parts_of_speech = ['-LRB-', '-RRB-', 'ADD', 'CC', 'CD', 'DT', 'EX', 'FW', 'IN', 'JJ', 'JJR', 'JJS', 'LS',
-                                 'MD', 'NFP', 'NN', 'NNP', 'NNPS', 'NNS', 'PDT', 'POS', 'PRP', 'PRP$', 'RB', 'RBR',
-                                 'RBS', 'RP', 'TO', 'UH', 'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'WDT', 'WP', 'WP$',
-                                 'WRB']
 
     b = {item: item if item in supported_parts_of_speech else 'PUNCT' for item in
          data_df['part_of_speech'].unique().tolist()}
