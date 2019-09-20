@@ -83,15 +83,14 @@ if __name__ == '__main__':
     # todo remove the punctuation tokens
     # todo set the type for the punctuation markers to be PUNCT
 
-    uniques = data_df['part_of_speech'].unique().tolist()
-
     # 'HYPH',
     supported_parts_of_speech = ['NNS', 'IN', 'NNP', 'DT', 'NN', 'JJ', 'VBZ', 'TO', 'PRP$', 'VB', 'RB', 'CC', 'WDT',
                                  'VBP', 'RBS', 'VBD', 'PRP', 'VBN', 'VBG', 'WP', 'MD', 'WRB', 'JJS',
                                  'UH', 'RP', 'PDT', 'CD', 'JJR', 'RBR', 'EX', '-LRB-', '-RRB-', 'LS', 'POS', 'ADD',
                                  'WP$', 'FW', 'NNPS', 'NFP']
 
-    b = {item: item if item in supported_parts_of_speech else 'PUNCT' for item in uniques}
+    b = {item: item if item in supported_parts_of_speech else 'PUNCT' for item in
+         data_df['part_of_speech'].unique().tolist()}
     for key, value in b.items():
         data_df['part_of_speech'] = data_df['part_of_speech'].replace(key, value)
 
