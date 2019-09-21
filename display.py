@@ -88,9 +88,9 @@ if __name__ == '__main__':
 
     # todo set the type for the punctuation markers to be PUNCT
 
-    b = {item: item if item in supported_parts_of_speech else 'PUNCT' for item in
-         data_df['part_of_speech'].unique().tolist()}
-    for key, value in b.items():
+    token_map = {item: item if item in supported_parts_of_speech else 'PUNCT' for item in
+                 data_df['part_of_speech'].unique().tolist()}
+    for key, value in token_map.items():
         data_df['part_of_speech'] = data_df['part_of_speech'].replace(key, value)
 
     mode_ = 'text'  # 'markers+text'
