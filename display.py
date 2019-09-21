@@ -86,7 +86,6 @@ if __name__ == '__main__':
     data_df.rename(columns={item: item.strip() for item in list(data_df)}, inplace=True)
     logging.info('column names after load and rename: {}'.format(list(data_df)))
 
-    # todo remove the punctuation tokens
     # todo set the type for the punctuation markers to be PUNCT
 
     b = {item: item if item in supported_parts_of_speech else 'PUNCT' for item in
