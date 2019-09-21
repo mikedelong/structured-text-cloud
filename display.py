@@ -93,8 +93,6 @@ if __name__ == '__main__':
 
     mode_ = 'text'  # 'markers+text'
     slices = sorted(data_df['count'].unique().tolist())
-
-    total = sum(slices)
     counts = Counter(data_df['count'].values.tolist())
     data_df = data_df.sort_values(by=['count'], axis=0, ascending=True)
     data_df['cumulative'] = data_df['count'].cumsum()
