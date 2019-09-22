@@ -95,7 +95,6 @@ if __name__ == '__main__':
     slices = sorted(data_df['count'].unique().tolist())
     counts = Counter(data_df['count'].values.tolist())
     data_df = data_df.sort_values(by=['count'], axis=0, ascending=True)
-    data_df['cumulative'] = data_df['count'].cumsum()
     # if we have more than max_pages slices refit
     if len(slices) > max_pages:
         quantiles = [1.0 / float(max_pages) * index - 1.0 / (2.0 * float(max_pages)) for index in
@@ -162,6 +161,7 @@ if __name__ == '__main__':
     size_ = 6
     stretch_factor = 1.05
     width_ = 0.1
+    data_df['cumulative'] = data_df['count'].cumsum()
     fig = go.Figure(data=[go.Scatter(
         hovertext=get_quantile(data_df, 'cumulative', quantile, interpolation_)['count'],
         marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=size_), mode=mode_,
