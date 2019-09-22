@@ -78,8 +78,6 @@ if __name__ == '__main__':
         logging.error('No part of speech file specified. Quitting.')
         quit(2)
 
-    # todo only create this if it will be needed
-    parser = WiktionaryParser()
 
     data_df = pd.read_csv(input_file)
     # we need to squeeze out spaces from the column names before we proceed
@@ -101,6 +99,9 @@ if __name__ == '__main__':
                      range(1, max_pages + 1)]
     else:
         quantiles = [float(index) / float(len(slices)) for index in range(1, len(slices))]
+
+    # todo only create this if it will be needed
+    parser = WiktionaryParser()
 
     # we only need to create the part of speech data if it does not already exist
     if 'part_of_speech' not in list(data_df):
