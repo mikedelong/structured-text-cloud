@@ -78,7 +78,6 @@ if __name__ == '__main__':
         logging.error('No part of speech file specified. Quitting.')
         quit(2)
 
-
     data_df = pd.read_csv(input_file)
     # we need to squeeze out spaces from the column names before we proceed
     data_df.rename(columns={item: item.strip() for item in list(data_df)}, inplace=True)
