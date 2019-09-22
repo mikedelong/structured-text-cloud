@@ -96,7 +96,7 @@ if __name__ == '__main__':
     counts = Counter(data_df['count'].values.tolist())
     data_df = data_df.sort_values(by=['count'], axis=0, ascending=True)
     data_df['cumulative'] = data_df['count'].cumsum()
-    # if we have more than ten slices refit to ten
+    # if we have more than max_pages slices refit
     if len(slices) > max_pages:
         quantiles = [1.0 / float(max_pages) * index - 1.0 / (2.0 * float(max_pages)) for index in
                      range(1, max_pages + 1)]
