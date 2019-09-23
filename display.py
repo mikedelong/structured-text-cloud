@@ -169,6 +169,7 @@ if __name__ == '__main__':
         y=get_quantile(data_df, 'cumulative', quantile, interpolation_)['y'],
     ) for index, quantile in enumerate(quantiles)],
         layout=dict(
+            showlegend=True,
             sliders=[dict(
                 active=len(quantiles) // 2,
                 pad={'t': 1},
