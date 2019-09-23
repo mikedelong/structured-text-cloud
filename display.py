@@ -63,7 +63,7 @@ if __name__ == '__main__':
         max_pages = 10
         logging.warning('Max pages to show not set, defaulting to default value: {}'.format(max_pages))
 
-    max_words_to_show = settings['max_words_to_show'] if 'max_words_to_show' in settings.keys() else None
+    max_words_to_show = get_setting('max_words_to_show', settings)
     if max_words_to_show is None:
         max_words_to_show = 300
         logging.warning('Max words to show not set, defaulting to default value: {}'.format(max_words_to_show))
