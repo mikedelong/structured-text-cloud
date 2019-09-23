@@ -58,7 +58,7 @@ if __name__ == '__main__':
         logging.error('No input file specified. Quitting.')
         quit(1)
 
-    max_pages = settings['max_pages_to_show'] if 'max_pages_to_show' in settings.keys() else None
+    max_pages = get_setting('max_pages_to_show', settings)
     if max_pages is None:
         max_pages = 10
         logging.warning('Max pages to show not set, defaulting to default value: {}'.format(max_pages))
