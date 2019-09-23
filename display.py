@@ -165,7 +165,6 @@ if __name__ == '__main__':
         marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=size_), mode=mode_,
         text=get_quantile(data_df, 'cumulative', quantile, interpolation_)['word'],
         textfont=dict(color=get_quantile(data_df, 'cumulative', quantile, interpolation_)['color']),
-        # , colorscale='Viridis'),
         x=get_quantile(data_df, 'cumulative', quantile, interpolation_)['x'],
         y=get_quantile(data_df, 'cumulative', quantile, interpolation_)['y'],
     ) for index, quantile in enumerate(quantiles)],
