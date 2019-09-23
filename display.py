@@ -99,11 +99,9 @@ if __name__ == '__main__':
     else:
         quantiles = [float(index) / float(len(slices)) for index in range(1, len(slices))]
 
-    # todo only create this if it will be needed
-    parser = WiktionaryParser()
-
     # we only need to create the part of speech data if it does not already exist
     if 'part_of_speech' not in list(data_df):
+        parser = WiktionaryParser()
         known_part_of_speech_df = pd.read_csv(part_of_speech_file, usecols=['word', 'part_of_speech'])
         known_part_of_speech = {row['word']: row['part_of_speech'] for _, row in known_part_of_speech_df.iterrows()}
         # known_part_of_speech = {}
