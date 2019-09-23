@@ -68,7 +68,7 @@ if __name__ == '__main__':
         max_words_to_show = 300
         logging.warning('Max words to show not set, defaulting to default value: {}'.format(max_words_to_show))
 
-    output_file_name = settings['output_file'] if 'output_file' in settings.keys() else None
+    output_file_name = get_setting('output_file', settings)
     if output_file_name is None:
         logging.error('No output file specified. Quitting.')
         quit(1)
