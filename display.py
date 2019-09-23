@@ -170,7 +170,7 @@ if __name__ == '__main__':
         y=get_quantile(data_df, 'cumulative', quantile, interpolation_)['y'],
     ) for index, quantile in enumerate(quantiles)],
         layout=dict(
-            showlegend=True,
+            showlegend=False,  # let's turn this off until we have figured out how to do it properly
             sliders=[dict(
                 active=len(quantiles) // 2,
                 pad={'t': 1},
