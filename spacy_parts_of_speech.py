@@ -96,7 +96,6 @@ if __name__ == '__main__':
     logging.info('current available pipes are {}'.format({item for item in parser.pipe_names}))
     # todo combine noun tokens to convert compound nouns
     # https://hackernoon.com/word2vec-part-1-fe2ec6514d70
-    # todo think about whether we need to handle capitalization before we use word2vec
     with parser.disable_pipes('ner'):
         logging.info('starting parsing')
         result = parser(text=text)
