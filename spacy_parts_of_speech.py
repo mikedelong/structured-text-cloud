@@ -136,10 +136,8 @@ if __name__ == '__main__':
         report_vocabulary_limit = 20
         print('the model vocabulary has {} words and they are {}'.format(len(words), words[:report_vocabulary_limit]))
         stop_words = stopwords.words('english')
-        filtered = list()
-        for index, word in enumerate(words):
-            if word not in stop_words and len(word) > 1 and not word.isdigit():
-                filtered.append((word, result[index, 0], result[index, 1]))
+        filtered = [(words[index], result[index, 0], result[index, 1]) for index in range(len(words)) if
+                    words[index] not in stop_words and len(words[index]) > 1 and not words[index].isdigit()]
         print('after we filter stopwords our vocabulary has {} words'.format(len(filtered)))
 
         # now reconstruct the words and results from the filtered result
