@@ -1,8 +1,8 @@
 {
   "colormap": "hot",
-  "input_file": "./data/3600-0_pos.csv",
+  "input_file": "./data/finnegans-wake_pos.csv",
   "max_pages_to_show": 12,
   "max_words_to_show": 400,
-  "output_file": "./data/3600-0.html",
+  "output_file": "./data/finnegans-wake.html",
   "part_of_speech_file": "./data/part_of_speech.csv"
 }
