@@ -64,7 +64,7 @@ if __name__ == '__main__':
         logging.error('Check settings: do_tsne and do_isomap cannot both be true. Quitting.')
         quit(1)
     if input_file is None:
-        print('input file not in settings. Quitting.')
+        logging.error('input file not in settings. Quitting.')
         quit(1)
     input_encoding = settings['input_encoding'] if 'input_encoding' in settings.keys() else 'utf-8'
 
