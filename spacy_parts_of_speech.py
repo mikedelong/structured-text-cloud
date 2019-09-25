@@ -116,7 +116,7 @@ if __name__ == '__main__':
     logging.info('created the part-marked, properly-cased training data for Word2Vec')
     word2vec_model.build_vocab(training_data)
     total_examples = word2vec_model.corpus_count
-    print('word2vec total examples: {}'.format(total_examples))
+    logging.info('word2vec total examples: {}'.format(total_examples))
     word2vec_model.train(training_data, epochs=word2vec_epochs_, total_examples=total_examples)
     print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
 
