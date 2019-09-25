@@ -118,7 +118,7 @@ if __name__ == '__main__':
     total_examples = word2vec_model.corpus_count
     logging.info('word2vec total examples: {}'.format(total_examples))
     word2vec_model.train(training_data, epochs=word2vec_epochs_, total_examples=total_examples)
-    print('word2vec took {:5.2f}s'.format(time() - time_word2vec))
+    logging.info('word2vec took {:5.2f}s'.format(time() - time_word2vec))
 
     if do_plot:
         time_projection = time()
