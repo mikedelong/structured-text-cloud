@@ -130,7 +130,6 @@ if __name__ == '__main__':
 
         X = word2vec_model.wv[word2vec_model.wv.vocab]
         result = projection_model.fit_transform(X)
-        # todo replace print() with logging
         logging.info('projection took {:5.2f}s'.format(time() - time_projection))
 
         words = list(word2vec_model.wv.vocab)
