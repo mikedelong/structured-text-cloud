@@ -162,6 +162,7 @@ if __name__ == '__main__':
     data_df['cumulative'] = data_df['count'].cumsum()
     # todo figure out how to add an item to the legend per color/part of speech
     fig = go.Figure(data=[go.Scatter(
+        hoverinfo='text',
         hovertext=get_quantile(data_df, 'cumulative', quantile, interpolation_)['count'],
         marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=size_), mode=mode_,
         name='foo: {}'.format(index),
