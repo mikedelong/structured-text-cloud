@@ -131,7 +131,7 @@ if __name__ == '__main__':
         X = word2vec_model.wv[word2vec_model.wv.vocab]
         result = projection_model.fit_transform(X)
         # todo replace print() with logging
-        print('projection took {:5.2f}s'.format(time() - time_projection))
+        logging.info('projection took {:5.2f}s'.format(time() - time_projection))
 
         words = list(word2vec_model.wv.vocab)
         report_vocabulary_limit = 20
