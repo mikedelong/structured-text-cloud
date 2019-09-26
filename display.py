@@ -164,6 +164,7 @@ if __name__ == '__main__':
     fig = go.Figure(data=[go.Scatter(
         hovertext=get_quantile(data_df, 'cumulative', quantile, interpolation_)['count'],
         marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=size_), mode=mode_,
+        name='foo: {}'.format(index),
         text=get_quantile(data_df, 'cumulative', quantile, interpolation_)['word'],
         textfont=dict(color=get_quantile(data_df, 'cumulative', quantile, interpolation_)['color']),
         x=get_quantile(data_df, 'cumulative', quantile, interpolation_)['x'],
@@ -173,7 +174,8 @@ if __name__ == '__main__':
             showlegend=False,  # let's turn this off until we have figured out how to do it properly
             sliders=[dict(
                 active=len(quantiles) // 2,
-                pad={'t': 1},
+                name='bar',
+                pad={'t': 1, 'b': 1, 'l': 1, 'r': 1},  # top margin in px
                 steps=[dict(method='restyle', args=['visible', [j == i for j in range(len(quantiles))]]) for i in
                        range(len(quantiles))]
             )],
