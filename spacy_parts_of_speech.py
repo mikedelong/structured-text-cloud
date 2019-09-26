@@ -142,7 +142,7 @@ if __name__ == '__main__':
         filtered = [(word, result[index, 0], result[index, 1]) for index, word in enumerate(words) if
                     word not in stop_words and len(word) > 1 and not word.isdigit()]
 
-        print('after we filter stopwords our vocabulary has {} words'.format(len(filtered)))
+        logging.info('after we filter stopwords our vocabulary has {} words'.format(len(filtered)))
 
         # now reconstruct the words and results from the filtered result
         words = [word[0] for word in filtered]
