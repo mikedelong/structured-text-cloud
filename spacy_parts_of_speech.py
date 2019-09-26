@@ -136,7 +136,8 @@ if __name__ == '__main__':
         words = list(word2vec_model.wv.vocab)
         # todo make this a setting or remove it
         report_vocabulary_limit = 20
-        print('the model vocabulary has {} words and they are {}'.format(len(words), words[:report_vocabulary_limit]))
+        logging.info('the model vocabulary has {} words and they are {}'.format(len(words),
+                                                                                words[:report_vocabulary_limit]))
         stop_words = stopwords.words('english')
         filtered = [(word, result[index, 0], result[index, 1]) for index, word in enumerate(words) if
                     word not in stop_words and len(word) > 1 and not word.isdigit()]
