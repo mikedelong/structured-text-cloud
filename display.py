@@ -85,6 +85,18 @@ if __name__ == '__main__':
         logging.warning(
             'Rebuild part of speech flag not specified. Defaulting to {}'.format(rebuild_part_of_speech_file))
 
+    which_color_map = get_setting('color_map_strategy', settings)
+    if which_color_map is None:
+        which_color_map = 'uniform'
+        logging.warning(
+            'Color map strategy not specified. Defaulting to {}'.format(which_color_map))
+    color_map_strategies = ['cumsum', 'uniform']
+    if which_color_map not in color_map_strategies:
+        logging.error(
+            'Color map strategy must be in {} but is {}. Quitting.'.format(color_map_strategies, which_color_map))
+        quit(3)
+
+
     data_df = pd.read_csv(input_file)
     # we need to squeeze out spaces from the column names before we proceed
     data_df.rename(columns={item: item.strip() for item in list(data_df)}, inplace=True)
@@ -124,7 +136,6 @@ if __name__ == '__main__':
                                                                                        index=True, header=True)
     logging.info('part of speech counts: {}'.format(data_df['part_of_speech'].value_counts().to_dict()))
 
-    which_color_map = 'uniform'  # was 'uniform' / 'cumsum'
     colormap = cm.get_cmap(colormap_name)
     do_original = False
     if do_original:
