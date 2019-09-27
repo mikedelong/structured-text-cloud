@@ -78,6 +78,13 @@ if __name__ == '__main__':
         logging.error('No part of speech file specified. Quitting.')
         quit(2)
 
+    rebuild_part_of_speech_file = settings[
+        'rebuild_part_of_speech_file'] if 'rebuild_part_of_speech_file' in settings.keys() else None
+    if rebuild_part_of_speech_file is None:
+        rebuild_part_of_speech_file = False
+        logging.warning(
+            'Rebuild part of speech flag not specified. Defaulting to {}'.format(rebuild_part_of_speech_file))
+
     data_df = pd.read_csv(input_file)
     # we need to squeeze out spaces from the column names before we proceed
     data_df.rename(columns={item: item.strip() for item in list(data_df)}, inplace=True)
@@ -104,7 +111,8 @@ if __name__ == '__main__':
         parser = WiktionaryParser()
         known_part_of_speech_df = pd.read_csv(part_of_speech_file, usecols=['word', 'part_of_speech'])
         known_part_of_speech = {row['word']: row['part_of_speech'] for _, row in known_part_of_speech_df.iterrows()}
-        # known_part_of_speech = {}
+        if rebuild_part_of_speech_file:
+            known_part_of_speech = {}
         data_df['part_of_speech'] = data_df['word'].apply(get_part_of_speech, args=(parser, known_part_of_speech))
         data_df['part_of_speech'] = data_df['part_of_speech'].fillna('unknown')
         # write the known parts of speech to a file before we proceed
