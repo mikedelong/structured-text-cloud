@@ -160,12 +160,14 @@ if __name__ == '__main__':
     stretch_factor = 1.05
     width_ = 0.1
     data_df['cumulative'] = data_df['count'].cumsum()
+    counts = ['{}'.format(get_quantile(data_df, 'cumulative', quantile, interpolation_)['count'].min()) for quantile in
+              quantiles]
+
     # todo figure out how to add an item to the legend per color/part of speech
     fig = go.Figure(data=[go.Scatter(
         hoverinfo='text',
         hovertext=get_quantile(data_df, 'cumulative', quantile, interpolation_)['count'],
         marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=size_), mode=mode_,
-        name='foo: {}'.format(index),
         text=get_quantile(data_df, 'cumulative', quantile, interpolation_)['word'],
         textfont=dict(color=get_quantile(data_df, 'cumulative', quantile, interpolation_)['color']),
         x=get_quantile(data_df, 'cumulative', quantile, interpolation_)['x'],
@@ -175,10 +177,11 @@ if __name__ == '__main__':
             showlegend=False,  # let's turn this off until we have figured out how to do it properly
             sliders=[dict(
                 active=len(quantiles) // 2,
-                name='bar',
-                pad={'t': 1, 'b': 1, 'l': 1, 'r': 1},  # top margin in px
-                steps=[dict(method='restyle', args=['visible', [j == i for j in range(len(quantiles))]]) for i in
-                       range(len(quantiles))]
+                pad={item: 1 for item in ['b', 'l', 'r', 't']},  # top margin in px
+                steps=[dict(method='restyle',
+                            # label='count',
+                            label=counts[i],
+                            args=['visible', [j == i for j in range(len(quantiles))]]) for i in range(len(quantiles))]
             )],
             xaxis=dict(visible=False, range=[stretch_factor * data_df['x'].min(), stretch_factor * data_df['x'].max()]),
             yaxis=dict(visible=False, range=[stretch_factor * data_df['y'].min(), stretch_factor * data_df['y'].max()]),
