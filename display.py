@@ -179,7 +179,6 @@ if __name__ == '__main__':
                 active=len(quantiles) // 2,
                 pad={item: 1 for item in ['b', 'l', 'r', 't']},  # top margin in px
                 steps=[dict(method='restyle',
-                            # label='count',
                             label=counts[i],
                             args=['visible', [j == i for j in range(len(quantiles))]]) for i in range(len(quantiles))]
             )],
