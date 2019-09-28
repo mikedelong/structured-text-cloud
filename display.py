@@ -53,6 +53,16 @@ if __name__ == '__main__':
         colormap_name = 'jet'
         logging.warning('colormap not set, defaulting to default value: {}'.format(colormap_name))
 
+    colormap_strategy = get_setting('color_map_strategy', settings)
+    if colormap_strategy is None:
+        colormap_strategy = 'uniform'
+        logging.warning('Color map strategy not specified. Defaulting to {}'.format(colormap_strategy))
+    color_map_strategies = ['cumsum', 'uniform']
+    if colormap_strategy not in color_map_strategies:
+        logging.error(
+            'Color map strategy must be in {} but is {}. Quitting.'.format(color_map_strategies, colormap_strategy))
+        quit(3)
+
     input_file = get_setting('input_file', settings)
     if input_file is None:
         logging.error('No input file specified. Quitting.')
@@ -84,16 +94,6 @@ if __name__ == '__main__':
         rebuild_part_of_speech_file = False
         logging.warning(
             'Rebuild part of speech flag not specified. Defaulting to {}'.format(rebuild_part_of_speech_file))
-
-    color_map_strategy = get_setting('color_map_strategy', settings)
-    if color_map_strategy is None:
-        color_map_strategy = 'uniform'
-        logging.warning('Color map strategy not specified. Defaulting to {}'.format(color_map_strategy))
-    color_map_strategies = ['cumsum', 'uniform']
-    if color_map_strategy not in color_map_strategies:
-        logging.error(
-            'Color map strategy must be in {} but is {}. Quitting.'.format(color_map_strategies, color_map_strategy))
-        quit(3)
 
 
     data_df = pd.read_csv(input_file)
@@ -138,32 +138,32 @@ if __name__ == '__main__':
     colormap = cm.get_cmap(colormap_name)
     do_original = False
     if do_original:
-        if color_map_strategy == 'cumsum':
+        if colormap_strategy == 'cumsum':
             # use the cumsum of the value counts to assign a color from the colormap by hex string
             part_of_speech_color_map = data_df['part_of_speech'].value_counts(normalize=True).cumsum(
             ).apply(lambda x: float_color_to_hex(x, colormap)).to_dict()
-        elif color_map_strategy == 'uniform':
+        elif colormap_strategy == 'uniform':
             # use evenly-spaced colors from a colormap
             part_of_speech_color_map = {data_df['part_of_speech'].unique()[index]: float_color_to_hex(
                 np.linspace(0, 1, data_df['part_of_speech'].nunique())[index], colormap) for index in
                 range(data_df['part_of_speech'].nunique())}
         else:
-            raise NotImplementedError('color map: {}'.format(color_map_strategy))
+            raise NotImplementedError('color map: {}'.format(colormap_strategy))
     else:
         # https://stackoverflow.com/questions/60208/replacements-for-switch-statement-in-python?rq=1
         supported_color_maps = {'cumsum', 'uniform'}
-        if color_map_strategy in supported_color_maps:
+        if colormap_strategy in supported_color_maps:
             part_of_speech_color_map = {
                 'cumsum': data_df['part_of_speech'].value_counts(normalize=True).cumsum(
                 ).apply(lambda x: float_color_to_hex(x, colormap)).to_dict(),
                 'uniform': {data_df['part_of_speech'].unique()[index]: float_color_to_hex(
                     np.linspace(0, 1, data_df['part_of_speech'].nunique())[index], colormap) for index in
                     range(data_df['part_of_speech'].nunique())}
-            }[color_map_strategy]
+            }[colormap_strategy]
         else:
-            raise NotImplementedError('color map: {}'.format(color_map_strategy))
+            raise NotImplementedError('color map: {}'.format(colormap_strategy))
 
-    logging.info('color map {}: {}'.format(color_map_strategy, part_of_speech_color_map))
+    logging.info('color map {}: {}'.format(colormap_strategy, part_of_speech_color_map))
     data_df['color'] = data_df['part_of_speech'].map(part_of_speech_color_map)
 
     # get the cut level
