@@ -23,6 +23,7 @@ if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
     logging.info('settings are {}'.format(settings))
 
+    do_plot = settings['do_plot'] if 'do_plot' in settings.keys() else False
     input_file = settings['input_file'] if 'input_file' in settings.keys() else None
     random_state_ = settings['random_state'] if 'random_state' in settings.keys() else 0
     start_line = settings['text_start_line'] if 'text_start_line' in settings.keys() else 0
@@ -36,7 +37,6 @@ if __name__ == '__main__':
         logging.warning('setting word2vec workers to default')
     word2vec_workers_ = settings['word2vec_workers'] if 'word2vec_workers' in settings.keys() else 1
     word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
-    do_plot = settings['do_plot'] if 'do_plot' in settings.keys() else False
     n_components_ = settings['plot_dimensions'] if 'plot_dimensions' in settings.keys() else 2
     if n_components_ != 2:
         raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
