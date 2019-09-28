@@ -1,5 +1,6 @@
 {
   "colormap": "hot",
+  "colormap_strategy": "uniform",
   "input_file": "./data/finnegans-wake_pos.csv",
   "max_pages_to_show": 12,
   "max_words_to_show": 400,
