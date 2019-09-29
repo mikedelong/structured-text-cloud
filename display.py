@@ -10,6 +10,8 @@ from matplotlib.pyplot import cm
 from plotly.offline import plot
 from wiktionaryparser import WiktionaryParser
 
+from common import get_setting
+
 # 'HYPH',
 supported_parts_of_speech = ['-LRB-', '-RRB-', 'ADD', 'CC', 'CD', 'DT', 'EX', 'FW', 'IN', 'JJ', 'JJR', 'JJS', 'LS',
                              'MD', 'NFP', 'NN', 'NNP', 'NNPS', 'NNS', 'PDT', 'POS', 'PRP', 'PRP$', 'RB', 'RBR',
@@ -34,11 +36,6 @@ def get_part_of_speech(arg, arg_parser, arg_known):
 
 def get_quantile(arg_df, arg_column, arg_quantile, arg_interpolation):
     return arg_df[arg_df[arg_column] > data_df[arg_column].quantile(q=arg_quantile, interpolation=arg_interpolation)]
-
-
-def get_setting(arg_name, arg_setting):
-    result = settings[arg_name] if arg_name in arg_setting.keys() else None
-    return result
 
 
 if __name__ == '__main__':
@@ -94,7 +91,6 @@ if __name__ == '__main__':
         rebuild_part_of_speech_file = False
         logging.warning(
             'Rebuild part of speech flag not specified. Defaulting to {}'.format(rebuild_part_of_speech_file))
-
 
     data_df = pd.read_csv(input_file)
     # we need to squeeze out spaces from the column names before we proceed
