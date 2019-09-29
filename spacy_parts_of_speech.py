@@ -9,6 +9,8 @@ from sklearn.manifold.isomap import Isomap
 from sklearn.manifold.t_sne import TSNE
 from spacy import load
 
+from common import get_setting
+
 
 def token_lower(arg):
     pieces = arg.split('/')
@@ -22,7 +24,11 @@ if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
     logging.info('settings are {}'.format(settings))
 
-    do_plot = settings['do_plot'] if 'do_plot' in settings.keys() else False
+    do_plot = get_setting('do_plot', settings)
+    if do_plot is None:
+        do_plot = False
+        logging.warning('do_plot is missing from settings; using default value {}'.format(do_plot))
+
     input_file = settings['input_file'] if 'input_file' in settings.keys() else None
     random_state_ = settings['random_state'] if 'random_state' in settings.keys() else 0
     start_line = settings['text_start_line'] if 'text_start_line' in settings.keys() else 0
