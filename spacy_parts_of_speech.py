@@ -29,6 +29,12 @@ if __name__ == '__main__':
         do_plot = False
         logging.warning('do_plot is missing from settings; using default value {}'.format(do_plot))
 
+    do_tsne = get_setting('do_tsne', settings)
+    if do_tsne is None:
+        do_tsne = False
+        logging.warning('do_tsne is missing from settings; using default value {}'.format(do_plot))
+
+
     input_file = settings['input_file'] if 'input_file' in settings.keys() else None
     random_state_ = settings['random_state'] if 'random_state' in settings.keys() else 0
     start_line = settings['text_start_line'] if 'text_start_line' in settings.keys() else 0
@@ -63,7 +69,6 @@ if __name__ == '__main__':
     if 'tsne_iterations_without_progress' not in settings.keys():
         logging.warning('setting t-SNE iterations without progress to default'.format(n_iter_without_progress_))
     tsne_init_ = settings['tsne_initialization'] if 'tsne_initialization' in settings.keys() else 'random'
-    do_tsne = settings['do_tsne'] if 'do_tsne' in settings.keys() else False
     do_isomap = settings['do_isomap'] if 'do_isomap' in settings.keys() else False
     if do_tsne and do_isomap:
         logging.error('Check settings: do_tsne and do_isomap cannot both be true. Quitting.')
