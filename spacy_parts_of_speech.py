@@ -29,17 +29,16 @@ if __name__ == '__main__':
         do_plot = False
         logging.warning('do_plot is missing from settings; using default value {}'.format(do_plot))
 
-    do_tsne = get_setting('do_tsne', settings)
-    if do_tsne is None:
-        do_tsne = False
-        logging.warning('do_tsne is missing from settings; using default value {}'.format(do_plot))
-
     do_isomap = get_setting('do_isomap', settings)
     if do_isomap is None:
         do_isomap = False
         logging.warning('do_isomap is missing from settings; using default value {}'.format(do_plot))
 
-    do_isomap = settings['do_isomap'] if 'do_isomap' in settings.keys() else False
+    do_tsne = get_setting('do_tsne', settings)
+    if do_tsne is None:
+        do_tsne = False
+        logging.warning('do_tsne is missing from settings; using default value {}'.format(do_plot))
+
     if do_tsne and do_isomap:
         logging.error('Check settings: do_tsne and do_isomap cannot both be true. Quitting.')
         quit(1)
