@@ -35,6 +35,8 @@ if __name__ == '__main__':
     if do_isomap is None:
         do_isomap = False
         logging.warning('do_isomap is missing from settings; using default value {}'.format(do_plot))
+    else:
+        logging.info('do isomap: {}'.format(do_isomap))
 
     do_tsne = get_setting('do_tsne', settings)
     if do_tsne is None:
