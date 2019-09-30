@@ -42,6 +42,8 @@ if __name__ == '__main__':
     if do_tsne is None:
         do_tsne = False
         logging.warning('do_tsne is missing from settings; using default value {}'.format(do_plot))
+    else:
+        logging.info('do TNSE: {}'.format(do_tsne))
 
     if do_tsne and do_isomap:
         logging.error('Check settings: do_tsne and do_isomap cannot both be true. Quitting.')
