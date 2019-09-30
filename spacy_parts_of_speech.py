@@ -63,6 +63,16 @@ if __name__ == '__main__':
     else:
         logging.info('input file: {}'.format(input_file))
 
+    n_components_ = get_setting('plot_dimensions', settings)
+    if n_components_ is None:
+        n_components_ = 2
+        logging.warning('plot dimensions not set; using default value {}'.format(n_components_))
+    else:
+        logging.info('plot dimensions: {}'.format(n_components_))
+
+    if n_components_ != 2:
+        raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
+
     random_state_ = get_setting('random_state', settings)
     if random_state_ is None:
         random_state_ = 0
@@ -81,9 +91,6 @@ if __name__ == '__main__':
         logging.warning('setting word2vec workers to default')
     word2vec_workers_ = settings['word2vec_workers'] if 'word2vec_workers' in settings.keys() else 1
     word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
-    n_components_ = settings['plot_dimensions'] if 'plot_dimensions' in settings.keys() else 2
-    if n_components_ != 2:
-        raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
     tsne_verbose_ = settings['tsne_verbose'] if 'tsne_verbose' in settings.keys() else 0
     if 'tsne_verbose' not in settings.keys():
         logging.warning('setting t-SNE verbosity to default')
