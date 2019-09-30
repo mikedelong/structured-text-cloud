@@ -60,6 +60,9 @@ if __name__ == '__main__':
     if input_file is None:
         logging.error('input file not in settings. Quitting.')
         quit(1)
+    else:
+        logging.info('input file: {}'.format(input_file))
+
     random_state_ = settings['random_state'] if 'random_state' in settings.keys() else 0
     start_line = settings['text_start_line'] if 'text_start_line' in settings.keys() else 0
     stop_line = settings['text_stop_line'] if 'text_stop_line' in settings.keys() else -1
