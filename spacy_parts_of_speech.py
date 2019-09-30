@@ -28,6 +28,8 @@ if __name__ == '__main__':
     if do_plot is None:
         do_plot = False
         logging.warning('do_plot is missing from settings; using default value {}'.format(do_plot))
+    else:
+        logging.info('do plot: {}'.format(do_plot))
 
     do_isomap = get_setting('do_isomap', settings)
     if do_isomap is None:
