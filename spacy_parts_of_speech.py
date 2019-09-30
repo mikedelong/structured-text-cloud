@@ -43,7 +43,17 @@ if __name__ == '__main__':
         logging.error('Check settings: do_tsne and do_isomap cannot both be true. Quitting.')
         quit(1)
 
+    input_encoding = get_setting('input_encoding', settings)
+    if input_encoding is None:
+        input_encoding = 'utf-8'
+        logging.warning('input_encoding is missing from settings; using default value {}'.format(input_encoding))
+    else:
+        logging.info('input_encoding: {}'.format(input_encoding))
+
     input_file = settings['input_file'] if 'input_file' in settings.keys() else None
+    if input_file is None:
+        logging.error('input file not in settings. Quitting.')
+        quit(1)
     random_state_ = settings['random_state'] if 'random_state' in settings.keys() else 0
     start_line = settings['text_start_line'] if 'text_start_line' in settings.keys() else 0
     stop_line = settings['text_stop_line'] if 'text_stop_line' in settings.keys() else -1
@@ -77,10 +87,6 @@ if __name__ == '__main__':
     if 'tsne_iterations_without_progress' not in settings.keys():
         logging.warning('setting t-SNE iterations without progress to default'.format(n_iter_without_progress_))
     tsne_init_ = settings['tsne_initialization'] if 'tsne_initialization' in settings.keys() else 'random'
-    if input_file is None:
-        logging.error('input file not in settings. Quitting.')
-        quit(1)
-    input_encoding = settings['input_encoding'] if 'input_encoding' in settings.keys() else 'utf-8'
 
     word2vec_epochs_ = settings['word2vec_epochs'] if 'word2vec_epochs' in settings.keys() else 100
     word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
