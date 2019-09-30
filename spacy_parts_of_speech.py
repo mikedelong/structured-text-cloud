@@ -63,7 +63,13 @@ if __name__ == '__main__':
     else:
         logging.info('input file: {}'.format(input_file))
 
-    random_state_ = settings['random_state'] if 'random_state' in settings.keys() else 0
+    random_state_ = get_setting('random_state', settings)
+    if random_state_ is None:
+        random_state_ = 0
+        logging.warning('random state not in settings, defaulting to: {}'.format(random_state_))
+    else:
+        logging.info('random state: {}'.format(random_state_))
+
     start_line = settings['text_start_line'] if 'text_start_line' in settings.keys() else 0
     stop_line = settings['text_stop_line'] if 'text_stop_line' in settings.keys() else -1
     word2vec_epochs_ = settings['word2vec_epochs'] if 'word2vec_epochs' in settings.keys() else 100
