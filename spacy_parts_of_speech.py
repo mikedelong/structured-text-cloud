@@ -63,6 +63,16 @@ if __name__ == '__main__':
     else:
         logging.info('input file: {}'.format(input_file))
 
+    isomap_n_jobs_ = get_setting('isomap_job_count', settings)
+    if isomap_n_jobs_ is None:
+        isomap_n_jobs_ = 1
+        logging.warning('isomap job count not set; using default value {}'.format(isomap_n_jobs_))
+    else:
+        logging.info('isomap job count: {}'.format(isomap_n_jobs_))
+
+    if 'isomap_job_count' not in settings.keys():
+        logging.warning('setting IsoMap parallelism (job count) to default/serial')
+
     n_components_ = get_setting('plot_dimensions', settings)
     if n_components_ is None:
         n_components_ = 2
@@ -94,9 +104,6 @@ if __name__ == '__main__':
     tsne_verbose_ = settings['tsne_verbose'] if 'tsne_verbose' in settings.keys() else 0
     if 'tsne_verbose' not in settings.keys():
         logging.warning('setting t-SNE verbosity to default')
-    isomap_n_jobs_ = settings['isomap_job_count'] if 'isomap_job_count' in settings.keys() else 1
-    if 'isomap_job_count' not in settings.keys():
-        logging.warning('setting IsoMap parallelism (job count) to default/serial')
 
     isomap_n_neighbors_ = settings['isomap_neighbor_count'] if 'isomap_neighbor_count' in settings.keys() else 5
     if 'isomap_n_neighbors_' not in settings.keys():
