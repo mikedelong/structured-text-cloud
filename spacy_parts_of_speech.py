@@ -105,7 +105,13 @@ if __name__ == '__main__':
     else:
         logging.info('text start line: {}'.format(start_line))
 
-    stop_line = settings['text_stop_line'] if 'text_stop_line' in settings.keys() else -1
+    stop_line = get_setting('text_stop_line', settings)
+    if stop_line is None:
+        stop_line = -1
+        logging.warning('text stop line not in settings, defaulting to: {}'.format(stop_line))
+    else:
+        logging.info('text stop line: {}'.format(stop_line))
+
     word2vec_epochs_ = settings['word2vec_epochs'] if 'word2vec_epochs' in settings.keys() else 100
     word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
     # how many times does a word have to appear to be interesting?
