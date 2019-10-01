@@ -69,7 +69,6 @@ if __name__ == '__main__':
         logging.warning('isomap job count not set; using default value {}'.format(isomap_n_jobs_))
     else:
         logging.info('isomap job count: {}'.format(isomap_n_jobs_))
-
     if 'isomap_job_count' not in settings.keys():
         logging.warning('setting IsoMap parallelism (job count) to default/serial')
 
