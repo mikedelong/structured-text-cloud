@@ -98,7 +98,13 @@ if __name__ == '__main__':
     else:
         logging.info('random state: {}'.format(random_state_))
 
-    start_line = settings['text_start_line'] if 'text_start_line' in settings.keys() else 0
+    start_line = get_setting('text_start_line', settings)
+    if start_line is None:
+        start_line = 0
+        logging.warning('text start line not in settings, defaulting to: {}'.format(start_line))
+    else:
+        logging.info('text start line: {}'.format(start_line))
+
     stop_line = settings['text_stop_line'] if 'text_stop_line' in settings.keys() else -1
     word2vec_epochs_ = settings['word2vec_epochs'] if 'word2vec_epochs' in settings.keys() else 100
     word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
