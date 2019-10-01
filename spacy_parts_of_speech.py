@@ -72,6 +72,15 @@ if __name__ == '__main__':
     if 'isomap_job_count' not in settings.keys():
         logging.warning('setting IsoMap parallelism (job count) to default/serial')
 
+    isomap_n_neighbors_ = get_setting('isomap_neighbor_count', settings)
+    if isomap_n_neighbors_ is None:
+        isomap_n_neighbors_ = 5
+        logging.warning('isomap neighbors not set; using default value {}'.format(isomap_n_neighbors_))
+    else:
+        logging.info('isomap neighbors: {}'.format(isomap_n_neighbors_))
+    if 'isomap_n_neighbors_' not in settings.keys():
+        logging.warning('setting Isomap neighbor count to default.')
+
     n_components_ = get_setting('plot_dimensions', settings)
     if n_components_ is None:
         n_components_ = 2
@@ -104,9 +113,6 @@ if __name__ == '__main__':
     if 'tsne_verbose' not in settings.keys():
         logging.warning('setting t-SNE verbosity to default')
 
-    isomap_n_neighbors_ = settings['isomap_neighbor_count'] if 'isomap_neighbor_count' in settings.keys() else 5
-    if 'isomap_n_neighbors_' not in settings.keys():
-        logging.warning('setting Isomap neighbor count to default.')
     n_iter_ = settings['projection_iteration_count'] if 'projection_iteration_count' in settings.keys() else 100
     if 'projection_iteration_count' not in settings.keys():
         logging.warning('setting projection (t-SNE/Isomap) iteration count to default'.format(n_iter_))
