@@ -129,10 +129,6 @@ if __name__ == '__main__':
     word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
     # how many times does a word have to appear to be interesting?
     word2vec_min_count_ = settings['word2vec_min_count'] if 'word2vec_min_count' in settings.keys() else 10
-    # how many threads will we use?
-    if 'word2vec_workers' not in settings.keys():
-        logging.warning('setting word2vec workers to default')
-    word2vec_workers_ = settings['word2vec_workers'] if 'word2vec_workers' in settings.keys() else 1
     word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
     tsne_verbose_ = settings['tsne_verbose'] if 'tsne_verbose' in settings.keys() else 0
     if 'tsne_verbose' not in settings.keys():
@@ -144,15 +140,15 @@ if __name__ == '__main__':
         logging.warning('setting t-SNE iterations without progress to default'.format(n_iter_without_progress_))
     tsne_init_ = settings['tsne_initialization'] if 'tsne_initialization' in settings.keys() else 'random'
 
+    word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
     word2vec_epochs_ = settings['word2vec_epochs'] if 'word2vec_epochs' in settings.keys() else 100
-    word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
     # how many times does a word have to appear to be interesting?
     word2vec_min_count_ = settings['word2vec_min_count'] if 'word2vec_min_count' in settings.keys() else 10
+    word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
     # how many threads will we use?
+    word2vec_workers_ = settings['word2vec_workers'] if 'word2vec_workers' in settings.keys() else 1
     if 'word2vec_workers' not in settings.keys():
         logging.warning('setting word2vec workers to default')
-    word2vec_workers_ = settings['word2vec_workers'] if 'word2vec_workers' in settings.keys() else 1
-    word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
 
     with open(input_file, 'r', encoding=input_encoding) as input_fp:
         text = input_fp.readlines()
