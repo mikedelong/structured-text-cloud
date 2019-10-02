@@ -126,7 +126,6 @@ if __name__ == '__main__':
     else:
         logging.info('model (word2vec) epochs: {}'.format(word2vec_epochs_))
 
-    word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
     # how many times does a word have to appear to be interesting?
     word2vec_min_count_ = settings['word2vec_min_count'] if 'word2vec_min_count' in settings.keys() else 10
     word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
