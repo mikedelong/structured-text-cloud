@@ -119,7 +119,13 @@ if __name__ == '__main__':
     else:
         logging.info('text stop line: {}'.format(stop_line))
 
-    word2vec_epochs_ = settings['word2vec_epochs'] if 'word2vec_epochs' in settings.keys() else 100
+    word2vec_epochs_ = get_setting('word2vec_epochs', settings)
+    if word2vec_epochs_ is None:
+        word2vec_epochs_ = 100
+        logging.warning('model (word2vec) epochs not in settings; defaulting to {}'.format(word2vec_epochs_))
+    else:
+        logging.info('model (word2vec) epochs: {}'.format(word2vec_epochs_))
+
     word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
     # how many times does a word have to appear to be interesting?
     word2vec_min_count_ = settings['word2vec_min_count'] if 'word2vec_min_count' in settings.keys() else 10
