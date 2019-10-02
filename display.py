@@ -102,7 +102,6 @@ if __name__ == '__main__':
     for key, value in token_map.items():
         data_df['part_of_speech'] = data_df['part_of_speech'].replace(key, value)
 
-    mode_ = 'text'  # 'markers+text'
     slices = sorted(data_df['count'].unique().tolist())
     counts = Counter(data_df['count'].values.tolist())
     data_df = data_df.sort_values(by=['count'], axis=0, ascending=True)
@@ -167,6 +166,7 @@ if __name__ == '__main__':
     data_df = data_df[data_df['count'] >= cut_level]
     logging.info('our cut level of {} leaves us with {} rows/words to display'.format(max_words_to_show, len(data_df)))
 
+    mode_ = 'text'  # 'markers+text'
     color_ = 'rgba(217, 217, 217, 0.14)'
     interpolation_ = 'lower'
     opacity_ = 0.8
