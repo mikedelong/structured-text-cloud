@@ -178,7 +178,7 @@ if __name__ == '__main__':
               quantiles]
 
     # todo figure out how to add an item to the legend per color/part of speech
-    fig = go.Figure(data=[go.Scatter(
+    figure = go.Figure(data=[go.Scatter(
         hoverinfo='text',
         hovertext=get_quantile(data_df, 'cumulative', quantile, interpolation_)['count'],
         marker=dict(line=dict(color=color_, width=width_), opacity=opacity_, size=size_), mode=mode_,
@@ -199,6 +199,6 @@ if __name__ == '__main__':
             xaxis=dict(visible=False, range=[stretch_factor * data_df['x'].min(), stretch_factor * data_df['x'].max()]),
             yaxis=dict(visible=False, range=[stretch_factor * data_df['y'].min(), stretch_factor * data_df['y'].max()]),
         ))
-    plot(fig, filename=output_file_name, auto_open=False)
+    plot(figure, filename=output_file_name, auto_open=False)
 
     logging.info('total time: {:5.2f}s'.format(time() - time_start))
