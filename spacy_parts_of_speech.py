@@ -126,7 +126,6 @@ if __name__ == '__main__':
     else:
         logging.info('model (word2vec) epochs: {}'.format(word2vec_epochs_))
 
-    word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
     tsne_verbose_ = settings['tsne_verbose'] if 'tsne_verbose' in settings.keys() else 0
     if 'tsne_verbose' not in settings.keys():
         logging.warning('setting t-SNE verbosity to default')
