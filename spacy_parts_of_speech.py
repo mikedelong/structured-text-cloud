@@ -91,6 +91,13 @@ if __name__ == '__main__':
     if n_components_ != 2:
         raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
 
+    n_iter_ = get_setting('projection_iteration_count', settings)
+    if n_iter_ is None:
+        n_iter_ = 100
+        logging.warning('projection iteration count (t-SNE/Isomap) not set; using default value {}'.format(n_iter_))
+    else:
+        logging.info('projection iteration count (t-SNE/Isomap): {}'.format(n_iter_))
+
     random_state_ = get_setting('random_state', settings)
     if random_state_ is None:
         random_state_ = 0
@@ -125,9 +132,6 @@ if __name__ == '__main__':
     if 'tsne_verbose' not in settings.keys():
         logging.warning('setting t-SNE verbosity to default')
 
-    n_iter_ = settings['projection_iteration_count'] if 'projection_iteration_count' in settings.keys() else 100
-    if 'projection_iteration_count' not in settings.keys():
-        logging.warning('setting projection (t-SNE/Isomap) iteration count to default'.format(n_iter_))
     n_iter_without_progress_ = settings[
         'tsne_iterations_without_progress'] if 'tsne_iterations_without_progress' in settings.keys() else 50
     if 'tsne_iterations_without_progress' not in settings.keys():
