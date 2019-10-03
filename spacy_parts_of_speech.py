@@ -159,7 +159,14 @@ if __name__ == '__main__':
     else:
         logging.info('word2vec minimum occurrence count: {}'.format(word2vec_min_count_))
 
-    word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
+    word2vec_size_ = get_setting('word2vec_size', settings)
+    if word2vec_size_ is None:
+        word2vec_size_ = 100
+        logging.warning(
+            'word2vec size not in settings; defaulting to {}'.format(word2vec_size_))
+    else:
+        logging.info('word2vec size: {}'.format(word2vec_size_))
+
     # how many threads will we use?
     word2vec_workers_ = settings['word2vec_workers'] if 'word2vec_workers' in settings.keys() else 1
     if 'word2vec_workers' not in settings.keys():
