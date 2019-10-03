@@ -136,7 +136,13 @@ if __name__ == '__main__':
         logging.warning('setting t-SNE iterations without progress to default'.format(n_iter_without_progress_))
     tsne_init_ = settings['tsne_initialization'] if 'tsne_initialization' in settings.keys() else 'random'
 
-    word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
+    word2vec_compute_loss_ = get_setting('word2vec_compute_loss', settings)
+    if word2vec_compute_loss_ is None:
+        word2vec_compute_loss_ = False
+        logging.warning('word2vec compute loss not in settings; defaulting to {}'.format(word2vec_compute_loss_))
+    else:
+        logging.info('word2vec compute loss: {}'.format(word2vec_compute_loss_))
+
     word2vec_epochs_ = settings['word2vec_epochs'] if 'word2vec_epochs' in settings.keys() else 100
     # how many times does a word have to appear to be interesting?
     word2vec_min_count_ = settings['word2vec_min_count'] if 'word2vec_min_count' in settings.keys() else 10
