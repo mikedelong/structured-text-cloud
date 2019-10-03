@@ -159,6 +159,7 @@ if __name__ == '__main__':
     else:
         logging.info('word2vec minimum occurrence count: {}'.format(word2vec_min_count_))
 
+    # todo what does this setting mean/do?
     word2vec_size_ = get_setting('word2vec_size', settings)
     if word2vec_size_ is None:
         word2vec_size_ = 100
@@ -169,8 +170,13 @@ if __name__ == '__main__':
 
     # how many threads will we use?
     word2vec_workers_ = settings['word2vec_workers'] if 'word2vec_workers' in settings.keys() else 1
-    if 'word2vec_workers' not in settings.keys():
-        logging.warning('setting word2vec workers to default')
+    word2vec_workers_ = get_setting('word2vec_workers', settings)
+    if word2vec_workers_ is None:
+        word2vec_workers_ = 1
+        logging.warning(
+            'word2vec workers (threads) not in settings; defaulting to {}'.format(word2vec_workers_))
+    else:
+        logging.info('word2vec workers (threads): {}'.format(word2vec_workers_))
 
     with open(input_file, 'r', encoding=input_encoding) as input_fp:
         text = input_fp.readlines()
