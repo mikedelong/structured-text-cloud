@@ -151,7 +151,14 @@ if __name__ == '__main__':
         logging.info('word2vec epochs loss: {}'.format(word2vec_epochs_))
 
     # how many times does a word have to appear to be interesting?
-    word2vec_min_count_ = settings['word2vec_min_count'] if 'word2vec_min_count' in settings.keys() else 10
+    word2vec_min_count_ = get_setting('word2vec_min_count', settings)
+    if word2vec_min_count_ is None:
+        word2vec_min_count_ = 10
+        logging.warning(
+            'word2vec minimum occurrence count not in settings; defaulting to {}'.format(word2vec_min_count_))
+    else:
+        logging.info('word2vec minimum occurrence count: {}'.format(word2vec_min_count_))
+
     word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
     # how many threads will we use?
     word2vec_workers_ = settings['word2vec_workers'] if 'word2vec_workers' in settings.keys() else 1
