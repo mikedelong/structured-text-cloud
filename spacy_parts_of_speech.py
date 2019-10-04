@@ -87,7 +87,6 @@ if __name__ == '__main__':
         logging.warning('plot dimensions not set; using default value {}'.format(n_components_))
     else:
         logging.info('plot dimensions: {}'.format(n_components_))
-
     if n_components_ != 2:
         raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
 
