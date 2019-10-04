@@ -9,6 +9,8 @@ from nltk.tokenize import casual_tokenize
 from sklearn.manifold.isomap import Isomap
 from sklearn.manifold.t_sne import TSNE
 
+from common import get_setting
+
 if __name__ == '__main__':
     time_start = time()
     with open('./locations_and_counts.json') as settings_fp:
@@ -16,51 +18,158 @@ if __name__ == '__main__':
         print(settings)
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
+    do_plot = get_setting('do_plot', settings)
+    if do_plot is None:
+        do_plot = False
+        logging.warning('do_plot is missing from settings; using default value {}'.format(do_plot))
+    else:
+        logging.info('do plot: {}'.format(do_plot))
+
+    do_isomap = get_setting('do_isomap', settings)
+    if do_isomap is None:
+        do_isomap = False
+        logging.warning('do_isomap is missing from settings; using default value {}'.format(do_plot))
+    else:
+        logging.info('do isomap: {}'.format(do_isomap))
+
+    do_tsne = get_setting('do_tsne', settings)
+    if do_tsne is None:
+        do_tsne = False
+        logging.warning('do_tsne is missing from settings; using default value {}'.format(do_plot))
+    else:
+        logging.info('do TNSE: {}'.format(do_tsne))
+
+    if do_tsne and do_isomap:
+        logging.error('Check settings: do_tsne and do_isomap cannot both be true. Quitting.')
+        quit(1)
+
+    input_encoding = get_setting('input_encoding', settings)
+    if input_encoding is None:
+        input_encoding = 'utf-8'
+        logging.warning('input_encoding is missing from settings; using default value {}'.format(input_encoding))
+    else:
+        logging.info('input_encoding: {}'.format(input_encoding))
+
     input_file = settings['input_file'] if 'input_file' in settings.keys() else None
-    random_state_ = settings['random_state'] if 'random_state' in settings.keys() else 0
-    start_line = settings['text_start_line'] if 'text_start_line' in settings.keys() else 0
-    stop_line = settings['text_stop_line'] if 'text_stop_line' in settings.keys() else -1
-    word2vec_epochs_ = settings['word2vec_epochs'] if 'word2vec_epochs' in settings.keys() else 100
-    word2vec_size_ = settings['word2vec_size'] if 'word2vec_size' in settings.keys() else 100
-    # how many times does a word have to appear to be interesting?
-    word2vec_min_count_ = settings['word2vec_min_count'] if 'word2vec_min_count' in settings.keys() else 10
-    # how many threads will we use?
-    if 'word2vec_workers' not in settings.keys():
-        logging.warning('setting word2vec workers to default')
-    word2vec_workers_ = settings['word2vec_workers'] if 'word2vec_workers' in settings.keys() else 1
-    word2vec_compute_loss_ = settings['word2vec_compute_loss'] if 'word2vec_compute_loss' in settings.keys() else False
-    do_plot = settings['do_plot'] if 'do_plot' in settings.keys() else False
-    n_components_ = settings['plot_dimensions'] if 'plot_dimensions' in settings.keys() else 2
-    if n_components_ != 2:
-        raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
-    tsne_verbose_ = settings['tsne_verbose'] if 'tsne_verbose' in settings.keys() else 0
-    if 'tsne_verbose' not in settings.keys():
-        logging.warning('setting t-SNE verbosity to default')
-    isomap_n_jobs_ = settings['isomap_job_count'] if 'isomap_job_count' in settings.keys() else 1
+    if input_file is None:
+        logging.error('input file not in settings. Quitting.')
+        quit(1)
+    else:
+        logging.info('input file: {}'.format(input_file))
+
+    isomap_n_jobs_ = get_setting('isomap_job_count', settings)
+    if isomap_n_jobs_ is None:
+        isomap_n_jobs_ = 1
+        logging.warning('isomap job count not set; using default value {}'.format(isomap_n_jobs_))
+    else:
+        logging.info('isomap job count: {}'.format(isomap_n_jobs_))
     if 'isomap_job_count' not in settings.keys():
         logging.warning('setting IsoMap parallelism (job count) to default/serial')
 
-    isomap_n_neighbors_ = settings['isomap_neighbor_count'] if 'isomap_neighbor_count' in settings.keys() else 5
+    isomap_n_neighbors_ = get_setting('isomap_neighbor_count', settings)
+    if isomap_n_neighbors_ is None:
+        isomap_n_neighbors_ = 5
+        logging.warning('isomap neighbors not set; using default value {}'.format(isomap_n_neighbors_))
+    else:
+        logging.info('isomap neighbors: {}'.format(isomap_n_neighbors_))
     if 'isomap_n_neighbors_' not in settings.keys():
         logging.warning('setting Isomap neighbor count to default.')
-    n_iter_ = settings['projection_iteration_count'] if 'projection_iteration_count' in settings.keys() else 100
-    if 'projection_iteration_count' not in settings.keys():
-        logging.warning('setting projection (t-SNE/Isomap) iteration count to default'.format(n_iter_))
+
+    n_components_ = get_setting('plot_dimensions', settings)
+    if n_components_ is None:
+        n_components_ = 2
+        logging.warning('plot dimensions not set; using default value {}'.format(n_components_))
+    else:
+        logging.info('plot dimensions: {}'.format(n_components_))
+    if n_components_ != 2:
+        raise ValueError('we should be plotting in 2 or 3 dimensions but n_components is {}'.format(n_components_))
+
+    n_iter_ = get_setting('projection_iteration_count', settings)
+    if n_iter_ is None:
+        n_iter_ = 100
+        logging.warning('projection iteration count (t-SNE/Isomap) not set; using default value {}'.format(n_iter_))
+    else:
+        logging.info('projection iteration count (t-SNE/Isomap): {}'.format(n_iter_))
+
+    random_state_ = get_setting('random_state', settings)
+    if random_state_ is None:
+        random_state_ = 0
+        logging.warning('random state not in settings, defaulting to: {}'.format(random_state_))
+    else:
+        logging.info('random state: {}'.format(random_state_))
+
+    start_line = get_setting('text_start_line', settings)
+    if start_line is None:
+        start_line = 0
+        logging.warning('text start line not in settings, defaulting to: {}'.format(start_line))
+    else:
+        logging.info('text start line: {}'.format(start_line))
+
+    stop_line = get_setting('text_stop_line', settings)
+    if stop_line is None:
+        stop_line = -1
+        logging.warning('text stop line not in settings, defaulting to: {}'.format(stop_line))
+    else:
+        logging.info('text stop line: {}'.format(stop_line))
+
+    word2vec_epochs_ = get_setting('word2vec_epochs', settings)
+    if word2vec_epochs_ is None:
+        word2vec_epochs_ = 100
+        logging.warning('model (word2vec) epochs not in settings; defaulting to {}'.format(word2vec_epochs_))
+    else:
+        logging.info('model (word2vec) epochs: {}'.format(word2vec_epochs_))
+
+    tsne_verbose_ = settings['tsne_verbose'] if 'tsne_verbose' in settings.keys() else 0
+    if 'tsne_verbose' not in settings.keys():
+        logging.warning('setting t-SNE verbosity to default')
+
     n_iter_without_progress_ = settings[
         'tsne_iterations_without_progress'] if 'tsne_iterations_without_progress' in settings.keys() else 50
     if 'tsne_iterations_without_progress' not in settings.keys():
         logging.warning('setting t-SNE iterations without progress to default'.format(n_iter_without_progress_))
     tsne_init_ = settings['tsne_initialization'] if 'tsne_initialization' in settings.keys() else 'random'
-    do_tsne = settings['do_tsne'] if 'do_tsne' in settings.keys() else False
-    do_isomap = settings['do_isomap'] if 'do_isomap' in settings.keys() else False
-    if do_tsne and do_isomap:
-        logging.error('Check settings: do_tsne and do_isomap cannot both be true. Quitting.')
-        quit(1)
-    if input_file is None:
-        print('input file not in settings. Quitting.')
-        quit(1)
 
-    input_encoding = settings['input_encoding'] if 'input_encoding' in settings.keys() else 'utf-8'
+    word2vec_compute_loss_ = get_setting('word2vec_compute_loss', settings)
+    if word2vec_compute_loss_ is None:
+        word2vec_compute_loss_ = False
+        logging.warning('word2vec compute loss not in settings; defaulting to {}'.format(word2vec_compute_loss_))
+    else:
+        logging.info('word2vec compute loss: {}'.format(word2vec_compute_loss_))
+
+    word2vec_epochs_ = get_setting('word2vec_epochs', settings)
+    if word2vec_epochs_ is None:
+        word2vec_epochs_ = 100
+        logging.warning('word2vec epochs not in settings; defaulting to {}'.format(word2vec_epochs_))
+    else:
+        logging.info('word2vec epochs loss: {}'.format(word2vec_epochs_))
+
+    # how many times does a word have to appear to be interesting?
+    word2vec_min_count_ = get_setting('word2vec_min_count', settings)
+    if word2vec_min_count_ is None:
+        word2vec_min_count_ = 10
+        logging.warning(
+            'word2vec minimum occurrence count not in settings; defaulting to {}'.format(word2vec_min_count_))
+    else:
+        logging.info('word2vec minimum occurrence count: {}'.format(word2vec_min_count_))
+
+    # todo what does this setting mean/do?
+    word2vec_size_ = get_setting('word2vec_size', settings)
+    if word2vec_size_ is None:
+        word2vec_size_ = 100
+        logging.warning(
+            'word2vec size not in settings; defaulting to {}'.format(word2vec_size_))
+    else:
+        logging.info('word2vec size: {}'.format(word2vec_size_))
+
+    # how many threads will we use?
+    word2vec_workers_ = get_setting('word2vec_workers', settings)
+    if word2vec_workers_ is None:
+        word2vec_workers_ = 1
+        logging.warning(
+            'word2vec workers (threads) not in settings; defaulting to {}'.format(word2vec_workers_))
+    else:
+        logging.info('word2vec workers (threads): {}'.format(word2vec_workers_))
+
     with open(input_file, 'r', encoding=input_encoding) as input_fp:
         text = input_fp.readlines()
         print('our input data has {} lines.'.format(len(text)))
