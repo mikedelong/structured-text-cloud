@@ -169,7 +169,6 @@ if __name__ == '__main__':
         logging.info('word2vec size: {}'.format(word2vec_size_))
 
     # how many threads will we use?
-    word2vec_workers_ = settings['word2vec_workers'] if 'word2vec_workers' in settings.keys() else 1
     word2vec_workers_ = get_setting('word2vec_workers', settings)
     if word2vec_workers_ is None:
         word2vec_workers_ = 1
