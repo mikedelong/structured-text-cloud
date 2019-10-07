@@ -15,7 +15,7 @@
   "tsne_verbose": 1,
   "word2vec_compute_loss": true,
   "word2vec_epochs": 1000,
-  "word2vec_min_count": 30,
+  "word2vec_min_count": 5,
   "word2vec_size": 50,
   "word2vec_workers": 4
 }
