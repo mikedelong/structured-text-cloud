@@ -8,14 +8,14 @@
   "isomap_neighbor_count": 10,
   "plot_dimensions": 2,
   "projection_iteration_count": 1000,
-  "text_start_line": 32,
-  "text_stop_line": 367,
+  "text_start_line": 31,
+  "text_stop_line": 17891,
   "tsne_iterations_without_progress": 300,
   "tsne_initialization": "pca",
   "tsne_verbose": 1,
   "word2vec_compute_loss": true,
   "word2vec_epochs": 1000,
-  "word2vec_min_count": 5,
+  "word2vec_min_count": 20,
   "word2vec_size": 50,
   "word2vec_workers": 4
 }
