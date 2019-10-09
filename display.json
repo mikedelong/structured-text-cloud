@@ -1,10 +1,10 @@
 {
   "colormap": "hot",
   "colormap_strategy": "uniform",
-  "input_file": "./data/1322-0_pos.csv",
+  "input_file": "./data/1661-0_pos.csv",
   "max_pages_to_show": 12,
   "max_words_to_show": 400,
-  "output_file": "./data/1322-0.html",
+  "output_file": "./data/1661-0.html",
   "part_of_speech_file": "./data/part_of_speech.csv",
   "rebuild_part_of_speech_file": false
 }
