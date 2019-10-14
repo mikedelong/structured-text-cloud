@@ -8,7 +8,7 @@
   "isomap_neighbor_count": 10,
   "plot_dimensions": 2,
   "projection_iteration_count": 1000,
-  "text_start_line": 205,
+  "text_start_line": 1765,
   "text_stop_line": 6557,
   "tsne_iterations_without_progress": 300,
   "tsne_initialization": "pca",
