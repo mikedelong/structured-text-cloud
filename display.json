@@ -1,7 +1,7 @@
 {
   "colormap": "hot",
   "colormap_strategy": "uniform",
-  "input_file": "./data/4300-0_pos.csv",
+  "input_file": "./data/16328_pos.csv",
   "max_pages_to_show": 12,
   "max_words_to_show": 400,
   "output_file": "./data/4300-0.html",
